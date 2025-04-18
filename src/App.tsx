@@ -1,10 +1,22 @@
-import { useState } from "react";
+/* import { useState } from "react";
 import reactLogo from "./assets/react.svg";
-import { invoke } from "@tauri-apps/api/core";
+import { invoke } from "@tauri-apps/api/core"; */
+import { Navigate, Route, Routes } from "react-router-dom";
+
 import "./App.css";
 
+import Profile from './pages/Profile.tsx';
+
 function App() {
-  const [greetMsg, setGreetMsg] = useState("");
+  return (
+  
+      <Routes>
+        <Route index path="/" element={<Navigate replace to="/profile" />}/>
+        <Route path="/profile" element={ <Profile/> }/>
+      </Routes>
+    
+  );
+ /*  const [greetMsg, setGreetMsg] = useState("");
   const [name, setName] = useState("");
 
   async function greet() {
@@ -45,7 +57,9 @@ function App() {
       </form>
       <p>{greetMsg}</p>
     </main>
-  );
+  ); */
+
+
 }
 
 export default App;
