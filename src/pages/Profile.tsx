@@ -1,11 +1,36 @@
 import Header from "@/components/header";
+import { Button } from "@/components/ui/button"
+import { Separator } from "@/components/ui/separator"
+
+import { useState } from "react";
 
 export default function Profile() {
   
+  const [language, setLanguage] = useState('es')
+
   return  (
     <div>
       <Header></Header>
-      <h1>PERFIL</h1>
+      <div className="p-6">
+        <div className="grid grid-cols-[1fr_0.005fr_1fr] mb-10">
+          <h2 className="text-right text-lg font-semibold mb-4 px-3">Selecciona tu idioma </h2>
+          <Separator orientation="vertical" />          
+          <h2 className="text-left text-lg font-semibold mb-4 px-3">Tria la teua llengua</h2>
+            <Button className="mx-3 max-w-32 justify-self-end"
+              variant={language === 'es' ? 'default' : 'outline'}
+              onClick={() => setLanguage('es')}
+            >
+              Castellano
+            </Button>
+            <Separator orientation="vertical" />
+            <Button className="mx-3 max-w-32"
+              variant={language === 'va' ? 'default' : 'outline'}
+              onClick={() => setLanguage('va')}
+            >
+              Valencià
+            </Button>
+        </div>
+      </div>
     </div>
   );
 }
