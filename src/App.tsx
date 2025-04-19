@@ -2,6 +2,7 @@
 import reactLogo from "./assets/react.svg";
 import { invoke } from "@tauri-apps/api/core"; */
 import { Navigate, Route, Routes } from "react-router-dom";
+import { ThemeProvider } from "@/components/theme-provider"
 
 import "./App.css";
 
@@ -9,12 +10,12 @@ import Profile from './pages/Profile.tsx';
 
 function App() {
   return (
-  
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <Routes>
         <Route index path="/" element={<Navigate replace to="/profile" />}/>
         <Route path="/profile" element={ <Profile/> }/>
       </Routes>
-    
+    </ThemeProvider>
   );
  /*  const [greetMsg, setGreetMsg] = useState("");
   const [name, setName] = useState("");
