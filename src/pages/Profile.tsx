@@ -39,7 +39,7 @@ export default function Profile() {
         </div>
         <Separator className="my-2" />
       <div className="flex space-x-4 mb-6"></div>
-        <DynamicForm formSchema="greet"/>
+        <DynamicForm formSchema="GEN_personal_data"/>
       </div>
     </div>
   );

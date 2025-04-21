@@ -1,0 +1,13 @@
+{
+  "id": "DOCTMPL_GEN_PERSONAL_DATA",
+  "title": "",
+  "version": 1,
+  "description": "Formulario para uso únicamente en profile",
+  "study_type": "GEN",
+  "sections_ids": [
+    {
+      "id": "PERSONAL_DATA",
+      "style": "FIXED"
+    }
+  ]
+}
