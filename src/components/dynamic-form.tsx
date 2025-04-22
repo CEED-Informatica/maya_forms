@@ -90,21 +90,33 @@ export default function DynamicForm({ formId }: DynamicFormProps)
       let fieldSchema: z.ZodTypeAny;
 
       switch (validation.type) {
-        case 'string':    // se compruban cadenas
+        case 'string':    // se comprueban cadenas
           let stringSchema = z.string()
-          if (validation.regex) {
-            stringSchema = stringSchema.regex(new RegExp(validation.regex), { message: 'Formato inválido' });
+
+          /* 
+           * permite la defincion de la regex en el json de varias maneras 
+              "regex": "expre" +
+              o 
+              "regex": { "regex": "expre", "message": "mess" }
+              o
+              "regex": { "regex": "expre" }
+          */
+          if (validation.regex) { 
+            let regex: string = ""
+
+            if (typeof validation.regex === "string") regex = validation.regex
+            else if (typeof validation.regex === "object" && validation.regex.regex) regex = validation.regex.regex
+
+            if (regex)
+              stringSchema = stringSchema.regex(new RegExp(regex), { message: validation.regex.message || "Formato inválido" });
           }
           if (validation.maxLength) {
-            stringSchema = stringSchema.max(validation.maxLength, { message: `Máximo ${validation.maxLength} caracteres` });
+            stringSchema = stringSchema.max(validation.maxLength, { message: `El número máximo de caracteres permitido es ${validation.maxLength}` });
           }
           if (validation.minLength) {
-            stringSchema = stringSchema.min(validation.minLength, { message: `Mínimo ${validation.minLength} caracteres` });
+            stringSchema = stringSchema.min(validation.minLength, { message: `El número mínimo de caracteres permitido es  ${validation.minLength}` });
           }
-          if (validation.required) {
-            fieldSchema = stringSchema.nonempty({ message: 'Este campo es obligatorio' });
-          }
-       
+          
           fieldSchema = stringSchema
           break
         
