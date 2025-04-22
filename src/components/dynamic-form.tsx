@@ -91,7 +91,12 @@ export default function DynamicForm({ formId }: DynamicFormProps)
 
       switch (validation.type) {
         case 'string':    // se comprueban cadenas
-          let stringSchema = z.string()
+          let stringSchema
+
+          if (validation.required)
+            stringSchema= z.string({required_error: "El campo es obligatorio"})
+          else 
+            stringSchema= z.string()
 
           /* 
            * permite la defincion de la regex en el json de varias maneras 
@@ -114,7 +119,7 @@ export default function DynamicForm({ formId }: DynamicFormProps)
             stringSchema = stringSchema.max(validation.maxLength, { message: `El número máximo de caracteres permitido es ${validation.maxLength}` });
           }
           if (validation.minLength) {
-            stringSchema = stringSchema.min(validation.minLength, { message: `El número mínimo de caracteres permitido es  ${validation.minLength}` });
+            stringSchema = stringSchema.min(validation.minLength, { message: `El número mínimo de caracteres permitido es ${validation.minLength}` });
           }
           
           fieldSchema = stringSchema
