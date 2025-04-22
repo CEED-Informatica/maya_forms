@@ -14,6 +14,7 @@ interface SectionSchema {
   id: string
   title: string
   subtitle: string
+  controls: any[]
 }
 
 export default function DynamicSetionForm({ sectionId }: DynamicSectionFormProps)
@@ -38,6 +39,11 @@ export default function DynamicSetionForm({ sectionId }: DynamicSectionFormProps
     }
   } 
 
+  function renderControl(control: any) {
+    
+   
+      return (<h1>C o n otrol </h1>)
+  }
 
   return (
     <div>
@@ -50,6 +56,9 @@ export default function DynamicSetionForm({ sectionId }: DynamicSectionFormProps
         </p>
       </div>
       <Separator className="my-2" />
+      <div>
+      { section && section.controls && section.controls.map((control: any) => renderControl(control)) }
+      </div>
     </div>
   );
 
