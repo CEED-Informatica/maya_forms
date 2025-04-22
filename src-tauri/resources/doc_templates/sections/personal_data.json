@@ -10,20 +10,34 @@
     "area": "nia",
     "control_type": {
       "Edit": {
-        "caption": "Escribe tu nombre completo",
+        "placeholder": "Escribe tu NIA",
         "default": null,
         "value": null
       }
     }},
     {
-      "id": "CTRL_GENERO",
-      "label": "Género",
-      "caption": "Genero con el que quiere ser tratado",
-      "area": "genero",
+      "id": "CTRL_NOMBRE",
+      "label": "Nombre",
+      "caption": "Nombre completo",
+      "area": "nombre",
       "control_type": {
-        "Checkbox": {
-          "state": true
+        "Edit": {
+          "placeholder": "Escribe tu nombre",
+          "default": null,
+          "value": null
         }
-      }}
+      }},
+      {
+        "id": "CTRL_APELLIDOS",
+        "label": "Apellidos",
+        "caption": "Apellidos",
+        "area": "apellidos",
+        "control_type": {
+          "Edit": {
+            "placeholder": "Escribe tus apellidos",
+            "default": null,
+            "value": null
+          }
+        }}
   ]
 }

@@ -1,6 +1,14 @@
 
 import { useState, useEffect } from 'react'
 import { Separator } from "@/components/ui/separator"
+import { Input } from "@/components/ui/input"
+import {
+  FormControl,
+  FormDescription, FormField,
+  FormItem, FormLabel, FormMessage,
+} from "@/components/ui/form"
+
+import { useFormContext } from 'react-hook-form';
 
 import { resolveResource } from '@tauri-apps/api/path';
 import { readTextFile } from '@tauri-apps/plugin-fs';
@@ -30,7 +38,6 @@ export default function DynamicSetionForm({ sectionId }: DynamicSectionFormProps
     try {
       const path = await resolveResource('resources/doc_templates/sections/' + idSectionTemplate.toLowerCase( ) + '.json');
       const sectionTemplate = JSON.parse(await readTextFile(path));
-      alert(JSON.stringify(sectionTemplate))
       setSection(sectionTemplate);
 
     } catch (error) {
@@ -40,9 +47,38 @@ export default function DynamicSetionForm({ sectionId }: DynamicSectionFormProps
   } 
 
   function renderControl(control: any) {
+
+    const methods = useFormContext();
     
-   
-      return (<h1>C o n otrol </h1>)
+    switch (Object.keys(control.control_type)[0]) {
+      case 'Edit':
+        return (
+          <FormField control={methods.control} name={control.id}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{control.label}</FormLabel>
+                <FormControl>
+                  <Input placeholder={control.control_type['Edit'].placeholder} {...field} />
+                </FormControl>
+                <FormDescription>
+                  {control.caption}
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+            />
+          /* <div key={control.id}>
+            <label>{control.label}</label>
+            <Input
+              {...register(control.id)}
+              placeholder={control.control_type.props.caption}
+              defaultValue={control.control_type.props.default || ''}
+            />
+        </div>
+ */     )
+      default:
+        return (<h1>C o n otrol </h1>)
+    }  
   }
 
   return (
