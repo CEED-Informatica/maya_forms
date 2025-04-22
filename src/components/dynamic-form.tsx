@@ -1,13 +1,14 @@
 import { useForm, FormProvider  } from 'react-hook-form'
 import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
+import DynamicSectionForm from "@/components/dynamic-section-form";
 
 //import { invoke } from '@tauri-apps/api/core';
 import { resolveResource } from '@tauri-apps/api/path';
 import { readTextFile } from '@tauri-apps/plugin-fs';
 
 interface DynamicFormProps {
-  formSchema: string;
+  formId: string;
 }
 
 interface Section {
@@ -19,20 +20,21 @@ interface FormSchema {
   sections_ids: Section[];
 }
 
-export default function DynamicForm({ formSchema }: DynamicFormProps)
+export default function DynamicForm({ formId }: DynamicFormProps)
 {
   const methods = useForm();
   const [form, setForm] = useState<FormSchema | null>(null)
 
   /* Este hook se ejecuta después del renderizado */
   useEffect(() => {
-    getDocTemplate(formSchema)
+    getDocTemplate(formId)
   }, []);
 
-  /** Carga el doc_template pasado como propiedad al componente */
+  /* Carga el doc_template pasado como propiedad al componente. 
+     Utiliza dfunciones del plugin FS de Tauri */
   async function getDocTemplate(idDocTemplate: string) {
     try {
-      
+
       const path = await resolveResource('resources/doc_templates/' + idDocTemplate + '.json');
       const rootDocTemplate = JSON.parse(await readTextFile(path));
 
@@ -54,8 +56,10 @@ export default function DynamicForm({ formSchema }: DynamicFormProps)
        en los subformularios a través de useFormContext*/
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)}>
-          {form && form.sections_ids && form.sections_ids.map((section: any) => (
-          <h1 key={section.id}>{section.id}</h1>))}
+          { form && form.sections_ids && form.sections_ids.map((section: Section) => (
+            <DynamicSectionForm sectionId={section.id}/>
+          ))
+          }
         <Button type="submit" className="mt-4">
           Guardar
         </Button>
@@ -63,3 +67,6 @@ export default function DynamicForm({ formSchema }: DynamicFormProps)
     </FormProvider>
   );
 };
+
+
+    /*  <DynamicSectionForm key={section.id} sectionId={section.id}/>)) */

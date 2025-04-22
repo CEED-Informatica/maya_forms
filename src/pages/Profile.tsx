@@ -31,15 +31,16 @@ export default function Profile() {
               Valencià
             </Button>
         </div>
-        <div className="space-y-1 ml-3 mr-3">
+       {/*  <div className="space-y-1 ml-3 mr-3">
           <h4 className="text-sm font-medium leading-none">Datos personales</h4>
           <p className="text-sm text-muted-foreground">
             Información general sobre el alumno
           </p>
         </div>
-        <Separator className="my-2" />
-      <div className="flex space-x-4 mb-6"></div>
-        <DynamicForm formSchema="GEN_personal_data"/>
+        <Separator className="my-2 mb-6" /> */}
+        {/* <div className="flex space-x-4">      
+        </div> */}
+        <DynamicForm formId="GEN_personal_data"/>
       </div>
     </div>
   );

@@ -2,7 +2,7 @@
   "id": "DOCTMPL_GEN_PERSONAL_DATA",
   "title": "",
   "version": 1,
-  "description": "Formulario para uso únicamente en profile",
+  "description": "Formulario para uso únicamente en la página Profile",
   "study_type": "GEN",
   "sections_ids": [
     {

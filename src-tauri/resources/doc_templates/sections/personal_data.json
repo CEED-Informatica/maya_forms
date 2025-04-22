@@ -1,0 +1,29 @@
+{
+  "id": "SEC_PERSONAL_DATA",
+  "title": "Datos personales",
+  "subtitle": "Información general sobre el alumno/a",
+  "layout": "CICLOS",
+  "controls": [ {
+    "id": "CTRL_NIA",
+    "label": "NIA",
+    "caption": "Número de identificación de alumnado",
+    "area": "nia",
+    "control_type": {
+      "Edit": {
+        "caption": "Escribe tu nombre completo",
+        "default": null,
+        "value": null
+      }
+    }},
+    {
+      "id": "CTRL_GENERO",
+      "label": "Género",
+      "caption": "Genero con el que quiere ser tratado",
+      "area": "genero",
+      "control_type": {
+        "Checkbox": {
+          "state": true
+        }
+      }}
+  ]
+}
