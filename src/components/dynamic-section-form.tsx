@@ -77,7 +77,7 @@ export default function DynamicSetionForm({ sectionId }: DynamicSectionFormProps
         </div>
  */     )
       default:
-        return (<h1>C o n otrol </h1>)
+        return (<h1>C o n otrol </h1>)  // TODO 
     }  
   }
 

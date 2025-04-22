@@ -3,18 +3,27 @@
   "title": "Datos personales",
   "subtitle": "Información general sobre el alumno/a",
   "layout": "CICLOS",
-  "controls": [ {
-    "id": "CTRL_NIA",
-    "label": "NIA",
-    "caption": "Número de identificación de alumnado",
-    "area": "nia",
-    "control_type": {
-      "Edit": {
-        "placeholder": "Escribe tu NIA",
-        "default": null,
-        "value": null
+  "controls": [ 
+    {
+      "id": "CTRL_NIA",
+      "label": "NIA",
+      "caption": "Número de Identificación de Alumnado",
+      "area": "nia",
+      "control_type": {
+        "Edit": {
+          "placeholder": "Escribe tu NIA",
+          "default": null,
+          "value": null
+        }
+      },
+      "validation":{
+        "type": "string",
+        "required": true,
+        "regex": "^[0-9]+$",
+        "minLength": 6,
+        "maxLength": 6
       }
-    }},
+    },
     {
       "id": "CTRL_NOMBRE",
       "label": "Nombre",
@@ -26,18 +35,20 @@
           "default": null,
           "value": null
         }
-      }},
-      {
-        "id": "CTRL_APELLIDOS",
-        "label": "Apellidos",
-        "caption": "Apellidos",
-        "area": "apellidos",
-        "control_type": {
-          "Edit": {
-            "placeholder": "Escribe tus apellidos",
-            "default": null,
-            "value": null
-          }
-        }}
+      }
+    },
+    {
+      "id": "CTRL_APELLIDOS",
+      "label": "Apellidos",
+      "caption": "Apellidos",
+      "area": "apellidos",
+      "control_type": {
+        "Edit": {
+          "placeholder": "Escribe tus apellidos",
+          "default": null,
+          "value": null
+        }
+      }
+    }
   ]
 }
