@@ -15,7 +15,7 @@ import { readTextFile } from '@tauri-apps/plugin-fs';
 
 
 interface DynamicSectionFormProps {
-  sectionId: string
+  sectionId: string,
 }
 
 interface SectionSchema {
@@ -25,13 +25,14 @@ interface SectionSchema {
   controls: any[]
 }
 
-export default function DynamicSetionForm({ sectionId }: DynamicSectionFormProps)
+export default function DynamicSectionForm({ sectionId }: DynamicSectionFormProps)
 {
   const [section, setSection] = useState<SectionSchema | null>(null)
 
   useEffect(() => {
     getSectionTemplate(sectionId)
   }, []);
+  const methods = useFormContext();
 
   async function getSectionTemplate(idSectionTemplate: string) {
   
@@ -48,12 +49,10 @@ export default function DynamicSetionForm({ sectionId }: DynamicSectionFormProps
 
   function renderControl(control: any) {
 
-    const methods = useFormContext();
-    
     switch (Object.keys(control.control_type)[0]) {
       case 'Edit':
         return (
-          <FormField control={methods.control} name={control.id}
+          <FormField control={methods.control} name={control.id} key={control.id}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>{control.label}</FormLabel>
