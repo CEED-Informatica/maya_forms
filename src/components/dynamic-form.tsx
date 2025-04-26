@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import DynamicSectionForm from "@/components/dynamic-section-form";
 
-import { resolveResource } from '@tauri-apps/api/path';
-import { readTextFile } from '@tauri-apps/plugin-fs';
+import { resolveResource, join, appConfigDir } from '@tauri-apps/api/path';
+import { BaseDirectory, exists, readTextFile, writeTextFile } from '@tauri-apps/plugin-fs';
 
 import { z, ZodObject } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -36,6 +36,8 @@ export default function DynamicForm({ formId }: DynamicFormProps)
   const [form, setForm] = useState<FormSchema | null>(null)
   const [zodSchema, setZodSchema] = useState<ZodObject<any>>(defaultZodSchema); // valor por defecto el vacio
 
+  let rutaCompleta: string
+
   const methods = useForm({ 
     resolver: zodResolver(zodSchema)
   });
@@ -43,7 +45,46 @@ export default function DynamicForm({ formId }: DynamicFormProps)
   /* Este hook se ejecuta después del renderizado */
   useEffect(() => {
     getDocTemplate(formId)
+    getDataPath()
   }, []);
+
+  async function getDataPath() {
+    // Linux $HOME/.config, 
+    // MacOS $HOME/Library/Application Support 
+    // Windowes {FOLDERID_RoamingAppData}.
+    const appDirectory = await appConfigDir(); 
+    rutaCompleta = await join(appDirectory, "profiles.mfp");
+
+    console.log(rutaCompleta)
+  }
+
+  async function saveProfile(data: any) {
+    let saveData: any = {}
+    
+    const profilesExists = await exists('profiles.json', {
+      baseDir: BaseDirectory.AppLocalData,
+    });
+
+    if (profilesExists) {
+      const datosPrevios = JSON.parse(await readTextFile( "profiles.json", {
+        baseDir: BaseDirectory.AppLocalData,
+      }));
+
+      saveData = datosPrevios
+    }
+
+    delete saveData[data['CTRL_NIA']]
+    console.log(JSON.stringify(data))
+    console.log(JSON.stringify(data['CTRL_NIA']))
+    saveData[data['CTRL_NIA']] = data
+    console.log(JSON.stringify(saveData))
+    await writeTextFile("profiles.json", JSON.stringify(saveData), {
+      baseDir: BaseDirectory.AppLocalData,
+    });
+
+    //console.log(JSON.stringify(datosPrevios))
+
+  }
 
   /* Carga el doc_template pasado como propiedad al componente. 
      Utiliza funciones del plugin FS de Tauri */
@@ -135,9 +176,13 @@ export default function DynamicForm({ formId }: DynamicFormProps)
     return z.object(schemaShape);
   }
 
-
+  /* Genera el formulario o almacena los datos en un fichero */
   const onSubmit = (data: any) => {
     console.log('Datos del formulario:', data);
+    const adat2 = methods.getValues()
+    console.log('Datos del formulario:', adat2);
+    
+    saveProfile(adat2);
   };
 
   if (!zodSchema || !form)
@@ -150,7 +195,7 @@ export default function DynamicForm({ formId }: DynamicFormProps)
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)}>
           { form && form.sections_ids && form.sections_ids.map((section: Section) => (
-            <DynamicSectionForm sectionId={section.id}/>
+            <DynamicSectionForm key={section.id} sectionId={section.id}/>
           ))
           }
         <Button type="submit" className="mt-4">
