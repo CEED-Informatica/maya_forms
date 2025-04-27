@@ -1,4 +1,5 @@
 import Header from "@/components/header";
+import Footer from "@/components/footer";
 import DynamicForm from "@/components/dynamic-form";
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
@@ -42,6 +43,7 @@ export default function Profile() {
         </div> */}
         <DynamicForm formId="GEN_personal_data"/>
       </div>
+      <Footer/>
     </div>
   );
 }
