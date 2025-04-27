@@ -1,5 +1,3 @@
-import Header from "@/components/header";
-import Footer from "@/components/footer";
 import DynamicForm from "@/components/dynamic-form";
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
@@ -12,7 +10,6 @@ export default function Profile() {
 
   return  (
     <div>
-      <Header></Header>
       <div className="p-6">
         <div className="grid grid-cols-[1fr_0.005fr_1fr] mb-12">
           <h2 className="text-right text-lg font-semibold mb-4 px-3">Selecciona tu idioma </h2>
@@ -43,7 +40,6 @@ export default function Profile() {
         </div> */}
         <DynamicForm formId="GEN_personal_data"/>
       </div>
-      <Footer/>
     </div>
   );
 }
