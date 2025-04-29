@@ -34,7 +34,7 @@ export default function Footer() {
           maya_forms <span className="pl-2">{appVersion}</span><span className="px-2">|</span>
           <Tooltip>
             <TooltipTrigger asChild>
-              <span onClick={refreshData}>{data.version}</span>
+              <span onClick={refreshData}>{data ? data.version: ''}</span>
             </TooltipTrigger>
             <TooltipContent>
               <p>Versión de los datos. Pulsa para actualizar</p>
