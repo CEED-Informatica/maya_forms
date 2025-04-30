@@ -13,6 +13,8 @@ import { useFormContext } from 'react-hook-form';
 import { resolveResource } from '@tauri-apps/api/path';
 import { readTextFile } from '@tauri-apps/plugin-fs';
 
+import clsx from 'clsx';
+
 
 interface DynamicSectionFormProps {
   sectionId: string,
@@ -22,16 +24,28 @@ interface SectionSchema {
   id: string
   title: string
   subtitle: string
+  layout: string
   controls: any[]
 }
 
 export default function DynamicSectionForm({ sectionId }: DynamicSectionFormProps)
 {
   const [section, setSection] = useState<SectionSchema | null>(null)
+  const [columns, setColumns] = useState<number>(1)   // numero de columnas del grid
+  const [layout, setLayout] = useState<string>('')   // layout con saltos de linea
 
   useEffect(() => {
     getSectionTemplate(sectionId)
   }, []);
+
+  useEffect(() => {
+    getColumns()
+  }, [section]);
+
+/*   useEffect(() => {
+    getLayout()
+  }, [section]); */
+  
   const methods = useFormContext();
 
   async function getSectionTemplate(idSectionTemplate: string) {
@@ -47,25 +61,42 @@ export default function DynamicSectionForm({ sectionId }: DynamicSectionFormProp
     }
   } 
 
+  function getColumns() {
+    if (section) {
+      setColumns(section.layout.split(',').map(line => line.trim().
+                                split(/\s+/).length).
+                                reduce((max, current) => Math.max(max, current), 0));
+    }
+  } 
+
+/*   function getLayout() {
+    if (section) {
+      setLayout(section.layout.replace(',','\n'))
+      console.log(layout)
+    }
+  }  */
+
   function renderControl(control: any) {
 
     switch (Object.keys(control.control_type)[0]) {
       case 'Edit':
         return (
-          <FormField control={methods.control} name={control.id} key={control.id}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{control.label}</FormLabel>
-                <FormControl>
-                  <Input placeholder={control.control_type['Edit'].placeholder} {...field} />
-                </FormControl>
-                <FormDescription>
-                  {control.caption}
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-            />
+          <div style={{ gridArea: control.area }} key={control.id}>
+            <FormField control={methods.control} name={control.id} 
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{control.label}</FormLabel>
+                  <FormControl>
+                    <Input placeholder={control.control_type['Edit'].placeholder} {...field} />
+                  </FormControl>
+                  <FormDescription>
+                    {control.caption}
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+              />
+            </div>
           /* <div key={control.id}>
             <label>{control.label}</label>
             <Input
@@ -91,10 +122,13 @@ export default function DynamicSectionForm({ sectionId }: DynamicSectionFormProp
         </p>
       </div>
       <Separator className="my-2" />
-      <div>
+      <div className={clsx("grid", `grid-cols-${columns}`, "gap-4")} style={{ gridTemplateAreas: section ? section.layout : ''}}>
       { section && section.controls && section.controls.map((control: any) => renderControl(control)) }
       </div>
     </div>
   );
 
 }
+
+
+//

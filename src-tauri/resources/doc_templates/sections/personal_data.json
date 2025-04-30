@@ -2,7 +2,7 @@
   "id": "SEC_PERSONAL_DATA",
   "title": "Datos personales",
   "subtitle": "Información general sobre el alumno/a",
-  "layout": "CICLOS",
+  "layout": "name surname surname nia dni, address address address address phone, city city city region cp",
   "controls": [ 
     {
       "id": "CTRL_NIA",
@@ -31,7 +31,7 @@
       "id": "CTRL_NOMBRE",
       "label": "Nombre",
       "caption": "Nombre completo",
-      "area": "nombre",
+      "area": "name",
       "control_type": {
         "Edit": {
           "placeholder": "Escribe tu nombre",
@@ -44,7 +44,7 @@
       "id": "CTRL_APELLIDOS",
       "label": "Apellidos",
       "caption": "Apellidos",
-      "area": "apellidos",
+      "area": "surname",
       "control_type": {
         "Edit": {
           "placeholder": "Escribe tus apellidos",
