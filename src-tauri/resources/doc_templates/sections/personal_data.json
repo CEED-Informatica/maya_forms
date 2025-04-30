@@ -2,7 +2,7 @@
   "id": "SEC_PERSONAL_DATA",
   "title": "Datos personales",
   "subtitle": "Información general sobre el alumno/a",
-  "layout": "name surname surname nia dni, address address address address phone, city city city region cp",
+  "layout": "'name surname surname nia dni', 'address address address address phone', 'city city city region cp'",
   "controls": [ 
     {
       "id": "CTRL_NIA",

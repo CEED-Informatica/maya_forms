@@ -42,9 +42,9 @@ export default function DynamicSectionForm({ sectionId }: DynamicSectionFormProp
     getColumns()
   }, [section]);
 
-/*   useEffect(() => {
+  useEffect(() => {
     getLayout()
-  }, [section]); */
+  }, [section]);
   
   const methods = useFormContext();
 
@@ -69,12 +69,11 @@ export default function DynamicSectionForm({ sectionId }: DynamicSectionFormProp
     }
   } 
 
-/*   function getLayout() {
+  function getLayout() {
     if (section) {
-      setLayout(section.layout.replace(',','\n'))
-      console.log(layout)
+      setLayout(section.layout.replaceAll(',',' '))
     }
-  }  */
+  } 
 
   function renderControl(control: any) {
 
@@ -122,7 +121,7 @@ export default function DynamicSectionForm({ sectionId }: DynamicSectionFormProp
         </p>
       </div>
       <Separator className="my-2" />
-      <div className={clsx("grid", `grid-cols-${columns}`, "gap-4")} style={{ gridTemplateAreas: section ? section.layout : ''}}>
+      <div className={clsx("grid", `grid-cols-${columns}`, "gap-4")} style={{ gridTemplateAreas: section ? layout : ''}}>
       { section && section.controls && section.controls.map((control: any) => renderControl(control)) }
       </div>
     </div>
