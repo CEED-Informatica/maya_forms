@@ -120,7 +120,7 @@ export default function DynamicSectionForm({ sectionId }: DynamicSectionFormProp
         { section ? section.subtitle : '' } 
         </p>
       </div>
-      <Separator className="my-2" />
+      <Separator className="mt-2 mb-5" />
       <div className={clsx("grid", `grid-cols-${columns}`, "gap-4")} style={{ gridTemplateAreas: section ? layout : ''}}>
       { section && section.controls && section.controls.map((control: any) => renderControl(control)) }
       </div>

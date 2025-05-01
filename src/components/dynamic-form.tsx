@@ -178,6 +178,14 @@ export default function DynamicForm({ formId }: DynamicFormProps)
     
           fieldSchema = dniSchema
           break
+        case  'email':
+            const emailSchema = 
+              z.string()
+                .email({ message: 'Introduce una dirección de correo electrónico válida' })
+      
+            fieldSchema = emailSchema
+            break
+
         default:
           fieldSchema = z.any()
       }

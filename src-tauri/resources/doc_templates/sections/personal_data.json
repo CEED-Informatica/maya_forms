@@ -2,7 +2,7 @@
   "id": "SEC_PERSONAL_DATA",
   "title": "Datos personales",
   "subtitle": "Información general sobre el alumno/a",
-  "layout": "'name surname surname nia dni', 'address address address address phone', 'city city city region cp'",
+  "layout": "'name surname surname nia dni', 'address address address email phone', 'city city city region cp'",
   "controls": [ 
     {
       "id": "CTRL_DNI",
@@ -42,6 +42,23 @@
         },
         "minLength": 6,
         "maxLength": 6
+      }
+    },
+    {
+      "id": "CTRL_EMAIL",
+      "label": "Correo electrónico",
+      "caption": "Dirección de correo electrónico",
+      "area": "email",
+      "control_type": {
+        "Edit": {
+          "placeholder": "Escribe tu correo electrónico",
+          "default": null,
+          "value": null
+        }
+      },
+      "validation":{
+        "type": "email",
+        "required": true
       }
     },
     {
