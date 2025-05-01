@@ -6,8 +6,10 @@ import DynamicSectionForm from "@/components/dynamic-section-form";
 import { resolveResource, join, appConfigDir } from '@tauri-apps/api/path';
 import { BaseDirectory, exists, readTextFile, writeTextFile } from '@tauri-apps/plugin-fs';
 
+// Zod y validadores
 import { z, ZodObject } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { isValidNif } from 'nif-dni-nie-cif-validation';
 
 interface DynamicFormProps {
   formId: string;
@@ -128,7 +130,7 @@ export default function DynamicForm({ formId }: DynamicFormProps)
 
       if (!validation) continue;  // si no hay validación pasa al siguiente control
 
-      let fieldSchema: z.ZodTypeAny;
+      let fieldSchema: z.ZodTypeAny
 
       switch (validation.type) {
         case 'string':    // se comprueban cadenas
@@ -165,12 +167,22 @@ export default function DynamicForm({ formId }: DynamicFormProps)
           
           fieldSchema = stringSchema
           break
-        
+        case  'dni':
+          const dniSchema = 
+            z.string()
+              .min(9, { message: 'El documento debe tener al menos 9 caracteres' })
+              .max(9, { message: 'El documento no puede tener más de 9 caracteres' })
+              .refine((value) => isValidNif(value), {
+                message: 'El DNI/NIE no es válido o la letra de control es incorrecta',
+              })
+    
+          fieldSchema = dniSchema
+          break
         default:
-          fieldSchema = z.any();
+          fieldSchema = z.any()
       }
 
-      schemaShape[id] = fieldSchema;
+      schemaShape[id] = fieldSchema
     }
     
     return z.object(schemaShape);

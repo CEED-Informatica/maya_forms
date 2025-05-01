@@ -5,6 +5,23 @@
   "layout": "'name surname surname nia dni', 'address address address address phone', 'city city city region cp'",
   "controls": [ 
     {
+      "id": "CTRL_DNI",
+      "label": "DNI/NIE",
+      "caption": "DNI o NIE",
+      "area": "dni",
+      "control_type": {
+        "Edit": {
+          "placeholder": "Escribe tu DNI o NIE",
+          "default": null,
+          "value": null
+        }
+      },
+      "validation":{
+        "type": "dni",
+        "required": true
+      }
+    },
+    {
       "id": "CTRL_NIA",
       "label": "NIA",
       "caption": "Número de Identificación de Alumnado",
