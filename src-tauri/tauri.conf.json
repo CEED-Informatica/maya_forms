@@ -33,7 +33,8 @@
       "icons/icon.ico"
     ],
     "resources": [
-      "resources/doc_templates/"
+      "resources/doc_templates/",
+      "resources/general_data/"
     ]
   }
 }

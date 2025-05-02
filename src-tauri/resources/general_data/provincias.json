@@ -1,0 +1,262 @@
+[
+  {
+    "parent_code": "01",
+    "value": "04",
+    "label": "Almería"
+  },
+  {
+    "parent_code": "01",
+    "value": "11",
+    "label": "Cádiz"
+  },
+  {
+    "parent_code": "01",
+    "value": "14",
+    "label": "Córdoba"
+  },
+  {
+    "parent_code": "01",
+    "value": "18",
+    "label": "Granada"
+  },
+  {
+    "parent_code": "01",
+    "value": "21",
+    "label": "Huelva"
+  },
+  {
+    "parent_code": "01",
+    "value": "23",
+    "label": "Jaén"
+  },
+  {
+    "parent_code": "01",
+    "value": "29",
+    "label": "Málaga"
+  },
+  {
+    "parent_code": "01",
+    "value": "41",
+    "label": "Sevilla"
+  },
+  {
+    "parent_code": "02",
+    "value": "22",
+    "label": "Huesca"
+  },
+  {
+    "parent_code": "02",
+    "value": "44",
+    "label": "Teruel"
+  },
+  {
+    "parent_code": "02",
+    "value": "50",
+    "label": "Zaragoza"
+  },
+  {
+    "parent_code": "03",
+    "value": "33",
+    "label": "Asturias"
+  },
+  {
+    "parent_code": "04",
+    "value": "07",
+    "label": "Balears, Illes"
+  },
+  {
+    "parent_code": "05",
+    "value": "35",
+    "label": "Palmas, Las"
+  },
+  {
+    "parent_code": "05",
+    "value": "38",
+    "label": "Santa Cruz de Tenerife"
+  },
+  {
+    "parent_code": "06",
+    "value": "39",
+    "label": "Cantabria"
+  },
+  {
+    "parent_code": "07",
+    "value": "05",
+    "label": "Ávila"
+  },
+  {
+    "parent_code": "07",
+    "value": "09",
+    "label": "Burgos"
+  },
+  {
+    "parent_code": "07",
+    "value": "24",
+    "label": "León"
+  },
+  {
+    "parent_code": "07",
+    "value": "34",
+    "label": "Palencia"
+  },
+  {
+    "parent_code": "07",
+    "value": "37",
+    "label": "Salamanca"
+  },
+  {
+    "parent_code": "07",
+    "value": "40",
+    "label": "Segovia"
+  },
+  {
+    "parent_code": "07",
+    "value": "42",
+    "label": "Soria"
+  },
+  {
+    "parent_code": "07",
+    "value": "47",
+    "label": "Valladolid"
+  },
+  {
+    "parent_code": "07",
+    "value": "49",
+    "label": "Zamora"
+  },
+  {
+    "parent_code": "08",
+    "value": "02",
+    "label": "Albacete"
+  },
+  {
+    "parent_code": "08",
+    "value": "13",
+    "label": "Ciudad Real"
+  },
+  {
+    "parent_code": "08",
+    "value": "16",
+    "label": "Cuenca"
+  },
+  {
+    "parent_code": "08",
+    "value": "19",
+    "label": "Guadalajara"
+  },
+  {
+    "parent_code": "08",
+    "value": "45",
+    "label": "Toledo"
+  },
+  {
+    "parent_code": "09",
+    "value": "08",
+    "label": "Barcelona"
+  },
+  {
+    "parent_code": "09",
+    "value": "17",
+    "label": "Girona"
+  },
+  {
+    "parent_code": "09",
+    "value": "25",
+    "label": "Lleida"
+  },
+  {
+    "parent_code": "09",
+    "value": "43",
+    "label": "Tarragona"
+  },
+  {
+    "parent_code": "10",
+    "value": "03",
+    "label": "Alicante/Alacant"
+  },
+  {
+    "parent_code": "10",
+    "value": "12",
+    "label": "Castellón/Castelló"
+  },
+  {
+    "parent_code": "10",
+    "value": "46",
+    "label": "Valencia/València"
+  },
+  {
+    "parent_code": "11",
+    "value": "06",
+    "label": "Badajoz"
+  },
+  {
+    "parent_code": "11",
+    "value": "10",
+    "label": "Cáceres"
+  },
+  {
+    "parent_code": "12",
+    "value": "15",
+    "label": "Coruña, A"
+  },
+  {
+    "parent_code": "12",
+    "value": "27",
+    "label": "Lugo"
+  },
+  {
+    "parent_code": "12",
+    "value": "32",
+    "label": "Ourense"
+  },
+  {
+    "parent_code": "12",
+    "value": "36",
+    "label": "Pontevedra"
+  },
+  {
+    "parent_code": "13",
+    "value": "28",
+    "label": "Madrid"
+  },
+  {
+    "parent_code": "14",
+    "value": "30",
+    "label": "Murcia"
+  },
+  {
+    "parent_code": "15",
+    "value": "31",
+    "label": "Navarra"
+  },
+  {
+    "parent_code": "16",
+    "value": "01",
+    "label": "Araba/Álava"
+  },
+  {
+    "parent_code": "16",
+    "value": "48",
+    "label": "Bizkaia"
+  },
+  {
+    "parent_code": "16",
+    "value": "20",
+    "label": "Gipuzkoa"
+  },
+  {
+    "parent_code": "17",
+    "value": "26",
+    "label": "Rioja, La"
+  },
+  {
+    "parent_code": "18",
+    "value": "51",
+    "label": "Ceuta"
+  },
+  {
+    "parent_code": "19",
+    "value": "52",
+    "label": "Melilla"
+  }
+]
