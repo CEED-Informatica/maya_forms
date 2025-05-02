@@ -1,26 +1,23 @@
-
+// React
 import { useState, useEffect } from 'react'
+import { useFormContext } from 'react-hook-form';
+
+// shadcn/ui
 import { Separator } from "@/components/ui/separator"
 import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command"
-
 import {
   FormControl,
   FormDescription, FormField,
   FormItem, FormLabel, FormMessage,
 } from "@/components/ui/form"
 
-import { Check, ChevronsUpDown } from "lucide-react"
-
-import { useFormContext } from 'react-hook-form';
-
 import { resolveResource } from '@tauri-apps/api/path';
 import { readTextFile } from '@tauri-apps/plugin-fs';
 
-import clsx from 'clsx';
+// componentes maya forms ui
+import MFCombo from "@/components/mfui/mf-combo"
 
+import clsx from 'clsx';
 
 interface DynamicSectionFormProps {
   sectionId: string,
@@ -81,23 +78,6 @@ export default function DynamicSectionForm({ sectionId }: DynamicSectionFormProp
     }
   } 
 
-  function getComboOptions(control: any) {
-    const optionsField = control.control_type.Combo.options
-
-    if (Array.isArray(control.control_type.Combo.options)) {
-      // Caso 1: Array de cadenas de texto
-      if (typeof optionsField[0] === 'string') {
-        console.log(control.control_type.Combo.options)
-        return optionsField.map((value: string)  => ({ value, label: value }));
-      }
-      // Caso 2: Array de objetos con 'value' y 'label'
-      else if (typeof optionsField[0] === 'object') {
-        return optionsField;
-     }
-    }
-    return []
-  }
-
   function renderControl(control: any) {
 
     switch (Object.keys(control.control_type)[0]) {
@@ -129,71 +109,10 @@ export default function DynamicSectionForm({ sectionId }: DynamicSectionFormProp
         </div>
  */     )
       case 'Combo':
-        return (
-          <div style={{ gridArea: control.area }} key={control.id}>
-            <FormField control={methods.control} name={control.id} 
-              render={({ field }) => (
-                <FormItem className="flex flex-col">
-                  <FormLabel>{control.label}</FormLabel>
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <FormControl>
-                        <Button variant="outline" role="combobox"
-                          className={clsx("justify-between",
-                      !field.value && "text-muted-foreground"
-                    )} {...field}
-                  >
-                    {field.value
-                      ? getComboOptions(control).find(
-                          (option: any) => option.value === field.value
-                        )?.label
-                      : "Selecciona " + control.control_type.Combo.placeholder}
-                          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                        </Button>
-                      </FormControl>
-                    </PopoverTrigger>
-                    <PopoverContent className="p-0">
-                      <Command>
-                        <CommandInput placeholder={"Busca " + control.control_type.Combo.placeholder} />
-                        <CommandList>
-                          <CommandEmpty>No se encuentra {control.control_type.Combo.placeholder} con ese patrón de búsqueda.</CommandEmpty>
-                          <CommandGroup>
-                            {getComboOptions(control).map((option: any) => (
-                              <CommandItem
-                                value={option.label}
-                                key={option.value}
-                                onSelect={() => {
-                                  methods.setValue(control.id, option.value)
-                                  console.log("Se ha seleccionado " + option.value)
-                                }}
-                              >
-                                {option.label}
-                                <Check
-                                  className={clsx(
-                                    "ml-auto",
-                                    option.value === field.value
-                                      ? "opacity-100"
-                                      : "opacity-0"
-                                  )}
-                                />
-                              </CommandItem>
-                            ))}
-                          </CommandGroup>
-                        </CommandList>
-                      </Command>
-                    </PopoverContent>
-                  </Popover>
-                  <FormDescription>
-                    {control.caption}
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-              />
-          </div>
-        )
+        return <MFCombo control={control} methods={methods} key={control.id}/>;
+
       default:
-        return (<h1>C o n otrol </h1>)  // TODO 
+        return (<h1>Control no soportado</h1>)  // TODO 
     }  
   }
 
