@@ -86,6 +86,19 @@
           "value": null
         }
       }
+    },
+    {
+      "id": "CTRL_PROVINCIA",
+      "label": "Provincia",
+      "caption": "Provincia del domicilio",
+      "area": "region",
+      "control_type": {
+        "Combo": {
+          "placeholder": "Selecciona la provincia",
+          "default": null,
+          "options": [ "val", "martes" ]
+        }
+      }
     }
   ]
 }

@@ -2,11 +2,17 @@
 import { useState, useEffect } from 'react'
 import { Separator } from "@/components/ui/separator"
 import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command"
+
 import {
   FormControl,
   FormDescription, FormField,
   FormItem, FormLabel, FormMessage,
 } from "@/components/ui/form"
+
+import { Check, ChevronsUpDown } from "lucide-react"
 
 import { useFormContext } from 'react-hook-form';
 
@@ -75,6 +81,19 @@ export default function DynamicSectionForm({ sectionId }: DynamicSectionFormProp
     }
   } 
 
+  function getComboOptions(control: any) {
+    const optionsField = control.control_type.Combo.options
+
+    if (Array.isArray(control.control_type.Combo.options)) {
+      // Caso 1: Array de cadenas de texto
+      if (typeof optionsField[0] === 'string') {
+        console.log(control.control_type.Combo.options)
+        return optionsField.map((value: string)  => ({ value, label: value }));
+      }
+    }
+    return []
+  }
+
   function renderControl(control: any) {
 
     switch (Object.keys(control.control_type)[0]) {
@@ -105,6 +124,70 @@ export default function DynamicSectionForm({ sectionId }: DynamicSectionFormProp
             />
         </div>
  */     )
+      case 'Combo':
+        return (
+          <div style={{ gridArea: control.area }} key={control.id}>
+            <FormField control={methods.control} name={control.id} 
+              render={({ field }) => (
+                <FormItem className="flex flex-col">
+                  <FormLabel>{control.label}</FormLabel>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <FormControl>
+                        <Button variant="outline" role="combobox"
+                          className={clsx("justify-between",
+                      !field.value && "text-muted-foreground"
+                    )} {...field}
+                  >
+                    {field.value
+                      ? getComboOptions(control).find(
+                          (option: any) => option.value === field.value
+                        )?.label
+                      : control.control_type.Combo.placeholder}
+                          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                        </Button>
+                      </FormControl>
+                    </PopoverTrigger>
+                    <PopoverContent className="p-0">
+                      <Command>
+                        <CommandInput placeholder="Search language..." />
+                        <CommandList>
+                          <CommandEmpty>No language found.</CommandEmpty>
+                          <CommandGroup>
+                            {getComboOptions(control).map((option: any) => (
+                              <CommandItem
+                                value={option.label}
+                                key={option.value}
+                                onSelect={() => {
+                                  methods.setValue(control.id, option.value)
+                                  console.log("asdfsdf")
+                                }}
+                              >
+                                {option.label}
+                                <Check
+                                  className={clsx(
+                                    "ml-auto",
+                                    option.value === field.value
+                                      ? "opacity-100"
+                                      : "opacity-0"
+                                  )}
+                                />
+                              </CommandItem>
+                            ))}
+                          </CommandGroup>
+                        </CommandList>
+                      </Command>
+                    </PopoverContent>
+                  </Popover>
+                  <FormDescription>
+                    {control.caption}
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+              />
+          </div>
+        )
       default:
         return (<h1>C o n otrol </h1>)  // TODO 
     }  
@@ -121,13 +204,10 @@ export default function DynamicSectionForm({ sectionId }: DynamicSectionFormProp
         </p>
       </div>
       <Separator className="mt-2 mb-5" />
-      <div className={clsx("grid", `grid-cols-${columns}`, "gap-4")} style={{ gridTemplateAreas: section ? layout : ''}}>
+      <div className={clsx("grid", `grid-cols-${columns}`, "gap-x-4 gap-y-7")} style={{ gridTemplateAreas: section ? layout : ''}}>
       { section && section.controls && section.controls.map((control: any) => renderControl(control)) }
       </div>
     </div>
   );
 
 }
-
-
-//
