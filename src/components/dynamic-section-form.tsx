@@ -143,16 +143,16 @@ export default function DynamicSectionForm({ sectionId }: DynamicSectionFormProp
                       ? getComboOptions(control).find(
                           (option: any) => option.value === field.value
                         )?.label
-                      : control.control_type.Combo.placeholder}
+                      : "Selecciona " + control.control_type.Combo.placeholder}
                           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                         </Button>
                       </FormControl>
                     </PopoverTrigger>
                     <PopoverContent className="p-0">
                       <Command>
-                        <CommandInput placeholder="Search language..." />
+                        <CommandInput placeholder={"Busca " + control.control_type.Combo.placeholder} />
                         <CommandList>
-                          <CommandEmpty>No language found.</CommandEmpty>
+                          <CommandEmpty>No se encuentra {control.control_type.Combo.placeholder} con ese patrón de búsqueda.</CommandEmpty>
                           <CommandGroup>
                             {getComboOptions(control).map((option: any) => (
                               <CommandItem
@@ -160,7 +160,7 @@ export default function DynamicSectionForm({ sectionId }: DynamicSectionFormProp
                                 key={option.value}
                                 onSelect={() => {
                                   methods.setValue(control.id, option.value)
-                                  console.log("asdfsdf")
+                                  console.log("Se ha seleccionado " + option.value)
                                 }}
                               >
                                 {option.label}

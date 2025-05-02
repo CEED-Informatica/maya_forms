@@ -94,7 +94,7 @@
       "area": "region",
       "control_type": {
         "Combo": {
-          "placeholder": "Selecciona la provincia",
+          "placeholder": "una provincia",
           "default": null,
           "options": [ "val", "martes" ]
         }
