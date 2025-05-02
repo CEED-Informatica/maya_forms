@@ -28,6 +28,9 @@ interface ComboOptions {
 
 // Combo que se puede incorpora dentro de una sección
 // Permite la carga de datos de manera asincrona
+// Propiedades:
+//   control: bloque JSON del control
+//   methods: methods del hook useForm de react-hook-form del formulario padre
 export default function MFCombo({ control, methods }: any) {
   const [options, setOptions] = useState<ComboOptions[]>([]);
 
@@ -46,13 +49,18 @@ export default function MFCombo({ control, methods }: any) {
       }
     } 
 
+    // Obtiene los datos de las opciones
+    // Existen tres opciones de indicar los datos
+    //   1. Un array de cadenas de texto  ['Hola', 'Adios']
+    //   2. Array de objetos {value, label}  [ {'value':  'HI 'label': 'Hola' }. {{'value':  'BYE', 'label': 'Adios' }]
+    //   3. Ruta, desde resources, de un fichero json con las opciones "data_general/mis_opciones.json"
     async function fetchOptions() {
       const optionsField = control.control_type.Combo.options
 
       if (Array.isArray(control.control_type.Combo.options)) {
         // Caso 1: Array de cadenas de texto
         if (typeof optionsField[0] === 'string') {
-          setOptions(optionsField.map((value: string)  => ({ value, label: value })));
+          setOptions(optionsField.map((value: string)  => ({ value, label: value })))
         }
         // Caso 2: Array de objetos con 'value' y 'label'
         else if (typeof optionsField[0] === 'object') {
