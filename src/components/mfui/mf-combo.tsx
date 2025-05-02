@@ -21,6 +21,10 @@ import { readTextFile } from '@tauri-apps/plugin-fs';
 // clsx para composicion de clases CSS
 import clsx from 'clsx';
 
+// utilidades ui
+import { isDisabled } from '@/lib/ui-utils'
+
+
 interface ComboOptions {
   value: string
   label: string
@@ -94,6 +98,7 @@ export default function MFCombo({ control, methods }: any) {
               <PopoverTrigger asChild>
                 <FormControl>
                   <Button variant="outline" role="combobox"
+                    disabled={isDisabled(control.disabledIf, methods.getValues)}
                     className={clsx("justify-between",
                     !field.value && "text-muted-foreground")} {...field}>
                       {field.value ? options.find((option) => option.value === field.value)?.label

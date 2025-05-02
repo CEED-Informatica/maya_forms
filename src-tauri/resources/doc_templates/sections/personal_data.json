@@ -2,7 +2,7 @@
   "id": "SEC_PERSONAL_DATA",
   "title": "Datos personales",
   "subtitle": "Información general sobre el alumno/a",
-  "layout": "'name surname surname nia dni', 'address address address email phone', 'city city city region cp'",
+  "layout": "'name surname surname nia dni', 'address address address email phone', 'region city city city cp'",
   "controls": [ 
     {
       "id": "CTRL_DNI",
@@ -88,6 +88,19 @@
       }
     },
     {
+      "id": "CTRL_DIRECCION",
+      "label": "Dirección",
+      "caption": "Domicilio (calle/plaza, número y puerta)",
+      "area": "address",
+      "control_type": {
+        "Edit": {
+          "placeholder": "Escribe tu dirección postal",
+          "default": null,
+          "value": null
+        }
+      }
+    },
+    {
       "id": "CTRL_PROVINCIA",
       "label": "Provincia",
       "caption": "Provincia del domicilio",
@@ -97,6 +110,26 @@
           "placeholder": "una provincia",
           "default": null,
           "options": "general_data/provincias"
+        }
+      }
+    },
+    {
+      "id": "CTRL_CIUDAD",
+      "label": "Localidad",
+      "caption": "Ciudad del domicilio",
+      "area": "city",
+      "disabledIf": [
+        {
+          "control_id": "CTRL_PROVINCIA",
+          "operator": "0",
+          "value": ""
+        }
+      ],
+      "control_type": {
+        "Combo": {
+          "placeholder": "una localidad",
+          "default": null,
+          "options": ["general_data", "provincias"]
         }
       }
     }
