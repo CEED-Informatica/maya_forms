@@ -90,6 +90,10 @@ export default function DynamicSectionForm({ sectionId }: DynamicSectionFormProp
         console.log(control.control_type.Combo.options)
         return optionsField.map((value: string)  => ({ value, label: value }));
       }
+      // Caso 2: Array de objetos con 'value' y 'label'
+      else if (typeof optionsField[0] === 'object') {
+        return optionsField;
+     }
     }
     return []
   }

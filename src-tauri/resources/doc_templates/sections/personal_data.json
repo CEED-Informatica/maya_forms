@@ -96,7 +96,7 @@
         "Combo": {
           "placeholder": "una provincia",
           "default": null,
-          "options": [ "val", "martes" ]
+          "options": [ { "value": "LUN", "label": "Lunes" }, { "value": "MAR", "label": "Martes" } ]
         }
       }
     }
