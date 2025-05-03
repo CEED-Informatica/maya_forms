@@ -28,7 +28,7 @@ La aplicación está desarrollada en Tauri (Rust) utilizando React para el desar
   - [Instalar dependencias Tauri](https://v2.tauri.app/es/start/prerequisites/)
   - Instalar Tauri
 
-## Configuración de IDE recomendada
+### Configuración de IDE recomendada
 
   - [VS Code](https://code.visualstudio.com/)
   - [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode)
@@ -44,7 +44,7 @@ Instalar los paquetes necesarios
 
 El core de maya_forms se encarga de la creación de formularios HTML con sus correspondientes validaciones que, una vez completados correctamente, generen documentos pdf. Cada uno de esos formularios se modela a través de lo que se denomina internamente _doc_template_ o plantilla de documento.
 
-Cada uno de esos _doc_template_ están compuestos a su vez de _sections_ o secciones, lo que vendrían a ser bloques de fomrularios. Por ejemplo: datos personales, documentación aportada, etc
+Cada uno de esos _doc_template_ están compuestos a su vez de _sections_ o secciones, lo que vendrían a ser bloques de formularios. Por ejemplo: datos personales, documentación aportada, etc
 
 ### doc_template
 
@@ -56,37 +56,58 @@ Cada uno de esos _doc_template_ están compuestos a su vez de _sections_ o secci
 
       Ejemplo: _CF_studies_validation_
     
-  3. Se almacenan en la carpeta _src-tauri/resources/doc_templates_.
+ 3. Se almacenan en la carpeta _src-tauri/resources/doc_templates_.
 
-  4. Su estructura es:
+ 4. Su estructura es:
 
-        - "id": Cadena en MAYÚSCULAS con el formato: DOCTMPL_XXXX_ID_DEL_TEMPLATE, donde XXXX es el nmotécnico del tipo de estudio para el está dirigida e ID_DEL_TEMPLATE es el identificador elegido. Por ejemplo: _"DOCTMPL_CF_STUDIES_VALIDATION"_.
+      - "id": cadena en MAYÚSCULAS con el formato: DOCTMPL_XXXX_ID_DEL_TEMPLATE, donde XXXX es el nmotécnico del tipo de estudio para el está dirigida e ID_DEL_TEMPLATE es el identificador elegido. Por ejemplo: _"DOCTMPL_CF_STUDIES_VALIDATION"_.
 
-        - "version": número entero que indica la versión de la plantillla. Por ejemplo: _1_.
+      - "version": número entero que indica la versión de la plantillla. Por ejemplo: _1_.
 
-        - "title": cadena que permite al ser humano entender cual es el formulario. Por ejemplo: _"Convalidaciones por estudios"_,
+      - "title": cadena que permite al ser humano entender cual es el formulario. Por ejemplo: _"Convalidaciones por estudios"_,
 
-        - "description": cadena que proporciona información detallada sobre el formulario. Será mostrada como ayuda para los usuarios finales. Por ejemplo: _"Formulario para solicitar convalidaciones por estudios, no por experiencia profesional."_,
+      - "description": cadena que proporciona información detallada sobre el formulario. Será mostrada como ayuda para los usuarios finales. Por ejemplo: _"Formulario para solicitar convalidaciones por estudios, no por experiencia profesional."_,
 
-        - "study_type": nmotécnico del tipo de estudio para el está dirigida la plantilla. Por ejemplo: _"CF"_.
+      - "study_type": nmotécnico del tipo de estudio para el está dirigida la plantilla. Por ejemplo: _"CF"_.
+
+      - "sections_ids": array de todas las secciones que incluye el _doc_template_. Cada una de ella es un objeto con la siguiente estructura:
   
-        - "sections_ids": array de todas las secciones que incluye el _doc_template_. Cada una de ella es un objeto con la siguiente estructura:
-   
-          * "id": Identificador de la sección. Por ejemplo: _"PERSONAL_DATA"_.
-          * "style": forma en la que se va a mostrar la sección. Hay dos posibilidades:
-            1. "FIXED": modo fijo. Siempre visible.
-            2. "ACC": modo acordeon. Se puede mostrar u ocultar pinchando en el título de al sección.
+        * "id": Identificador de la sección. Por ejemplo: _"PERSONAL_DATA"_.
+        * "style": forma en la que se va a mostrar la sección. Hay dos posibilidades:
+          1. "FIXED": modo fijo. Siempre visible.
+          2. "ACC": modo acordeon. Se puede mostrar u ocultar pinchando en el título de al sección.
 
-          Por ejemplo: 
-          ```
-          "sections_ids": [ {
-              "id": "PERSONAL_DATA",
-              "style": "FIXED"
-            }
-          ]
-          ```
+        Por ejemplo: 
+        ```
+        "sections_ids": [ {
+            "id": "PERSONAL_DATA",
+            "style": "FIXED"
+          }
+        ]
+        ```
 
       > NOTA: El orden de las secciones en el _doc_template_ será el orden en el que estás se mostrarán en el formulario.
+
+### section
+
+ 1. Cada _section_ es un fichero _json_.
+
+ 2. Su nombre se escribe en nomenclatura _snake_case_ indicando simplemente el nombre_del_template. Por ejemplo: _personal_data_
+    
+ 3. Se almacenan en la carpeta _src-tauri/resources/doc_templates/sections_.
+
+ 4. Su estructura es:
+
+     - "id": cadena en MAYÚSCULAS con el formato: SEC_ID_DEL_TEMPLATE, donde ID_DEL_TEMPLATE es el identificador elegido. Por ejemplo: _"SEC_PERSONAL_DATA"_.
+     
+     - "title": cadena que indica el título de la sección. Se utilizará para ser renderizada como cabecera de la misma. Por ejemplo: _"Datos personales"_.
+     
+     - "subtitle": cadena que indica el subtítulo de la sección. Se utilizará_ para ser renderizada como subcabecera de la misma. Por ejemplo: _"Información general sobre el alumno/a"_
+
+     - "layout": cadena con el _css grid areas template_. Indica, mediante el uso de areas  las distribución de los control. Cada fila va entercomillada con comillas simples y se separa del resto de filas con comas. Por ejemplo:  _"'name surname surname nia dni', 'address address address email phone', 'region city city city cp'"_
+
+     - "controls": array de todos los controles que incluye la _section_. El orden de los controles no es relevante ya que su posicionamiento viene definido por el layout.
+ 
 
 ## Anexo I. Tipos de estudios
 
