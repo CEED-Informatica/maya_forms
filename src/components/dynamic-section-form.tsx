@@ -4,18 +4,14 @@ import { useFormContext } from 'react-hook-form';
 
 // shadcn/ui
 import { Separator } from "@/components/ui/separator"
-import { Input } from "@/components/ui/input"
-import {
-  FormControl,
-  FormDescription, FormField,
-  FormItem, FormLabel, FormMessage,
-} from "@/components/ui/form"
 
+// Tauri
 import { resolveResource } from '@tauri-apps/api/path';
 import { readTextFile } from '@tauri-apps/plugin-fs';
 
 // componentes maya forms ui
 import MFCombo from "@/components/mfui/mf-combo"
+import MFEdit from "@/components/mfui/mf-edit"
 
 import clsx from 'clsx';
 
@@ -82,23 +78,7 @@ export default function DynamicSectionForm({ sectionId }: DynamicSectionFormProp
 
     switch (Object.keys(control.control_type)[0]) {
       case 'Edit':
-        return (
-          <div style={{ gridArea: control.area }} key={control.id}>
-            <FormField control={methods.control} name={control.id} 
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{control.label}</FormLabel>
-                  <FormControl>
-                    <Input placeholder={control.control_type['Edit'].placeholder} {...field} />
-                  </FormControl>
-                  <FormDescription>
-                    {control.caption}
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-              />
-            </div>
+        return <MFEdit control={control} methods={methods} key={control.id}/>;
           /* <div key={control.id}>
             <label>{control.label}</label>
             <Input
@@ -107,7 +87,7 @@ export default function DynamicSectionForm({ sectionId }: DynamicSectionFormProp
               defaultValue={control.control_type.props.default || ''}
             />
         </div>
- */     )
+ */     
       case 'Combo':
         return <MFCombo control={control} methods={methods} key={control.id}/>;
 

@@ -57,14 +57,13 @@ function evaluateCondition(
   values: Record<string, any>  
 ): boolean {
   const controlValue = values[condition.control_id];
-  console.log("watch ", values, controlValue)
+
   switch (condition.operator) {
     case '=':  // equals
       return controlValue === condition.value;
     case '!=': // not equals
       return controlValue !== condition.value;
     case '0':  // empty
-      console.log("vacioaaaaaa?", controlValue, !controlValue )
       return !controlValue;
     case '!0': // not empty
       return !!controlValue;
