@@ -1,41 +1,47 @@
 // Utilidades para la gestión de los controles de los formularios
 
+import { Condition, DisabledIf } from "@/lib/data-models"
+import { useWatch, Control } from "react-hook-form";
+
 ///// CONTROL ACTIVO/DESACTIVO /////
 
-interface Condition {
-  control_id: string
-  operator: string    // admite equals, notEquals, empty, notEmpty
-  value: string
-}
-
-// Indica si el control tiene o que estar desactivado en función de 
+// Hook que indica si el control tiene o que estar desactivado en función de 
 // los valores de otros controles.
 // IMPORTANTE: Es posible aplicar condiciones and u or, pero no and y or juntas
-// Parametros
+// Parámetros
 //   disableIf: bloque disableIf del JSON
-//   getValues: función para obtener el valor de los controles indicados en la condición
+//   control: control obtenido desde useForm. Es opcional con el uso de FormProvider
 // Retorno
 //   True si está desactivo o False en caso contrario
-export function isDisabled(
-  disabledIf: any,
-  getValues: (field: string) => any
+export function useIsDisabled(
+  disabledIf: DisabledIf,
+  control?: Control  
 ): boolean {
   if (!disabledIf) return false // no hay bloque disableIf
 
-  if (Array.isArray(disabledIf)) {
-    // Lógica AND por defecto
-    return disabledIf.every((cond) => evaluateCondition(cond, getValues));
-  } else if (disabledIf.logic === 'OR') {
-    return disabledIf.conditions.some((cond: Condition) =>
-      evaluateCondition(cond, getValues)
-    );
-  } else if (disabledIf.logic === 'AND') {
-    return disabledIf.conditions.every((cond: Condition) =>
-      evaluateCondition(cond, getValues)
-    );
-  }
+  // obtengo las condiciones en función de como estén definidas en el JSON
+  const conditions: Condition[] = Array.isArray(disabledIf) 
+    ? disabledIf
+    : disabledIf.conditions;
 
-  return false;
+  // obtengo el tipo de lógica a aplicar
+  const logic = Array.isArray(disabledIf) ? "AND" : disabledIf.logic?.toUpperCase() || "AND"
+  
+  // controles sobre los que se hacen las condiciones, los que hay que vigilar
+  const controlNames = conditions.map((cond) => cond.control_id);
+
+  // array de valores de los controles, ordenados por controlNames
+  const watchedValuesArray = useWatch({ control, name: controlNames })
+
+  // lo convierto de array a coleccion de pares control_id, valor
+  const watchedValues: Record<string, any> = {};
+    controlNames.forEach((field, index) => {
+      watchedValues[field] = watchedValuesArray[index];
+  });
+  
+  const results = conditions.map((condition) => evaluateCondition(condition,  watchedValues))
+  
+  return logic === "OR" ? results.some(Boolean) : results.every(Boolean)
 }
 
 // Evalúa cada una de las condiciones de un if, por ejemplo disableIf
@@ -43,23 +49,25 @@ export function isDisabled(
 //    igual '=', distinto '!=', vacio '0', no vacio , '!0'
 // Parámetros
 //   condition: condición (control_id/operator/value ) a ser evaluada 
-//   getValues: función para obtener el valor de los controles indicados en la condición
+//   values: objeto con los valores actuales del formulario
 // Retorno
 //   True si se cumple al condicón o False en caso contrario
 function evaluateCondition(
   condition: Condition,
-  getValues: (field: string) => any
+  values: Record<string, any>  
 ): boolean {
-  const fieldValue = getValues(condition.control_id);
+  const controlValue = values[condition.control_id];
+  console.log("watch ", values, controlValue)
   switch (condition.operator) {
     case '=':  // equals
-      return fieldValue === condition.value;
+      return controlValue === condition.value;
     case '!=': // not equals
-      return fieldValue !== condition.value;
+      return controlValue !== condition.value;
     case '0':  // empty
-      return !fieldValue;
+      console.log("vacioaaaaaa?", controlValue, !controlValue )
+      return !controlValue;
     case '!0': // not empty
-      return !!fieldValue;
+      return !!controlValue;
     default:
       return false;
   }

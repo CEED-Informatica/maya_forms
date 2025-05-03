@@ -22,7 +22,7 @@ import { readTextFile } from '@tauri-apps/plugin-fs';
 import clsx from 'clsx';
 
 // utilidades ui
-import { isDisabled } from '@/lib/ui-utils'
+import { useIsDisabled } from '@/lib/ui-utils'
 
 
 interface ComboOptions {
@@ -88,6 +88,9 @@ export default function MFCombo({ control, methods }: any) {
 
   }, [control])
 
+  // Hook para saber si el combo está activado o desactivado
+  const isDisabled = useIsDisabled(control.disabledIf, methods.control)
+
   return (
     <div style={{ gridArea: control.area }}>
       <FormField control={methods.control} name={control.id} 
@@ -98,7 +101,7 @@ export default function MFCombo({ control, methods }: any) {
               <PopoverTrigger asChild>
                 <FormControl>
                   <Button variant="outline" role="combobox"
-                    disabled={isDisabled(control.disabledIf, methods.getValues)}
+                    disabled={isDisabled}
                     className={clsx("justify-between",
                     !field.value && "text-muted-foreground")} {...field}>
                       {field.value ? options.find((option) => option.value === field.value)?.label
