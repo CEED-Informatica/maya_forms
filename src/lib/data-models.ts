@@ -12,3 +12,41 @@ export interface DisabledIf {
   logic?: "AND" | "OR"      // o todas las condiciones se anidan con un and o con un or
   conditions: Condition[]
 }
+
+// Condición de filtrado de opciones para Combos
+export interface FilterCondition {
+  control_id: string;       // Control del formulario a observar 
+  optionField: string;      // Campo de la opción a comparar 
+}
+
+// Control (componente gráfico del formulario)
+export interface Control {
+  id: string
+  label: string
+  caption: string
+  area: string
+  control_type: any
+  validation: any
+  disableIf?: DisabledIf
+  filter?: FilterCondition
+}
+
+// Sección. Partes de un formulario
+export interface Section {
+  id: string
+  title: string
+  subtitle: string
+  layout: string
+  controls: Control[]
+}
+
+
+// Campo sección de un doc_template
+export interface FieldSection {
+  id: string
+  style: string
+}
+
+export interface DocTemplate {
+  sections_ids: FieldSection[];
+}

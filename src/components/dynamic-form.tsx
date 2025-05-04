@@ -1,8 +1,17 @@
+// React
 import { useForm, FormProvider  } from 'react-hook-form'
 import { useState, useEffect } from 'react'
+
+// shadcn/ui
 import { Button } from '@/components/ui/button'
+
+// Componentes
 import DynamicSectionForm from "@/components/dynamic-section-form";
 
+// Modelos
+import { DocTemplate, FieldSection, Control } from "@/lib/data-models"
+
+// Tauri
 import { resolveResource, join, appConfigDir } from '@tauri-apps/api/path';
 import { BaseDirectory, exists, readTextFile, writeTextFile } from '@tauri-apps/plugin-fs';
 
@@ -15,27 +24,11 @@ interface DynamicFormProps {
   formId: string;
 }
 
-interface Section {
-  id: string
-  style: string
-  controls: Control[]
-}
-
-interface Control {
-  id: string
-  control_type: any
-  validation: any
-}
-
-interface FormSchema {
-  sections_ids: Section[];
-}
-
 const defaultZodSchema = z.object({}); // creo un esquema vacio de inicio
 
 export default function DynamicForm({ formId }: DynamicFormProps)
 {
-  const [form, setForm] = useState<FormSchema | null>(null)
+  const [form, setForm] = useState<DocTemplate | null>(null)
   const [zodSchema, setZodSchema] = useState<ZodObject<any>>(defaultZodSchema); // valor por defecto el vacio
 
   let rutaCompleta: string
@@ -76,7 +69,6 @@ export default function DynamicForm({ formId }: DynamicFormProps)
     }
 
     delete saveData[data['CTRL_NIA']]
-    console.log(JSON.stringify(data))
     console.log(JSON.stringify(data['CTRL_NIA']))
     saveData[data['CTRL_NIA']] = data
     console.log(JSON.stringify(saveData))
@@ -214,7 +206,7 @@ export default function DynamicForm({ formId }: DynamicFormProps)
        en los subformularios a través de useFormContext*/
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)}>
-          { form && form.sections_ids && form.sections_ids.map((section: Section) => (
+          { form && form.sections_ids && form.sections_ids.map((section: FieldSection) => (
             <DynamicSectionForm key={section.id} sectionId={section.id}/>
           ))
           }
@@ -225,6 +217,3 @@ export default function DynamicForm({ formId }: DynamicFormProps)
     </FormProvider>
   );
 };
-
-            /*  */
-    /*  <DynamicSectionForm key={section.id} sectionId={section.id}/>)) */
