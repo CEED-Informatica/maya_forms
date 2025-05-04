@@ -125,11 +125,15 @@
           "value": ""
         }
       ],
+      "filter": {
+        "control_id": "CTRL_PROVINCIA",
+        "optionField": "parent_code"
+      },
       "control_type": {
         "Combo": {
           "placeholder": "una localidad",
           "default": null,
-          "options": ["general_data", "provincias"]
+          "options": "general_data/poblaciones_con_valor"
         }
       }
     }

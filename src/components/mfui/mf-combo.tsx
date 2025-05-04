@@ -22,7 +22,7 @@ import { readTextFile } from '@tauri-apps/plugin-fs';
 import clsx from 'clsx';
 
 // utilidades ui
-import { useIsDisabled } from '@/lib/ui-utils'
+import { useFilteredOptions, useIsDisabled } from '@/lib/ui-utils'
 
 // Modelos
 import { ComboOptions } from "@/lib/data-models"
@@ -88,6 +88,8 @@ export default function MFCombo({ control, methods }: any) {
   // Hook para saber si el combo está activado o desactivado
   const isDisabled = useIsDisabled(control.disabledIf, methods.control)
 
+  const filteredOptions = useFilteredOptions(options, control.filter, methods.control);
+
   return (
     <div style={{ gridArea: control.area }}>
       <FormField control={methods.control} name={control.id} 
@@ -101,7 +103,7 @@ export default function MFCombo({ control, methods }: any) {
                     disabled={isDisabled}
                     className={clsx("justify-between",
                     !field.value && "text-muted-foreground")} {...field}>
-                      {field.value ? options.find((option) => option.value === field.value)?.label
+                      {field.value ? filteredOptions.find((option) => option.value === field.value)?.label
                        : "Selecciona " + control.control_type.Combo.placeholder}
                     <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                   </Button>
@@ -113,7 +115,7 @@ export default function MFCombo({ control, methods }: any) {
                   <CommandList>
                     <CommandEmpty>No se encuentra {control.control_type.Combo.placeholder} con ese patrón de búsqueda.</CommandEmpty>
                     <CommandGroup>
-                      {options.map((option: any) => (
+                      {filteredOptions.map((option: any) => (
                         <CommandItem
                           value={option.label}
                           key={option.value}

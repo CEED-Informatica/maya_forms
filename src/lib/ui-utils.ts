@@ -79,8 +79,8 @@ function evaluateCondition(
 ///// FILTRADO DE OPCIONES /////
 
 // Hook que devuelve las opciones filtradas en función del valor de otro control.
+// En el caso de un combo el valor que se utiliza para comparar es el value, no el texto de la etiqueta
 // Parámetros
-
 //   filter: bloque filter del JSON
 //   control: control obtenido desde useForm. Es opcional con el uso de FormProvider
 // Retorno
