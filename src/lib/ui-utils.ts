@@ -1,6 +1,9 @@
 // Utilidades para la gestión de los controles de los formularios
 
-import { Condition, DisabledIf } from "@/lib/data-models"
+// Modelos
+import { Condition, DisabledIf, FilterCondition, ComboOptions } from "@/lib/data-models"
+
+// React hook form
 import { useWatch, Control } from "react-hook-form";
 
 ///// CONTROL ACTIVO/DESACTIVO /////
@@ -70,4 +73,28 @@ function evaluateCondition(
     default:
       return false;
   }
+}
+
+
+///// FILTRADO DE OPCIONES /////
+
+// Hook que devuelve las opciones filtradas en función del valor de otro control.
+// Parámetros
+
+//   filter: bloque filter del JSON
+//   control: control obtenido desde useForm. Es opcional con el uso de FormProvider
+// Retorno
+//   Las opciones filtradas. Si el parametro de filtro no existe en la opción, no debe devolverla
+export function useFilteredOptions(
+  options: ComboOptions[],
+  filter: FilterCondition | undefined,
+  control?: Control  
+): ComboOptions[] {
+  if (!filter) return options;  // no hay bloque filter
+
+  const watchedValue = useWatch({ control, name: filter.control_id });
+
+  return options.filter(
+    (option) => filter.optionField in option && option[filter.optionField] === watchedValue
+  );
 }

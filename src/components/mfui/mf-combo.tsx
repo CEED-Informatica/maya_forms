@@ -24,11 +24,8 @@ import clsx from 'clsx';
 // utilidades ui
 import { useIsDisabled } from '@/lib/ui-utils'
 
-
-interface ComboOptions {
-  value: string
-  label: string
-}
+// Modelos
+import { ComboOptions } from "@/lib/data-models"
 
 // Combo que se puede incorpora dentro de una sección
 // Permite la carga de datos de manera asincrona

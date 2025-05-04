@@ -1,5 +1,12 @@
 // Definición de los modelos /tipos de datos
 
+// opciones de un combo
+export interface ComboOptions {
+  value: string
+  label: string
+  [propName: string]: string | number; // son opcionales
+} 
+
 // Condición atómíca
 export interface Condition {
   control_id: string
