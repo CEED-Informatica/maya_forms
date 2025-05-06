@@ -1,5 +1,5 @@
 // React
-import { useForm, FormProvider  } from 'react-hook-form'
+import { useForm, FormProvider } from 'react-hook-form'
 import { useState, useEffect } from 'react'
 
 // shadcn/ui
@@ -12,13 +12,14 @@ import DynamicSectionForm from "@/components/dynamic-section-form";
 import { DocTemplate, FieldSection, Control } from "@/lib/data-models"
 
 // Tauri
-import { resolveResource, join, appConfigDir } from '@tauri-apps/api/path';
-import { BaseDirectory, exists, readTextFile, writeTextFile } from '@tauri-apps/plugin-fs';
+import { resolveResource, join, appConfigDir } from '@tauri-apps/api/path'
+import { BaseDirectory, exists, readTextFile, writeTextFile } from '@tauri-apps/plugin-fs'
 
 // Zod y validadores
-import { z, ZodObject } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { isValidNif } from 'nif-dni-nie-cif-validation';
+import { z, ZodObject, ZodIssueCode } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { isValidNif } from 'nif-dni-nie-cif-validation'
+import { CustomZodRules } from "@/lib/data-models"
 
 interface DynamicFormProps {
   formId: string;
@@ -84,7 +85,8 @@ export default function DynamicForm({ formId }: DynamicFormProps)
      Utiliza funciones del plugin FS de Tauri */
   async function getDocTemplate(idDocTemplate: string) {
     try {
-      const controls: Control[] = [];
+      const controls: Control[] = []
+      const initValues: Record<string, any> =  {}
 
       const path = await resolveResource('resources/doc_templates/' + idDocTemplate + '.json');
       const rootDocTemplate = JSON.parse(await readTextFile(path));
@@ -99,9 +101,13 @@ export default function DynamicForm({ formId }: DynamicFormProps)
       
         sectionTemplate.controls.forEach((control: Control) => {
           controls.push(control)
+          // si es de tipo Edit lo inicializo a ""
+          if (Object.keys(control.control_type)[0] == 'Edit')
+            initValues[control.id] = ""
         }) 
       }
  
+      methods.reset(initValues)   // inicializo el formulario
       setZodSchema(buildZodSchema(controls))  // actualizo el zodSchema según el JSON
 
     } catch (error) {
@@ -110,11 +116,13 @@ export default function DynamicForm({ formId }: DynamicFormProps)
     }
   }
 
+
   /* Crea el esquema de validación de Zod para el formulario a partir de los datos 
      que se incluyen en el json */
   function buildZodSchema(controls: Control[]) {
 
     const schemaShape: Record<string, z.ZodTypeAny> = {}
+    /* let customZodRules: CustomZodRules[] = [] */
     
     for (const control of controls) {
      
@@ -150,6 +158,11 @@ export default function DynamicForm({ formId }: DynamicFormProps)
             if (regex)
               stringSchema = stringSchema.regex(new RegExp(regex), { message: validation.regex.message || "Formato inválido" });
           }
+          
+          /* if (validation.custom) {
+            customZodRules.push(validation.custom)
+          } */
+
           if (validation.maxLength) {
             stringSchema = stringSchema.max(validation.maxLength, { message: `El número máximo de caracteres permitido es ${validation.maxLength}` });
           }
@@ -184,8 +197,32 @@ export default function DynamicForm({ formId }: DynamicFormProps)
 
       schemaShape[id] = fieldSchema
     }
+
+    /* console.log(customZodRules)  */
+
+    const zodSchema = z.object(schemaShape)
+
+    /* zodSchema.superRefine((data, ctx) => {
+
+      console.log("VALIDOOOO 2222")
+      customZodRules.forEach((rule) => {
+        // Creo un objeto función con un parámetro data que solo evalúa la condicion y la devuelve
+        const conditionFunction = new Function('data', `return ${rule.condition}`)
+        // ejecuto la función
+        const isInvalid = conditionFunction(data)
+        console.log("VALIDOOOO "+isInvalid)
+        // si la condición no se cumple añado un issue
+        if (isInvalid) {
+          ctx.addIssue({
+            code: ZodIssueCode.custom,
+            message: rule.message,
+            path: JSON.parse(rule.path.replace(/'/g, '"'))
+          });
+        }
+      })
+    }) */
     
-    return z.object(schemaShape);
+    return zodSchema
   }
 
   /* Genera el formulario o almacena los datos en un fichero */
