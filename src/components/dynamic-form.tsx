@@ -16,7 +16,7 @@ import { resolveResource, join, appConfigDir } from '@tauri-apps/api/path'
 import { BaseDirectory, exists, readTextFile, writeTextFile } from '@tauri-apps/plugin-fs'
 
 // Zod y validadores
-import { z, ZodObject, ZodIssueCode } from 'zod'
+import { z, ZodIssueCode, ZodType } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { isValidNif } from 'nif-dni-nie-cif-validation'
 import { CustomZodRules } from "@/lib/data-models"
@@ -30,7 +30,7 @@ const defaultZodSchema = z.object({}); // creo un esquema vacio de inicio
 export default function DynamicForm({ formId }: DynamicFormProps)
 {
   const [form, setForm] = useState<DocTemplate | null>(null)
-  const [zodSchema, setZodSchema] = useState<ZodObject<any>>(defaultZodSchema); // valor por defecto el vacio
+  const [zodSchema, setZodSchema] = useState<ZodType<any>>(defaultZodSchema); // valor por defecto el vacio
 
   let rutaCompleta: string
 
@@ -122,7 +122,7 @@ export default function DynamicForm({ formId }: DynamicFormProps)
   function buildZodSchema(controls: Control[]) {
 
     const schemaShape: Record<string, z.ZodTypeAny> = {}
-    /* let customZodRules: CustomZodRules[] = [] */
+    let customZodRules: CustomZodRules[] = []
     
     for (const control of controls) {
      
@@ -158,10 +158,9 @@ export default function DynamicForm({ formId }: DynamicFormProps)
             if (regex)
               stringSchema = stringSchema.regex(new RegExp(regex), { message: validation.regex.message || "Formato inválido" });
           }
-          
-          /* if (validation.custom) {
+          if (validation.custom) {
             customZodRules.push(validation.custom)
-          } */
+          }
 
           if (validation.maxLength) {
             stringSchema = stringSchema.max(validation.maxLength, { message: `El número máximo de caracteres permitido es ${validation.maxLength}` });
@@ -198,30 +197,40 @@ export default function DynamicForm({ formId }: DynamicFormProps)
       schemaShape[id] = fieldSchema
     }
 
-    /* console.log(customZodRules)  */
+    console.log(customZodRules) 
 
-    const zodSchema = z.object(schemaShape)
-
-    /* zodSchema.superRefine((data, ctx) => {
-
-      console.log("VALIDOOOO 2222")
+    const zodSchema = z.object(schemaShape).superRefine((data, ctx) => {
+      //console.log("VALIDOOOO 2222")
       customZodRules.forEach((rule) => {
+        
+      try {
+
+        const menssageInterpolated = new Function('data', `console.log(data.CTRL_PROVINCIA); return \`${rule.message}\`;`)(data)
         // Creo un objeto función con un parámetro data que solo evalúa la condicion y la devuelve
         const conditionFunction = new Function('data', `return ${rule.condition}`)
         // ejecuto la función
         const isInvalid = conditionFunction(data)
-        console.log("VALIDOOOO "+isInvalid)
+    
         // si la condición no se cumple añado un issue
         if (isInvalid) {
           ctx.addIssue({
             code: ZodIssueCode.custom,
-            message: rule.message,
+            message: menssageInterpolated,
             path: JSON.parse(rule.path.replace(/'/g, '"'))
           });
         }
+
+      } catch (error) {
+        ctx.addIssue({
+          code: ZodIssueCode.custom,
+          message: 'Error al evaluar la condición de validación.',
+          path: []
+        });
+      } 
       })
-    }) */
-    
+      
+    })
+
     return zodSchema
   }
 

@@ -1,5 +1,13 @@
 // Definición de los modelos /tipos de datos
 
+// ReglasZod  de validación personalizadas
+export interface CustomZodRules {
+  condition: string
+  path: string
+  message: string
+  code: string
+}
+
 // opciones de un combo
 export interface ComboOptions {
   value: string
