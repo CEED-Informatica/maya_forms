@@ -1,9 +1,13 @@
-import { createContext, useState, useEffect, useContext } from 'react';
+import { createContext, useState, useEffect, useContext, ReactNode } from 'react';
 
 interface DataInfoContextType {
   data: any;
   refreshData: () => void;
 }
+
+type Props = {
+  children: ReactNode;
+};
 
 /* Permite crear un contexto, un espacio para compartir datos entre componentes sin tener que pasar props
    Puede albergar dos tipos de datos DataInfoContextType o undefined, por defecto, undefined */
@@ -11,7 +15,7 @@ const DataInfoContext = createContext<DataInfoContextType | undefined>(undefined
 
 /* Se encarga de la obtención y distribución de la información pública sobre los trámites que se ofrece 
    desde internet */ 
-export default function DataInfoProvider({children}: ReactNode) {
+export default function DataInfoProvider({children}: Props) {
 
   const [data, setData] = useState(null);
 
