@@ -13,9 +13,23 @@
     "withGlobalTauri": true,
     "windows": [
       {
+        "label": "splash",
+        "title": "splash",
+        "fullscreen": false,
+        "resizable": false,
+        "width": 400,
+        "height": 300,
+        "decorations": false,
+        "visible": true,
+        "url": "/splash"
+      },
+      {
+        "label": "main",
         "title": "maya_forms",
         "width": 800,
-        "height": 600
+        "height": 600,
+        "visible": false,
+        "url": "/"
       }
     ],
     "security": {

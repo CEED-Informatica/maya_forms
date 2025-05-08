@@ -13,8 +13,17 @@ pub fn run() {
         .setup(|app| {
         #[cfg(debug_assertions)] // only include this code on debug builds
         {
+            let splash = app.get_webview_window("splash").unwrap();
             let window = app.get_webview_window("main").unwrap();
+
             window.open_devtools();
+
+            tauri::async_runtime::spawn(async move {
+                std::thread::sleep(std::time::Duration::from_secs(2));
+                splash.close().ok();
+                window.show().ok();
+              });
+            
         }
         Ok(())
     })
