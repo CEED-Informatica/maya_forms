@@ -153,6 +153,13 @@
           "value": null
         }
       },
+      "disabledIf": [
+        {
+          "control_id": "CTRL_PROVINCIA",
+          "operator": "0",
+          "value": ""
+        }
+      ],
       "validation":{
         "required": true,
         "type": "string",
