@@ -1,10 +1,11 @@
 // React Route DOM
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom"
 
 import { ThemeProvider } from "@/components/theme-provider"
 
-// Obtiene datos publicos y los comparte con toda la app
+// Providers. Obtienen datos y los comparte con toda la app
 import DataInfoProvider from "@/components/data/data-info-provider"
+import DataUserProvider from "@/components/data/data-user-provider"
 
 import "./App.css";
 
@@ -14,7 +15,8 @@ import Layout from "@/components/layout"
 
 function App() {
   return (
-    <DataInfoProvider>
+   <DataInfoProvider>
+    <DataUserProvider>
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
         <Routes>
           <Route path="/splash" element={ <Splash/>} />
@@ -24,7 +26,8 @@ function App() {
           </Route>
         </Routes>
       </ThemeProvider>
-    </DataInfoProvider>
+    </DataUserProvider> 
+  </DataInfoProvider>
   );
 }
 

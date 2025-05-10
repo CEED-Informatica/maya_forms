@@ -1,20 +1,21 @@
+// React
 import { createContext, useState, useEffect, useContext, ReactNode } from 'react';
 
 interface DataInfoContextType {
-  data: any;
-  refreshData: () => void;
+  data: any
+  refreshData: () => void
 }
 
 type Props = {
-  children: ReactNode;
+  children: ReactNode
 };
 
-/* Permite crear un contexto, un espacio para compartir datos entre componentes sin tener que pasar props
-   Puede albergar dos tipos de datos DataInfoContextType o undefined, por defecto, undefined */
+// Permite crear un contexto, un espacio para compartir datos entre componentes sin tener que pasar props
+// Puede albergar dos tipos de datos DataInfoContextType o undefined, por defecto, undefined
 const DataInfoContext = createContext<DataInfoContextType | undefined>(undefined);
 
-/* Se encarga de la obtención y distribución de la información pública sobre los trámites que se ofrece 
-   desde internet */ 
+// Se encarga de la obtención desde internet y distribución de la información pública 
+//sobre los trámites que se ofrece  
 export default function DataInfoProvider({children}: Props) {
 
   const [data, setData] = useState(null);
@@ -24,7 +25,6 @@ export default function DataInfoProvider({children}: Props) {
   }, []);
 
   const fetchDataInfo = async () => {
-    // Reemplaza con tu lógica de obtención de datos
     const response = await fetch('https://raw.githubusercontent.com/CEED-Informatica/maya_forms_info/main/data_info_46025799.json');
     const result = await response.json();
     setData(result);
@@ -39,6 +39,7 @@ export default function DataInfoProvider({children}: Props) {
   );
 }
 
+// Devuelve el contexto creado con los tipos definidos en DataInfoContextType
 export const useDataInfo = () => {
   const context = useContext(DataInfoContext);
   if (!context) {
