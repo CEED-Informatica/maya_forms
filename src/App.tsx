@@ -1,5 +1,5 @@
 // React Route DOM
-import { Navigate, Route, Routes } from "react-router-dom"
+import { Route, Routes } from "react-router-dom"
 
 import { ThemeProvider } from "@/components/theme-provider"
 
@@ -9,9 +9,12 @@ import DataUserProvider from "@/components/data/data-user-provider"
 
 import "./App.css";
 
-import Profile from '@/pages/Profile'
+// Páginas
 import Splash from '@/pages/Splash'
 import Layout from "@/components/layout"
+import StartupRouter from '@/pages/StartupRouter'
+import Profile from '@/pages/Profile'
+import SelectProfile from '@/pages/SelectProfile'
 
 function App() {
   return (
@@ -20,8 +23,9 @@ function App() {
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
         <Routes>
           <Route path="/splash" element={ <Splash/>} />
-          <Route element={ <Layout/>} >
-            <Route index path="/" element={ <Navigate replace to="/profile" /> }/>
+          <Route element={ <Layout/>} >7
+            <Route index path="/" element={ <StartupRouter/> }/>
+            <Route path="/select_profile" element={ <SelectProfile/> }/>
             <Route path="/profile" element={ <Profile/> }/>
           </Route>
         </Routes>
@@ -32,3 +36,5 @@ function App() {
 }
 
 export default App;
+
+//<Navigate replace to="/profile" /> 

@@ -16,20 +16,22 @@ pub fn run() {
             let splash = app.get_webview_window("splash").unwrap();
             let window = app.get_webview_window("main").unwrap();
 
+            splash.open_devtools();
             window.open_devtools();
 
-            tauri::async_runtime::spawn(async move {
-                std::thread::sleep(std::time::Duration::from_secs(2));
+
+            /* tauri::async_runtime::spawn(async move {
+                std::thread::sleep(std::time::Duration::from_secs(10));
                 splash.close().ok();
                 window.show().ok();
-              });
-            
+              });        */     
         }
         Ok(())
     })
         .plugin(tauri_plugin_fs::init())
         .plugin(tauri_plugin_opener::init())
-        .invoke_handler(tauri::generate_handler![commands::greet])
+        .invoke_handler(tauri::generate_handler![commands::close_splash_and_open_main])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
+

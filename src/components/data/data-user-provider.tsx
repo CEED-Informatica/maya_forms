@@ -1,11 +1,15 @@
 // React
-import { createContext, useState, useEffect, useContext, ReactNode } from 'react'
+import { createContext, useState, useContext, ReactNode } from 'react'
 
 // Tauri
 import { BaseDirectory, exists, readTextFile } from '@tauri-apps/plugin-fs'
 
+// Modelos
+import { Profile } from "@/lib/data-models"
+
 interface DataUserContextType {
-  users: any
+  users: Record<string, Profile> | null
+  setUsers: React.Dispatch<React.SetStateAction<Record<string, Profile> | null>>
   readDataUser: () => void
 }
 
@@ -16,28 +20,41 @@ const DataUserContext = createContext<DataUserContextType | undefined>(undefined
 // Se encarga de la obtención y distribución de la información del usuario  
 export default function DataUserProvider({ children }: { children: ReactNode }) {
   
-  const [users, setUsers] = useState(null)
+  const [users, setUsers] = useState<Record<string, Profile> | null>(null)
 
-  const readDataUser = async () => {  
+  const readDataUser = async () => { 
+    
     const profilesExists = await exists('profiles.json', {
       baseDir: BaseDirectory.AppLocalData, // .local/com.maya_forms.app
     })
     
     // no existe aun el fichero de perfiles
     if (!profilesExists) 
-      setUsers(null)
+      setUsers({})
     else {
-      const dataProfiles = JSON.parse(await readTextFile( "profiles.json", {
+      const rawProfiles:  Record<string, Record<string, any>> = JSON.parse(await readTextFile( "profiles.json", {
         baseDir: BaseDirectory.AppLocalData,
       }));
-      
-      setUsers(dataProfiles)
-      alert(Object.keys(dataProfiles).length)  
+
+      // convierto las claves del fichero a las de Profile
+      const profiles: Record<string, Profile> = Object.entries(rawProfiles).reduce(
+        (acc, [key, value]) => {
+          acc[key] = {
+            nia: value.CTRL_NIA,
+            name: value.CTRL_NOMBRE,
+            surname: value.CTRL_APELLIDOS,
+          };
+          return acc;
+        },
+        {} as Record<string, Profile>
+      );
+  
+      setUsers(profiles);
     }  
   }
 
   return (
-    <DataUserContext.Provider value={{ users, readDataUser }}>
+    <DataUserContext.Provider value={{ users, setUsers, readDataUser }}>
       {children}
     </DataUserContext.Provider>
   );

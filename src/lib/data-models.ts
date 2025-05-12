@@ -65,3 +65,9 @@ export interface FieldSection {
 export interface DocTemplate {
   sections_ids: FieldSection[];
 }
+
+export interface Profile {
+  nia: string
+  name: string
+  surname: string
+}
