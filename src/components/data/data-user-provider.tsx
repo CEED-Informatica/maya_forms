@@ -11,6 +11,8 @@ interface DataUserContextType {
   users: Record<string, Profile> | null
   setUsers: React.Dispatch<React.SetStateAction<Record<string, Profile> | null>>
   readDataUser: () => void
+  currentUserNia: string | null
+  setCurrentUserNia: (nia: string) => void
 }
 
 // Permite crear un contexto, un espacio para compartir datos entre componentes sin tener que pasar props
@@ -21,6 +23,7 @@ const DataUserContext = createContext<DataUserContextType | undefined>(undefined
 export default function DataUserProvider({ children }: { children: ReactNode }) {
   
   const [users, setUsers] = useState<Record<string, Profile> | null>(null)
+  const [currentUserNia, setCurrentUserNia] = useState<string | null>(null)
 
   const readDataUser = async () => { 
     
@@ -54,7 +57,7 @@ export default function DataUserProvider({ children }: { children: ReactNode }) 
   }
 
   return (
-    <DataUserContext.Provider value={{ users, setUsers, readDataUser }}>
+    <DataUserContext.Provider value={{ users, setUsers, readDataUser, currentUserNia, setCurrentUserNia }}>
       {children}
     </DataUserContext.Provider>
   );

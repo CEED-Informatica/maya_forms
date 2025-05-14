@@ -5,12 +5,15 @@ import { Sun, Moon, User } from 'lucide-react';
 import  logoCeedW  from '@/assets/ceedcv_white.png'
 import  logoCeedG  from '@/assets/ceedcv_gray.png'
 
-import { useTheme } from '@/components/theme-provider';
+import { useDataUser } from '@/components/data/data-user-provider'
+
+import { useTheme } from '@/components/theme-provider'
 
 export default function Header() {
 
   const { theme, setTheme } = useTheme();
-
+  const { users, currentUserNia } = useDataUser()
+  
   /* Alterna el tema */
   const toggleTheme = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark');
@@ -32,7 +35,7 @@ export default function Header() {
           {/* Icono de usuario y nombre */}
           <Link to="/perfil" className="flex items-center space-x-2">
             <User className="h-5 w-5 text-gray-800 dark:text-white" />
-            <span className="text-gray-800 dark:text-white">Nombre Apellido1 - 123456</span>
+            <span className="text-gray-800 dark:text-white">{users && currentUserNia ? users[currentUserNia].name : ''} {users && currentUserNia ? users[currentUserNia].surname : ''} - {currentUserNia}</span>
           </Link>
 
            {/* Botón de cambio de tema */}
