@@ -1,3 +1,4 @@
+// Data provider
 import { useDataUser } from "@/components/data/data-user-provider"
 
 import { ScrollArea } from "@/components/ui/scroll-area"
@@ -7,13 +8,18 @@ import { UserIcon } from "lucide-react"
 
 import { Profile } from "@/lib/data-models"
 
+// React Router DOM
+import { useNavigate } from "react-router-dom"
+
 export default function SelectProfile() {
 
   const { users, setCurrentUserNia } = useDataUser()
+  const navigate = useNavigate()
 
   const handleSelectUser = (user: Profile) => {
     setCurrentUserNia(user.nia)
     console.log("Usuario seleccionado:", user)
+    navigate("/studies",  {replace: true })
   }
   
   return  (
