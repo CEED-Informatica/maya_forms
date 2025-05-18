@@ -15,7 +15,7 @@ import Layout from "@/components/layout"
 import StartupRouter from '@/pages/StartupRouter'
 import Profile from '@/pages/Profile'
 import SelectProfile from '@/pages/SelectProfile'
-import Studies from '@/pages/Studies'
+import Selector from '@/pages/Selector'
 
 function App() {
   return (
@@ -28,7 +28,7 @@ function App() {
             <Route index path="/" element={ <StartupRouter/> }/>
             <Route path="/select_profile" element={ <SelectProfile/> }/>
             <Route path="/profile" element={ <Profile/> }/>
-            <Route path="/studies" element={ <Studies/> }/>
+            <Route path="/selector/:type" element={ <Selector/> }/>
           </Route>
         </Routes>
       </ThemeProvider>
