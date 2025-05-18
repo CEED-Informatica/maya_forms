@@ -1,7 +1,7 @@
 // Utilidades para la gestión de los controles de los formularios
 
 // Modelos
-import { Condition, DisabledIf, FilterCondition, ComboOptions } from "@/lib/data-models"
+import { Condition, DisabledIf, FilterCondition, ComboOptions } from "@/lib/component-models"
 
 // React hook form
 import { useWatch, Control } from "react-hook-form";

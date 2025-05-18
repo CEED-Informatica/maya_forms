@@ -25,7 +25,7 @@ import clsx from 'clsx';
 import { useFilteredOptions, useIsDisabled } from '@/lib/ui-utils'
 
 // Modelos
-import { ComboOptions } from "@/lib/data-models"
+import { ComboOptions } from "@/lib/component-models"
 
 // Combo que se puede incorpora dentro de una sección
 // Permite la carga de datos de manera asincrona

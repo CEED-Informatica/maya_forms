@@ -6,7 +6,7 @@ import { Separator } from "@/components/ui/separator"
 
 import { UserIcon } from "lucide-react"
 
-import { Profile } from "@/lib/data-models"
+import { Profile } from "@/lib/component-models"
 
 // React Router DOM
 import { useNavigate } from "react-router-dom"
@@ -19,7 +19,7 @@ export default function SelectProfile() {
   const handleSelectUser = (user: Profile) => {
     setCurrentUserNia(user.nia)
     console.log("Usuario seleccionado:", user)
-    navigate("/studies",  {replace: true })
+    navigate("/selector/studies",  {replace: true })
   }
   
   return  (

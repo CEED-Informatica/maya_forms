@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom"
 import { listen } from "@tauri-apps/api/event"
 
 // Modelos
-import { Profile } from "@/lib/data-models"
+import { Profile } from "@/lib/component-models"
 
 // Página de inicio. Enruta en función de los perfiles existentes
 // En principio solo se ejecuta al arrancar la aplicación

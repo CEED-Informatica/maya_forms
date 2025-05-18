@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button'
 import DynamicSectionForm from "@/components/dynamic-section-form";
 
 // Modelos
-import { DocTemplate, FieldSection, Control } from "@/lib/data-models"
+import { DocTemplate, FieldSection, Control, CustomZodRules } from "@/lib/component-models"
 
 // Tauri
 import { resolveResource, join, appConfigDir } from '@tauri-apps/api/path'
@@ -19,7 +19,6 @@ import { BaseDirectory, exists, readTextFile, writeTextFile } from '@tauri-apps/
 import { z, ZodIssueCode, ZodType } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { isValidNif } from 'nif-dni-nie-cif-validation'
-import { CustomZodRules } from "@/lib/data-models"
 
 interface DynamicFormProps {
   formId: string;
