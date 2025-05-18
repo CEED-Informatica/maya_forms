@@ -31,7 +31,7 @@ export default function MFCardStudies({data}: any) {
       <CardFooter>
         <Button asChild className="w-full" style={{ backgroundColor: data.color, borderColor: data.color }}>
           <div>
-          <Link key={data.abbr} to={'/section/${study}'}>Acceder</Link> 
+          <Link key={data.abbr} to={`/selector/procedures/${data.abbr}`}>Acceder</Link> 
           <ArrowRight />  
           </div>
         </Button>

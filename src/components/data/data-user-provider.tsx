@@ -5,7 +5,7 @@ import { createContext, useState, useContext, ReactNode } from 'react'
 import { BaseDirectory, exists, readTextFile } from '@tauri-apps/plugin-fs'
 
 // Modelos
-import { Profile } from "@/lib/component-models"
+import { Profile } from "@/lib/data-models"
 
 interface DataUserContextType {
   users: Record<string, Profile> | null

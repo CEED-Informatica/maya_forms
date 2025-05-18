@@ -29,6 +29,7 @@ function App() {
             <Route path="/select_profile" element={ <SelectProfile/> }/>
             <Route path="/profile" element={ <Profile/> }/>
             <Route path="/selector/:type" element={ <Selector/> }/>
+            <Route path="/selector/:type/:study_abbr" element={ <Selector/> }/>
           </Route>
         </Routes>
       </ThemeProvider>

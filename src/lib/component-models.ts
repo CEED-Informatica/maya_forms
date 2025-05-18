@@ -55,7 +55,6 @@ export interface Section {
   controls: Control[]
 }
 
-
 // Campo sección de un doc_template
 export interface FieldSection {
   id: string
@@ -64,10 +63,4 @@ export interface FieldSection {
 
 export interface DocTemplate {
   sections_ids: FieldSection[];
-}
-
-export interface Profile {
-  nia: string
-  name: string
-  surname: string
 }

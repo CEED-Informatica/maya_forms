@@ -1,12 +1,14 @@
 // Data provider
 import { useDataUser } from "@/components/data/data-user-provider"
 
+// shadcn/ui
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Separator } from "@/components/ui/separator"
 
 import { UserIcon } from "lucide-react"
 
-import { Profile } from "@/lib/component-models"
+// Models
+import { Profile } from "@/lib/data-models"
 
 // React Router DOM
 import { useNavigate } from "react-router-dom"
