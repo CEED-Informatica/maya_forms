@@ -19,9 +19,9 @@ export default function MFCardStudies({data}: any) {
           style={{ borderColor: data.color }}> 
       <CardHeader>
         <div className="flex items-center space-x-4">
-          { data.icon && <img src={icons[data.icon]} alt="icono" className="w-10 h-10"/>}
+          { data.icon && <img src={icons[data.icon]} alt="icono" className="w-11  h-11"/>}
           <div>
-            <CardTitle>{data.abbr}</CardTitle>
+            <CardTitle className="mb-2">{data.abbr}</CardTitle>
             <CardDescription>{data.name}</CardDescription>
           </div>
         </div>
