@@ -18,16 +18,16 @@ import { isBefore, isAfter, differenceInDays, parseISO } from "date-fns"
 
 const DAYS_WARNING = 7
 
-export default function MFCardProcedures({data, color} : any) {
+export default function MFCardProcedures({data, color, study_abbr} : any) {
   const now = new Date()
-  const numProcedures = data.info?.subtypes?.length ?? 0
+  const numProcedures = data.subtypes?.length ?? 0
 
   // cálculo del número de trámites por situacion
   let countOpen = 0
   let countClosingSoon = 0
   let countClosed = 0
 
-  data.info.subtypes.forEach((subtype: any) => {
+  data.subtypes.forEach((subtype: any) => {
     const key = Object.keys(subtype)[0]
     const item = subtype[key]
     const init = parseISO(item.init_date)
@@ -118,7 +118,7 @@ export default function MFCardProcedures({data, color} : any) {
       <CardFooter>
         <Button asChild className="w-full" style={{ backgroundColor: color, borderColor: data.color }}>
           <div>
-          <Link key={data.abbr} to={`/selector/procedures/${data.abbr}`}>Acceder</Link> 
+          <Link key={data.type} to={`/selector/procedures/${study_abbr}/${data.type}`}>Acceder</Link> 
           <ArrowRight />  
           </div>
         </Button>

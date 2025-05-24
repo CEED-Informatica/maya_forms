@@ -47,7 +47,7 @@ const studies = [
 export default function Selector() {
 
   const { data } = useDataInfo()
-  const { type, study_abbr } = useParams<{ type: string, study_abbr: string }>()
+  const { type, study_abbr, procedure_type } = useParams<{ type: string, study_abbr: string, procedure_type: string }>()
 
   const { items, color }: any = (() => {
     switch (type) {
@@ -55,10 +55,23 @@ export default function Selector() {
         const study = data.studies.find(
           (s: any) => s.GENERAL_INFO?.abbr === study_abbr
         )
-        console.log(study_abbr + "    " +study?.PROCEDURES )
-        return {
-          items: study?.PROCEDURES ?? [],
-          color: study?.GENERAL_INFO.color
+        console.log("ESTUDIOS " + study_abbr + "    " +study?.PROCEDURES )
+
+        if (!procedure_type) {
+          return {
+            items: study?.PROCEDURES ?? [],
+            color: study?.GENERAL_INFO.color
+          }
+        }
+        else {
+          console.log("ELEGIDO TIPOS DE PROCEDIMIENTO -> " + procedure_type)
+          const procedures_type = study?.PROCEDURES.find(
+            (s: any) => s.type === procedure_type
+          )
+         return {
+            items: procedures_type?.subtypes ?? [],
+            color: study?.GENERAL_INFO.color
+          }
         }
       default:
         return {
@@ -77,8 +90,12 @@ export default function Selector() {
             <MFCardStudies data={study.GENERAL_INFO} key={study.GENERAL_INFO.abbr}/>
       ))}
         {/* Trámites */}
-        { type == 'procedures' && items.map((procedure: Studies["PROCEDURES"]) => (
-            <MFCardProcedures data={procedure} color={color} key={procedure.type}/>
+        { type == 'procedures' && !procedure_type && items.map((procedure: Studies["PROCEDURES"]) => (
+            <MFCardProcedures data={procedure} color={color} study_abbr={study_abbr} key={procedure.type}/>
+      ))}
+        {/* Sutipo de Trámites  */}
+        { type == 'procedures' && procedure_type && items.map((ptype: any) => (
+            <p>procedimiento {ptype.description}</p>
       ))}
       </div>
     
