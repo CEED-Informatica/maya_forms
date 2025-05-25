@@ -1,6 +1,11 @@
 // shadcn/ui
 import { Button } from "@/components/ui/button"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 
 // iconos
 import { CalendarCheck, CalendarX, ExternalLink, Lock, Unlock, ChevronsUpDown, ArrowRight, Video, Mic  } from "lucide-react"
@@ -74,12 +79,49 @@ export default function MFCollapsibleProcedure({data, color, studyAbbr} : any) {
         </p>
         <p>{info.info}</p>
 
-        {/* Enlace al video */}
-        {/* <a href={data.url_help} target="_blank" rel="noopener noreferrer" className="flex items-center text-blue-600 hover:underline">
-          Ver vídeo explicativo <ExternalLink className="ml-1 w-4 h-4" />
-        </a> */}
+        <div className="flex space-x-4 mt-3 justify-end">
+          {/* Icono de enlace */}
+          {info.url_help && (
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <a href={info.url_help} target="_blank" rel="noopener noreferrer" className="text-yellow-500 hover:text-yellow-700">
+                <ExternalLink className="w-5 h-5" />
+              </a>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Enlace a página web con más información</p>
+              </TooltipContent>
+            </Tooltip>
+          )}
 
-      
+          {/* Icono de Video */}
+          {info.url_video && (
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <a href={info.url_video} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-700">
+                  <Video className="w-5 h-5" />
+                </a>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Disponible video con más información</p>
+              </TooltipContent>
+            </Tooltip>
+          )}
+
+          {/* Icono de Podcast */}
+          {info.url_podcast && (
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <a href={info.url_podcast} target="_blank" rel="noopener noreferrer" className="text-purple-500 hover:text-purple-700">
+                  <Mic className="w-5 h-5" />
+                </a>
+             </TooltipTrigger>
+             <TooltipContent>
+               <p>Disponible podcast con más información</p>
+             </TooltipContent>
+           </Tooltip>
+          )}
+        </div>
 
         {/* Dialogo con detalles */}
        {/*  <Dialog>
