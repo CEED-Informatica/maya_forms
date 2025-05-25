@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
 
 // iconos
-import { CalendarCheck, CalendarX, ExternalLink, Lock, Unlock, ChevronsUpDown, ArrowRight  } from "lucide-react"
+import { CalendarCheck, CalendarX, ExternalLink, Lock, Unlock, ChevronsUpDown, ArrowRight, Video, Mic  } from "lucide-react"
 
 // React Router DOM
 import { Link } from "react-router-dom"
@@ -11,38 +11,48 @@ import { Link } from "react-router-dom"
 // gestión de fechas
 import { isBefore, isAfter, differenceInDays, parseISO } from "date-fns"
 
+// React
+import { useState, useEffect } from 'react'
+
 import clsx from 'clsx'
 
-const CLOSED = 0, CLOSING_SOON = 1, OPENED = 2
+const CLOSED = 0, CLOSING_SOON = 1, OPENED = 2, NEXT = 4
 
 export default function MFCollapsibleProcedure({data, color, studyAbbr} : any) {
 
-  const info = data[Object.keys(data)[0]]
+  const [state, setState] = useState<number>(CLOSED)
+  const [isOpen, setIsOpen] = useState<boolean>(false)
 
+  const info = data[Object.keys(data)[0]]
   const now = new Date()
 
-  // en qué estado está?
-  const init = parseISO(info.init_date)
-  const end = parseISO(info.end_date)
-  let state = CLOSED
+  useEffect(() => {
+    // ¿en qué estado está?
+    const init = parseISO(info.init_date)
+    const end = parseISO(info.end_date)
 
-  if (isBefore(now, init)) 
-    state = CLOSED  // podria poner algo así como próximamente
-
-  if (isAfter(now, end)) {
-    state = CLOSED
-  } else {
-    const daysLeft = differenceInDays(end, now)
-    if (daysLeft <= 15) {
-      state = CLOSING_SOON
-    } else {
-      state = OPENED
+    if (isBefore(now, init)) {
+      setState(NEXT)
+      setIsOpen(false)
     }
-  }
 
+    if (isAfter(now, end)) {
+      setState(CLOSED)
+      setIsOpen(false)
+    } else {
+      const daysLeft = differenceInDays(end, now)
+      if (daysLeft <= 15) 
+        setState(CLOSING_SOON)
+      else 
+        setState(OPENED)    
+      
+      setIsOpen(true)
+    }
+  }, []);
+  
   return (
     <Collapsible className="w-[65%] border rounded-lg mb-4 bg-muted/40 shadow-md"
-      style={{ borderColor: color }} open={ state != CLOSED}>
+      style={{ borderColor: color }} open={isOpen} onOpenChange={setIsOpen}>
       <CollapsibleTrigger className="w-full bg-muted px-4 py-2 rounded-lg hover:bg-muted/70 transition flex justify-between px-4 py-2 hover:bg-muted transition">
         
         {state != CLOSED ? (
@@ -65,9 +75,11 @@ export default function MFCollapsibleProcedure({data, color, studyAbbr} : any) {
         <p>{info.info}</p>
 
         {/* Enlace al video */}
-        <a href={data.url_help} target="_blank" rel="noopener noreferrer" className="flex items-center text-blue-600 hover:underline">
+        {/* <a href={data.url_help} target="_blank" rel="noopener noreferrer" className="flex items-center text-blue-600 hover:underline">
           Ver vídeo explicativo <ExternalLink className="ml-1 w-4 h-4" />
-        </a>
+        </a> */}
+
+      
 
         {/* Dialogo con detalles */}
        {/*  <Dialog>
