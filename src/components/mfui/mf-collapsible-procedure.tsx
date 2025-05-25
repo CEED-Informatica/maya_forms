@@ -78,7 +78,7 @@ export default function MFCollapsibleProcedure({data, color, studyAbbr} : any) {
         <p className="flex space-x-2">
           <CalendarX className="text-red-400 w-4 h-4" /><strong>Fin:</strong><span className="ml-1">{format(parseISO(info.end_date), "d 'de' MMMM 'de' yyyy", { locale: es })}</span> 
         </p>
-        <p>{info.info}</p>
+        <div dangerouslySetInnerHTML={{ __html: info.info }} className="prose prose-sm dark:prose-invert"/>
 
         <div className="flex space-x-4 mt-3 justify-end">
           {/* Icono de enlace */}
