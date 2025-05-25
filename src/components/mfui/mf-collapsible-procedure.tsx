@@ -14,7 +14,8 @@ import { CalendarCheck, CalendarX, ExternalLink, Lock, Unlock, ChevronsUpDown, A
 import { Link } from "react-router-dom"
 
 // gestión de fechas
-import { isBefore, isAfter, differenceInDays, parseISO } from "date-fns"
+import { isBefore, isAfter, differenceInDays, parseISO, format } from "date-fns"
+import { es } from "date-fns/locale"
 
 // React
 import { useState, useEffect } from 'react'
@@ -72,10 +73,10 @@ export default function MFCollapsibleProcedure({data, color, studyAbbr} : any) {
       </CollapsibleTrigger>
       <CollapsibleContent className="px-4 py-3 space-y-3 text-sm">
         <p className="flex space-x-2 mb-0.5">
-          <CalendarCheck className="text-green-400 w-4 h-4" /><strong>Inicio:</strong><span className="ml-1">{info.init_date}</span> 
+          <CalendarCheck className="text-green-400 w-4 h-4" /><strong>Inicio:</strong><span className="ml-1"><span>{format(parseISO(info.init_date), "d 'de' MMMM 'de' yyyy", { locale: es })}</span></span> 
         </p>
         <p className="flex space-x-2">
-          <CalendarX className="text-red-400 w-4 h-4" /><strong>Fin:</strong><span className="ml-1">{info.end_date}</span> 
+          <CalendarX className="text-red-400 w-4 h-4" /><strong>Fin:</strong><span className="ml-1">{format(parseISO(info.end_date), "d 'de' MMMM 'de' yyyy", { locale: es })}</span> 
         </p>
         <p>{info.info}</p>
 
