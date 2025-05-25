@@ -8,20 +8,49 @@ import { CalendarCheck, CalendarX, ExternalLink, Lock, Unlock, ChevronsUpDown, A
 // React Router DOM
 import { Link } from "react-router-dom"
 
+// gestión de fechas
+import { isBefore, isAfter, differenceInDays, parseISO } from "date-fns"
 
-export default function MFCollapsibleProcedure({data, color, studyAbbr, isOpen} : any) {
+import clsx from 'clsx'
+
+const CLOSED = 0, CLOSING_SOON = 1, OPENED = 2
+
+export default function MFCollapsibleProcedure({data, color, studyAbbr} : any) {
 
   const info = data[Object.keys(data)[0]]
-  
+
+  const now = new Date()
+
+  // en qué estado está?
+  const init = parseISO(info.init_date)
+  const end = parseISO(info.end_date)
+  let state = CLOSED
+
+  if (isBefore(now, init)) 
+    state = CLOSED  // podria poner algo así como próximamente
+
+  if (isAfter(now, end)) {
+    state = CLOSED
+  } else {
+    const daysLeft = differenceInDays(end, now)
+    if (daysLeft <= 15) {
+      state = CLOSING_SOON
+    } else {
+      state = OPENED
+    }
+  }
+
   return (
     <Collapsible className="w-[65%] border rounded-lg mb-4 bg-muted/40 shadow-md"
-      style={{ borderColor: color }}>
+      style={{ borderColor: color }} open={ state != CLOSED}>
       <CollapsibleTrigger className="w-full bg-muted px-4 py-2 rounded-lg hover:bg-muted/70 transition flex justify-between px-4 py-2 hover:bg-muted transition">
         
-        {isOpen ? (
-          <Unlock className="text-green-400 w-4 h-4 mx-3" />
+        {state != CLOSED ? (
+          <Unlock className={clsx(
+            "text-green-400 w-4 h-5 mr-3",
+            { "animate-pulse" : state == CLOSING_SOON })}/>
         ) : (
-          <Lock className="text-red-400 w-5 h-4 mr-3" />
+          <Lock className="text-red-400 w-4 h-5 mr-3" />
         )}
         <span className="font-semibold">{info.description}</span>
         <ChevronsUpDown className="ml-3 h-4 w-4" />
