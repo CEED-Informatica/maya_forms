@@ -70,14 +70,35 @@ export default function Selector() {
             (s: any) => s.type === procedure_type
           )
       
-          const items = procedures_type?.subtypes ?? []
+          const items = [...(procedures_type?.subtypes ?? [])]
             .sort((a: any, b: any) => {
-              const aDate = new Date(a[Object.keys(a)[0]].end_date)
-              const bDate = new Date(b[Object.keys(b)[0]].end_date)
-              return aDate.getTime() - bDate.getTime()
-            })
+              const now = new Date()
 
-            console.log(JSON.stringify(items))
+              const aData = a[Object.keys(a)[0]]
+              const bData = b[Object.keys(b)[0]]
+
+              const aInit = new Date(aData.init_date)
+              const aEnd = new Date(aData.end_date)
+              const bInit = new Date(bData.init_date)
+              const bEnd = new Date(bData.end_date)
+
+              // Clasifico cada trámite en 3 grupos: en vigor (1), próximos (2), finalizados (3)
+              const aStatus = aEnd < now ? 3 : (aInit > now ? 2 : 1)
+              const bStatus = bEnd < now ? 3 : (bInit > now ? 2 : 1)
+
+              // Diferentes grupos
+              if (aStatus !== bStatus) {
+                return aStatus - bStatus;
+              }
+
+              if (aStatus === 1)  // Entre activos (más próxima primero)
+                return aEnd.getTime() - bEnd.getTime()
+              else if (aStatus === 2)    // Próximos (más próxima primero)
+                return aInit.getTime() - bInit.getTime()   
+              else // Finalizados (más reciente primero)
+                return bEnd.getTime() - aEnd.getTime();
+
+            })
 
           return {
               items: items,
