@@ -7,6 +7,7 @@ import { useDataInfo } from "@/components/data/data-info-provider"
 // componentes maya forms ui
 import MFCardStudies from "@/components/mfui/mf-card-estudies"
 import MFCardProcedures from "@/components/mfui/mf-card-procedures"
+import MFCollapsibleProcedure from "@/components/mfui/mf-collapsible-procedure"
 
 // Modelos
 import { Studies } from "@/lib/data-models"
@@ -68,10 +69,20 @@ export default function Selector() {
           const procedures_type = study?.PROCEDURES.find(
             (s: any) => s.type === procedure_type
           )
-         return {
-            items: procedures_type?.subtypes ?? [],
-            color: study?.GENERAL_INFO.color
-          }
+      
+          const items = procedures_type?.subtypes ?? []
+            .sort((a: any, b: any) => {
+              const aDate = new Date(a[Object.keys(a)[0]].end_date)
+              const bDate = new Date(b[Object.keys(b)[0]].end_date)
+              return aDate.getTime() - bDate.getTime()
+            })
+
+            console.log(JSON.stringify(items))
+
+          return {
+              items: items,
+              color: study?.GENERAL_INFO.color
+            }
         }
       default:
         return {
@@ -95,7 +106,7 @@ export default function Selector() {
       ))}
         {/* Sutipo de Trámites  */}
         { type == 'procedures' && procedure_type && items.map((ptype: any) => (
-            <p>procedimiento {ptype.description}</p>
+            <MFCollapsibleProcedure data={ptype} color={color} study_abbr={study_abbr} key={ptype.type} isIOpen="true"/>
       ))}
       </div>
     
