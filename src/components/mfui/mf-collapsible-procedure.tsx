@@ -1,14 +1,19 @@
 // shadcn/ui
 import { Button } from "@/components/ui/button"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 
 // iconos
-import { CalendarCheck, CalendarX, ExternalLink, Lock, Unlock, ChevronsUpDown, ArrowRight, Video, Mic  } from "lucide-react"
+import { 
+  CalendarCheck, CalendarX, ExternalLink, Lock, Unlock, ChevronsUpDown, 
+  ArrowRight, Video, Mic, File, Files  } from "lucide-react"
 
 // React Router DOM
 import { Link } from "react-router-dom"
@@ -80,6 +85,39 @@ export default function MFCollapsibleProcedure({data, color, studyAbbr} : any) {
         </p>
         <div dangerouslySetInnerHTML={{ __html: info.info }} className="prose prose-sm dark:prose-invert"/>
 
+         {/* Dialogo con la documentación necesaria */}
+         {Array.isArray(info.documentation) && info.documentation.length > 0 && (
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant="outline" size="sm">¿Qué documentos necesito?</Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Documentación requerida</DialogTitle>
+              </DialogHeader>
+                <ul className="list-disc pl-4 space-y-1 text-sm">
+                { info.documentation && info.documentation.map((doc: any) => (
+                  <li key={doc.name} className="mb-3 list-none">
+                    <div className="flex items-center space-x-2">
+                      {doc.several ? (
+                        <Files className="text-muted-foreground w-4 h-4" />
+                      ) : (
+                        <File className="text-muted-foreground w-4 h-4" />
+                      )}
+                      <span className="font-medium">{doc.name}</span>
+                    </div>
+                      {doc.description && (
+                        <div className="text-sm text-muted-foreground pl-6 mt-1">
+                          {doc.description}
+                        </div>
+                      )}
+                  </li>
+                ))}        
+                </ul>
+            </DialogContent>
+          </Dialog>
+        )}
+
         <div className="flex space-x-4 mt-3 justify-end">
           {/* Icono de enlace */}
           {info.url_help && (
@@ -124,21 +162,6 @@ export default function MFCollapsibleProcedure({data, color, studyAbbr} : any) {
           )}
         </div>
 
-        {/* Dialogo con detalles */}
-       {/*  <Dialog>
-          <DialogTrigger asChild>
-            <Button variant="outline" size="sm">¿Qué documentos necesito?</Button>
-          </DialogTrigger>
-          <DialogContent>
-            <h2 className="text-lg font-semibold mb-2">Documentación requerida</h2>
-            <ul className="list-disc pl-4 space-y-1 text-sm">
-              <li>Documento 1 (ejemplo)</li>
-              <li>Documento 2 (ejemplo)</li>
-              
-            </ul>
-          </DialogContent>
-        </Dialog>
- */}
         {/* Botón de acceso al formulario */}
         <Button asChild className="w-full flex items-center" style={{ backgroundColor: color, borderColor: data.color }}>
           <Link to={`/selector/procedures/${data.abbr}`}>
@@ -150,3 +173,16 @@ export default function MFCollapsibleProcedure({data, color, studyAbbr} : any) {
     </Collapsible>
   )
 } 
+
+
+{/* <li key={doc.name} className="flex items-center space-x-2">
+                    <div className="flex items-center space-x-2"></div>
+                    {  doc.several ? (<Files className="text-muted-foreground w-4 h-4" />) : 
+                        (<File className="text-muted-foreground w-4 h-4" />) }
+                    <span>{doc.name}</span>                
+                    { doc.description && (
+                      <div className="text-sm text-muted-foreground pl-6 mt-1">
+                        {doc.description}
+                      </div>
+                    )}
+                  </li> */}
