@@ -9,7 +9,11 @@ import { emit } from "@tauri-apps/api/event"
 import { useDataUser } from "@/components/data/data-user-provider"
 import { useDataInfo } from "@/components/data/data-info-provider"
 
-const SPLASH_TIME: number = 7000 // ms
+// Elementos gráficos
+import logo from '../assets/splash.svg'
+import { ENTITY_COLORS } from "@/lib/constants"
+
+const SPLASH_TIME: number = 7250 // ms
 
 // Página de presentación de la aplicación
 export default function Splash() {
@@ -17,6 +21,8 @@ export default function Splash() {
   const [loadFinished, setLoadFinished] = useState<boolean>(false)
   const { users, readDataUser } = useDataUser()
   const { refreshData } = useDataInfo()
+
+  const backgroundColor = ENTITY_COLORS[Math.floor(Math.random() * ENTITY_COLORS.length)]; 
 
   // se ejecuta después de renderizar, asi que aseguro que primero se vea 
   // la página y luego se carguen los datos
@@ -51,10 +57,13 @@ export default function Splash() {
   }, [loadFinished])
 
   return (
-    <div className="flex items-center justify-center h-screen bg-black text-white">
+    <div className="relative flex items-center justify-center h-screen text-white" 
+         style={{ backgroundColor }}>
       <div className="text-center">
-        {/* <img src="/logo.svg" alt="Logo" className="w-20 h-20 mx-auto mb-4" /> */}
-        <p className="text-lg">Cargando... </p>
+        <img src={logo} alt="Animación splash" className="mx-auto mb-4 max-h-[90vh]" />
+        <div className="absolute bottom-4 right-4 text-black text-sm animate-pulse z-10">
+          Cargando...
+        </div>
       </div>
     </div>
   )
