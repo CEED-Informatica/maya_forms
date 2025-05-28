@@ -16,6 +16,7 @@ import StartupRouter from '@/pages/StartupRouter'
 import Profile from '@/pages/Profile'
 import SelectProfile from '@/pages/SelectProfile'
 import Selector from '@/pages/Selector'
+import Form from '@/pages/Form'
 
 function App() {
   return (
@@ -30,7 +31,7 @@ function App() {
             <Route path="/profile" element={ <Profile/> }/>
             <Route path="/selector/:type" element={ <Selector/> }/>
             <Route path="/selector/:type/:study_abbr" element={ <Selector/> }/>
-            <Route path="/selector/:type/:study_abbr/:procedure_type" element={ <Selector/> }/>
+            <Route path="/selector/:type/:study_abbr/:procedure_type" element={ <Form/> }/>
           </Route>
         </Routes>
       </ThemeProvider>

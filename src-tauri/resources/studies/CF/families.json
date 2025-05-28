@@ -1,0 +1,22 @@
+[
+  {
+    "id": "CF_FAMILY_AYG",
+    "value": "AYG",
+    "label": "Administración y Gestión"
+  },
+  {
+    "id": "CF_FAMILY_IYC",
+    "value": "IYC",
+    "label": "Informática y Comunicaciones"
+  },
+  {
+    "id": "CF_FAMILY_CYM",
+    "value": "CYM",
+    "label": "Comercio y Marketing"
+  },
+  {
+    "id": "CF_FAMILY_HYT",
+    "value": "HYT",
+    "label": "Hostelería y Turismo"
+  }
+]

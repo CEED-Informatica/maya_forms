@@ -48,6 +48,7 @@
     ],
     "resources": [
       "resources/doc_templates/",
+      "resources/studies/",
       "resources/general_data/"
     ]
   }

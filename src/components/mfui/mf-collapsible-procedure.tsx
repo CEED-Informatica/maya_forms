@@ -29,7 +29,7 @@ import clsx from 'clsx'
 
 const CLOSED = 0, CLOSING_SOON = 1, OPENED = 2, NEXT = 4
 
-export default function MFCollapsibleProcedure({data, color, studyAbbr} : any) {
+export default function MFCollapsibleProcedure({data, color, studyAbbr, procedureId} : any) {
 
   const [state, setState] = useState<number>(CLOSED)
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -164,7 +164,7 @@ export default function MFCollapsibleProcedure({data, color, studyAbbr} : any) {
 
         {/* Botón de acceso al formulario */}
         <Button asChild className="w-full flex items-center" style={{ backgroundColor: color, borderColor: data.color }}>
-          <Link to={`/selector/procedures/${data.abbr}`}>
+          <Link to={`/forms/${studyAbbr}/${procedureId}`}>
             <span>Acceder al formulario</span>
             <ArrowRight className="ml-2 w-4 h-4" />
           </Link>

@@ -1,0 +1,21 @@
+{
+  "id": "SEC_SELECT_COURSE",
+  "title": "Ciclo Formativo",
+  "subtitle": "Selección del ciclo formativo que se está cursando actualmente en el centro",
+  "layout": "'familiy level course course'",
+  "controls": [ 
+    {
+      "id": "CTRL_FAMILIA",
+      "label": "Familia formativa",
+      "caption": "Familia",
+      "area": "familiy",
+      "control_type": {
+        "Combo": {
+          "placeholder": "una familia",
+          "default": null,
+          "options": "studies/CF/families"
+        }
+      }
+    }
+  ]
+}

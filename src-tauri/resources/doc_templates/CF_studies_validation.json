@@ -1,0 +1,13 @@
+{
+  "id": "DOCTMPL_CF_STUDIES_VALIDATION",
+  "title": "Convalidaciones por estudios",
+  "version": 1,
+  "description": "Formulario para solicitar convalidaciones por estudios, no por experiencia profesional",
+  "study_type": "CICLOS",
+  "sections_ids": [
+    {
+      "id": "SELECT_COURSE",
+      "style": "ACC"
+    }
+  ]
+}
