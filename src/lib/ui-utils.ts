@@ -81,20 +81,27 @@ function evaluateCondition(
 // Hook que devuelve las opciones filtradas en función del valor de otro control.
 // En el caso de un combo el valor que se utiliza para comparar es el value, no el texto de la etiqueta
 // Parámetros
-//   filter: bloque filter del JSON
+//   filters: bloque filters del JSON
 //   control: control obtenido desde useForm. Es opcional con el uso de FormProvider
 // Retorno
 //   Las opciones filtradas. Si el parametro de filtro no existe en la opción, no debe devolverla
 export function useFilteredOptions(
   options: ComboOptions[],
-  filter: FilterCondition | undefined,
+  filters: FilterCondition[] | undefined,
   control?: Control  
 ): ComboOptions[] {
-  if (!filter) return options;  // no hay bloque filter
+  if (!filters || !filters.length ) return options;  // no hay bloque filter
 
-  const watchedValue = useWatch({ control, name: filter.control_id });
+  // observo todos los valores de los controles implicados
+  const watchedValues = useWatch({ control, name: filters.map((f) => f.control_id) })
 
   return options.filter(
-    (option) => filter.optionField in option && option[filter.optionField] === watchedValue
+    (option) => filters.every((filter, index) => {
+      const watchedValue = watchedValues?.[index]
+      return (
+        filter.optionField in option &&
+        option[filter.optionField] === watchedValue
+      )
+    })
   );
 }

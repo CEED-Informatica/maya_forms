@@ -43,7 +43,7 @@ export interface Control {
   control_type: any
   validation: any
   disableIf?: DisabledIf
-  filter?: FilterCondition
+  filter?: FilterCondition[]
 }
 
 // Sección. Partes de un formulario

@@ -66,10 +66,16 @@
           "value": ""
         }
       ],
-      "filter": {
-        "control_id": "CTRL_FAMILIA",
-        "optionField": "family"
-      },
+      "filter": [ 
+        {
+          "control_id": "CTRL_FAMILIA",
+          "optionField": "family"
+        },
+        {
+          "control_id": "CTRL_NIVEL",
+          "optionField": "level"
+        }
+      ],
       "control_type": {
         "Combo": {
           "placeholder": "un ciclo formativo",

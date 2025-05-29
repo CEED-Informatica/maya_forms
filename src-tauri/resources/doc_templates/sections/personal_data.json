@@ -129,10 +129,12 @@
           "value": ""
         }
       ],
-      "filter": {
-        "control_id": "CTRL_PROVINCIA",
-        "optionField": "parent_code"
-      },
+      "filter": [
+        {
+          "control_id": "CTRL_PROVINCIA",
+          "optionField": "parent_code"
+        }
+      ],
       "control_type": {
         "Combo": {
           "placeholder": "una localidad",
