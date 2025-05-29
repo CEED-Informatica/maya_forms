@@ -13,10 +13,10 @@ pub fn run() {
         .setup(|app| {
         #[cfg(debug_assertions)] // only include this code on debug builds
         {
-            let splash = app.get_webview_window("splash").unwrap();
+            let _splash = app.get_webview_window("splash").unwrap();
             let window = app.get_webview_window("main").unwrap();
 
-            splash.open_devtools();
+            // splash.open_devtools();
             window.open_devtools();
 
 
