@@ -1,0 +1,79 @@
+[
+  {
+    "value": "CF_COURSE_AFI",
+    "abbr": "AFI",
+    "family": "AYG",
+    "code": "441104",
+    "label": "Administración y Finanzas"
+  },
+  {
+    "value": "CF_COURSE_ADI",
+    "abbr": "ADI",
+    "family": "AYG",
+    "code": "906104",
+    "label": "Asistencia a Dirección"
+  },
+  {
+    "value": "CF_COURSE_DAW",
+    "abbr": "DAW",
+    "family": "IYC",
+    "code": "845104",
+    "label": "Desarrollo de Aplicaciones Web"
+  },
+  {
+    "value": "CF_COURSE_DAM",
+    "abbr": "DAM",
+    "family": "IYC",
+    "code": "836104",
+    "label": "Desarrollo de Aplicaciones Multiplataforma"
+  },
+  {
+    "value": "CF_COURSE_ASIR",
+    "abbr": "ASIR",
+    "family": "IYC",
+    "code": "829104",
+    "label": "Administración de Sistemas Informáticos y Redes"
+  },
+  {
+    "value": "CF_COURSE_GAT",
+    "abbr": "GAT",
+    "family": "HYT",
+    "code": "714104",
+    "label": "Gestión de Alojamientos Turísticos"
+  },
+  {
+    "value": "CF_COURSE_GIAT",
+    "abbr": "GIAT",
+    "family": "HYT",
+    "code": "828104",
+    "label": "Guía, Información y Asistencias Turísticas"
+  },
+  {
+    "value": "CF_COURSE_AVGE",
+    "abbr": "AVGE",
+    "family": "HYT",
+    "code": "827104",
+    "label": "Agencias de Viajes y Gestión de Eventos"
+  },
+  {
+    "value": "CF_COURSE_CI",
+    "abbr": "CI",
+    "family": "CYM",
+    "code": "449104",
+    "label": "Comercio Internacional"
+  },
+  {
+    "value": "CF_COURSE_TIL",
+    "abbr": "TIL",
+    "family": "CYM",
+    "code": "898104",
+    "label": "Transporte y Logística"
+  },
+  {
+    "value": "CF_COURSE_GEVEC",
+    "abbr": "GEVEC",
+    "family": "CYM",
+    "code": "899104",
+    "label": "Gestión y Ventas de Espacios Comerciales"
+  }
+]

@@ -2,13 +2,13 @@
   "id": "SEC_SELECT_COURSE",
   "title": "Ciclo Formativo",
   "subtitle": "Selección del ciclo formativo que se está cursando actualmente en el centro",
-  "layout": "'familiy level course course'",
+  "layout": "'family family level course course'",
   "controls": [ 
     {
       "id": "CTRL_FAMILIA",
-      "label": "Familia formativa",
-      "caption": "Familia",
-      "area": "familiy",
+      "label": "Familia",
+      "caption": "Familia formativa",
+      "area": "family",
       "control_type": {
         "Combo": {
           "placeholder": "una familia",
@@ -16,6 +16,68 @@
           "options": "studies/CF/families"
         }
       }
+    },
+    {
+      "id": "CTRL_NIVEL",
+      "label": "Grado",
+      "caption": "Tipo de grado",
+      "area": "level",
+      "disabledIf": [
+        {
+          "control_id": "CTRL_FAMILIA",
+          "operator": "0",
+          "value": ""
+        }
+      ],
+      "control_type": {
+        "Combo": {
+          "placeholder": "un grado",
+          "default": null,
+          "options":  [ 
+            { 
+              "value": "GB", 
+              "label": "Básica"
+            },
+            { 
+              "value":  "GM", 
+              "label": "Medio"
+            },
+            { 
+              "value":  "GS", 
+              "label": "Superior"
+            },
+            { 
+              "value":  "GE", 
+              "label": "Especialización"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "CTRL_CURSO",
+      "label": "Ciclo",
+      "caption": "Ciclo Formativo que se está cursando",
+      "area": "course",
+      "disabledIf": [
+        {
+          "control_id": "CTRL_NIVEL",
+          "operator": "0",
+          "value": ""
+        }
+      ],
+      "filter": {
+        "control_id": "CTRL_FAMILIA",
+        "optionField": "family"
+      },
+      "control_type": {
+        "Combo": {
+          "placeholder": "un ciclo formativo",
+          "default": null,
+          "options": "studies/CF/courses" 
+        }
+      }
     }
+
   ]
 }
