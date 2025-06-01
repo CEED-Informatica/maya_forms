@@ -8,6 +8,10 @@
     {
       "id": "SELECT_COURSE",
       "style": "ACC"
+    },
+    {
+      "id": "REQUIREMENTS",
+      "style": "ACC"
     }
   ]
 }

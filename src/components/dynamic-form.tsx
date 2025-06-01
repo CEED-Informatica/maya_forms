@@ -115,18 +115,51 @@ export default function DynamicForm({ formId }: DynamicFormProps)
     }
   }
 
-
-  /* Crea el esquema de validación de Zod para el formulario a partir de los datos 
-     que se incluyen en el json */
+  // Crea el esquema de validación de Zod para el formulario a partir de los datos 
+  // que se incluyen en el json
   function buildZodSchema(controls: Control[]) {
 
     const schemaShape: Record<string, z.ZodTypeAny> = {}
     let customZodRules: CustomZodRules[] = []
+    const checkGroupValidations: { ids: string[]; minSelected: number; message: string }[] = [];
     
     for (const control of controls) {
      
-      const { id, validation } = control
+      const { id, validation, control_type } = control
+      const controlName = Object.keys(control_type)[0]
 
+      // CHECKBOX
+      if (controlName === "CheckGroup") {
+        const items = control_type.CheckGroup.items
+        
+        // Cada item como es un campo bopleano
+        for (const item of items) {
+          if (!item.control_type.Check) 
+            throw new Error("Uno de lositems de un checkgroup no es un check!!")
+          
+          schemaShape[item.id] = z.boolean().default(item.control_type.Check?.default);
+        }
+
+        if (validation?.type?.startsWith("atLeast")) {
+          const match = validation.type.match(/^atLeast(\d+)$/)
+          if (!match) 
+            throw new Error(`Tipo de validación "${validation.type}" no válido`)
+          
+          // máximo 10
+          const minRequired = parseInt(match[1], 10)
+  
+          checkGroupValidations.push({
+            ids: items.map((i: any) => i.id),
+            minSelected: minRequired,
+            message:
+              validation.message ||
+              `Debes seleccionar al menos ${minRequired} opción${minRequired > 1 ? "es" : ""}`,
+          });
+        }
+
+
+      }
+  
       if (!validation) continue;  // si no hay validación pasa al siguiente control
 
       let fieldSchema: z.ZodTypeAny
@@ -196,44 +229,58 @@ export default function DynamicForm({ formId }: DynamicFormProps)
       schemaShape[id] = fieldSchema
     }
 
-    console.log(customZodRules) 
+    console.log("REGLAS " +customZodRules) 
 
     const zodSchema = z.object(schemaShape).superRefine((data, ctx) => {
-      //console.log("VALIDOOOO 2222")
+      
+      // Reglas presonalizadas
       customZodRules.forEach((rule) => {
         
-      try {
+        try {
 
-        const menssageInterpolated = new Function('data', `console.log(data.CTRL_PROVINCIA); return \`${rule.message}\`;`)(data)
-        // Creo un objeto función con un parámetro data que solo evalúa la condicion y la devuelve
-        const conditionFunction = new Function('data', `return ${rule.condition}`)
-        // ejecuto la función
-        const isInvalid = conditionFunction(data)
-    
-        // si la condición no se cumple añado un issue
-        if (isInvalid) {
+          const menssageInterpolated = new Function('data', `return \`${rule.message}\`;`)(data)
+          // Creo un objeto función con un parámetro data que solo evalúa la condicion y la devuelve
+          const conditionFunction = new Function('data', `return ${rule.condition}`)
+          // ejecuto la función
+          const isInvalid = conditionFunction(data)
+      
+          // si la condición no se cumple añado un issue
+          if (isInvalid) {
+            ctx.addIssue({
+              code: ZodIssueCode.custom,
+              message: menssageInterpolated,
+              path: JSON.parse(rule.path.replace(/'/g, '"'))
+            });
+          }
+
+        } catch (error) {
           ctx.addIssue({
             code: ZodIssueCode.custom,
-            message: menssageInterpolated,
-            path: JSON.parse(rule.path.replace(/'/g, '"'))
+            message: 'Error al evaluar la condición de validación.',
+            path: []
+          });
+        } 
+      })
+     
+      // Reglas checkboxgroup
+      checkGroupValidations.forEach(({ ids, minSelected, message }) => {
+        const selectedCount = ids.reduce((acc, id) => acc + (data[id] ? 1 : 0), 0);
+    
+        if (selectedCount < minSelected) {
+          ctx.addIssue({
+            code: ZodIssueCode.custom,
+            message,
+            path: [ids[0]], // puedes usar el primer campo como marcador
           });
         }
-
-      } catch (error) {
-        ctx.addIssue({
-          code: ZodIssueCode.custom,
-          message: 'Error al evaluar la condición de validación.',
-          path: []
-        });
-      } 
-      })
+      });
       
     })
 
     return zodSchema
   }
 
-  /* Genera el formulario o almacena los datos en un fichero */
+  // Genera el formulario o almacena los datos en un fichero
   const onSubmit = (data: any) => {
     console.log('Datos del formulario:', data);
     const adat2 = methods.getValues()

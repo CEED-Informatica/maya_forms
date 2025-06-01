@@ -1,0 +1,48 @@
+{
+  "id": "SEC_REQUIREMENTS",
+  "title": "Requisitos convalidaciones por estudios",
+  "subtitle": "Indiqua el requisito/s que reune para solicitar la convalidación",
+  "layout": "'req req'",
+  "controls": [ 
+    {
+      "id": "CTRL_REQUISITOS",
+      "label": "RequisiFamilia",
+      "caption": "",
+      "area": "req",
+      "control_type": {
+        "CheckGroup": {
+          "layout": "'r1 r1', 'r2 r2'",
+          "items": [
+            {
+              "id": "CTRL_REQUISITO1",
+              "label": "Tener módulos profesionales o títulos LOGSE/LOE",
+              "caption": "Tener superados módulos profesionales de títulos de Formación Profesional del catálogo de la LOGSE/LOE o bien estar en posesión de un título LOGSE/LOE, cuya convalidación está definida en las normas que regulan los títulos de Formación Profesional del catálogo de la LFP",
+              "area": "r1",
+              "control_type": {
+                "Check": {
+                  "placeholder": "una familiaasas",
+                  "default": true
+                }
+              }
+            },
+            {
+              "id": "CTRL_REQUISITO2",
+              "label": "Requisito 2",
+              "caption": "Tutoria",
+              "area": "r2",
+              "control_type": {
+                "Check": {
+                  "placeholder": "una familiaasas",
+                  "default": false
+                }
+              }
+            }
+          ]
+        }
+      },
+      "validation":{
+        "type": "atLeast1"
+      }
+    }
+  ]
+}

@@ -12,7 +12,10 @@ import { readTextFile } from '@tauri-apps/plugin-fs';
 // componentes maya forms ui
 import MFCombo from "@/components/mfui/mf-combo"
 import MFEdit from "@/components/mfui/mf-edit"
+import MFCheckGroup from "@/components/mfui/mf-checkgroup"
 
+// utilidades
+import { adaptLayout } from '@/lib/ui-utils'
 import clsx from 'clsx';
 
 interface DynamicSectionFormProps {
@@ -70,7 +73,7 @@ export default function DynamicSectionForm({ sectionId }: DynamicSectionFormProp
 
   function getLayout() {
     if (section) {
-      setLayout(section.layout.replaceAll(',',' '))
+      setLayout(adaptLayout(section.layout.replaceAll(',',' ')))
     }
   } 
 
@@ -89,7 +92,13 @@ export default function DynamicSectionForm({ sectionId }: DynamicSectionFormProp
         </div>
  */     
       case 'Combo':
-        return <MFCombo control={control} methods={methods} key={control.id}/>;
+        return <MFCombo control={control} methods={methods} key={control.id}/>
+
+      case 'CheckGroup':
+        return <MFCheckGroup control={control} methods={methods} key={control.id}/>
+
+      /* case 'CheckGroup':
+          return <MFCombo control={control} methods={methods} key={control.id}/>; */
 
       default:
         return (<h1>Control no soportado</h1>)  // TODO 
@@ -97,8 +106,8 @@ export default function DynamicSectionForm({ sectionId }: DynamicSectionFormProp
   }
 
   return (
-    <div>
-      <div className="space-y-1 ml-3 mr-3">
+    <div className='mb-9'>
+      <div className="space-y-1 mx-3">
         <h4 className="text-sm font-medium leading-none">
           { section ? section.title : ''}
         </h4>

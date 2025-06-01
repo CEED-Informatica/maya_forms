@@ -105,3 +105,7 @@ export function useFilteredOptions(
     })
   );
 }
+// Convierte el formato de layout que llega desdel JSON en formato CSS
+export function adaptLayout(layout: string) : string {
+  return layout.replaceAll(',',' ')
+} 
