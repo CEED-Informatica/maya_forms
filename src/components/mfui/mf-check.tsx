@@ -17,31 +17,34 @@ export default function MFCheck({ control, methods }: any) {
  
   console.log("CHHHECK   " + control ? JSON.stringify(control) :  "NOOOOOO")
   return (
-      <div style={{ gridArea: control.area }} key={control.id}>
+      <div style={{ gridArea: control.area }} key={control.id} className="mb-4">
         <FormField control={methods.control} name={control.id} 
           render={({ field }) => (
           <FormItem>
-            <FormControl>
-
-              <div className="flex items-start gap-3">
-                <Checkbox 
-                          checked={field.value?.includes(control.id)}
-                          onCheckedChange={(checked: boolean) => {
-                              return checked
-                                ? field.onChange([...field.value, control.id])
-                                : field.onChange(
-                                    field.value?.filter(
-                                      (value: boolean) => value !== control.id
-                                    )
-                                  )
-                            }} />
-                
+            <FormLabel className="hover:bg-accent/50 flex items-start gap-3 rounded-lg border 
+                      p-3 has-[[aria-checked=true]]:border-blue-600 
+                      has-[[aria-checked=true]]:bg-blue-50 dark:has-[[aria-checked=true]]:border-blue-900 
+                      dark:has-[[aria-checked=true]]:bg-blue-950">
+              <Checkbox 
+                checked={field.value?.includes(control.id)}
+                onCheckedChange={(checked: boolean) => {
+                    return checked
+                      ? field.onChange([...(field.value ?? []), control.id])
+                      : field.onChange(
+                          field.value?.filter(
+                            (value: boolean) => value !== control.id
+                          )
+                        )
+              }} />
+              <div className="grid gap-1.5 font-normal">
+                <p className="text-sm leading-none font-medium">
+                  {control.label}
+                </p>
+                <FormDescription className="text-muted-foreground text-sm">
+                  {control.caption}
+                </FormDescription>
               </div>
-            </FormControl>
-            <FormLabel>{control.label}</FormLabel>
-            <FormDescription>
-              {control.caption}
-            </FormDescription>
+            </FormLabel>
             <FormMessage />
           </FormItem>
         )}
