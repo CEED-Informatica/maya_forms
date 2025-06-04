@@ -127,7 +127,7 @@ export default function Selector() {
       ))}
         {/* Sutipo de Trámites  */}
         { type == 'procedures' && procedure_type && items.map((ptype: any) => (
-            <MFCollapsibleProcedure data={ptype} color={color} studyAbbr={study_abbr} procedureId={procedure_type} key={Object.keys(ptype)[0]}/>
+            <MFCollapsibleProcedure data={ptype} color={color} studyAbbr={study_abbr} procedureId={Object.keys(ptype)[0]} key={Object.keys(ptype)[0]}/>
       ))}
       </div>
     
