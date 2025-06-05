@@ -1,7 +1,7 @@
 // shadcn/ui
 import { Checkbox } from "@/components/ui/checkbox"
 import {
-  FormControl, FormDescription, FormField,
+  FormDescription, FormField,
   FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 
 // utilidades ui
@@ -26,16 +26,9 @@ export default function MFCheck({ control, methods }: any) {
                       has-[[aria-checked=true]]:bg-blue-50 dark:has-[[aria-checked=true]]:border-blue-900 
                       dark:has-[[aria-checked=true]]:bg-blue-950">
               <Checkbox 
-                checked={field.value?.includes(control.id)}
-                onCheckedChange={(checked: boolean) => {
-                    return checked
-                      ? field.onChange([...(field.value ?? []), control.id])
-                      : field.onChange(
-                          field.value?.filter(
-                            (value: boolean) => value !== control.id
-                          )
-                        )
-              }} />
+                checked={field.value ?? false}
+                onCheckedChange={field.onChange}
+              />
               <div className="grid gap-1.5 font-normal">
                 <p className="text-sm leading-none font-medium">
                   {control.label}
