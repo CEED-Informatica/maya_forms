@@ -121,7 +121,7 @@ export default function DynamicForm({ formId }: DynamicFormProps)
 
     const schemaShape: Record<string, z.ZodTypeAny> = {}
     let customZodRules: CustomZodRules[] = []
-    const checkGroupValidations: { ids: string[]; minSelected: number; message: string }[] = [];
+    const checkGroupValidations: { ids: string[]; minSelected: number; groupId: string; message: string }[] = [];
     
     for (const control of controls) {
      
@@ -135,7 +135,7 @@ export default function DynamicForm({ formId }: DynamicFormProps)
         // Cada item como es un campo bopleano
         for (const item of items) {
           if (!item.control_type.Check) 
-            throw new Error("Uno de lositems de un checkgroup no es un check!!")
+            throw new Error("Uno de los items de un checkgroup no es un check!!")
           
           schemaShape[item.id] = z.boolean().default(item.control_type.Check?.default);
         }
@@ -151,6 +151,7 @@ export default function DynamicForm({ formId }: DynamicFormProps)
           checkGroupValidations.push({
             ids: items.map((i: any) => i.id),
             minSelected: minRequired,
+            groupId: control.id, // identificador del checkgroup
             message:
               validation.message ||
               `Debes seleccionar al menos ${minRequired} opción${minRequired > 1 ? "es" : ""}`,
@@ -263,14 +264,14 @@ export default function DynamicForm({ formId }: DynamicFormProps)
       })
      
       // Reglas checkboxgroup
-      checkGroupValidations.forEach(({ ids, minSelected, message }) => {
+      checkGroupValidations.forEach(({ ids, minSelected, message, groupId }) => {
         const selectedCount = ids.reduce((acc, id) => acc + (data[id] ? 1 : 0), 0);
     
         if (selectedCount < minSelected) {
           ctx.addIssue({
             code: ZodIssueCode.custom,
             message,
-            path: [ids[0]], // puedes usar el primer campo como marcador
+            path: [groupId], // pone el mensaje de error en el checkgroup
           });
         }
       });
