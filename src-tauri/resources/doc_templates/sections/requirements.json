@@ -1,17 +1,17 @@
 {
   "id": "SEC_REQUIREMENTS",
   "title": "Requisitos convalidaciones por estudios",
-  "subtitle": "Indiqua el requisito/s que reune para solicitar la convalidación",
+  "subtitle": "Indique el requisito/s que reune para solicitar la convalidación",
   "layout": "'req req'",
   "controls": [ 
     {
       "id": "CTRL_REQUISITOS",
-      "label": "RequisiFamilia",
+      "label": "Requisitos",
       "caption": "",
       "area": "req",
       "control_type": {
         "CheckGroup": {
-          "layout": "'r1 r1', 'r2 r2'",
+          "layout": "'r1 r1', 'r2 r2', 'r3 r3'",
           "items": [
             {
               "id": "CTRL_REQUISITO1",
@@ -20,19 +20,28 @@
               "area": "r1",
               "control_type": {
                 "Check": {
-                  "placeholder": "una familiaasas",
-                  "default": true
+                  "default": false
                 }
               }
             },
             {
               "id": "CTRL_REQUISITO2",
-              "label": "Requisito 2",
-              "caption": "Tutoria",
+              "label": "Tener superados estudios que acrediten competencias profesionales.",
+              "caption": "",
               "area": "r2",
               "control_type": {
                 "Check": {
-                  "placeholder": "una familiaasas",
+                  "default": false
+                }
+              }
+            },
+            {
+              "id": "CTRL_REQUISITO3",
+              "label": "Tener superados otros estudios reglados.",
+              "caption": "",
+              "area": "r3",
+              "control_type": {
+                "Check": {
                   "default": false
                 }
               }

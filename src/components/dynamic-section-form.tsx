@@ -4,6 +4,12 @@ import { useFormContext } from 'react-hook-form';
 
 // shadcn/ui
 import { Separator } from "@/components/ui/separator"
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
 
 // Tauri
 import { resolveResource } from '@tauri-apps/api/path';
@@ -19,7 +25,8 @@ import { adaptLayout } from '@/lib/ui-utils'
 import clsx from 'clsx';
 
 interface DynamicSectionFormProps {
-  sectionId: string,
+  sectionId: string
+  headerStyle:  "ACC" | "FIXED"
 }
 
 interface SectionSchema {
@@ -30,7 +37,7 @@ interface SectionSchema {
   controls: any[]
 }
 
-export default function DynamicSectionForm({ sectionId }: DynamicSectionFormProps)
+export default function DynamicSectionForm({ sectionId, headerStyle = "FIXED" }: DynamicSectionFormProps)
 {
   const [section, setSection] = useState<SectionSchema | null>(null)
   const [columns, setColumns] = useState<number>(1)   // numero de columnas del grid
@@ -105,21 +112,41 @@ export default function DynamicSectionForm({ sectionId }: DynamicSectionFormProp
     }  
   }
 
+  const sectionContent = section && (
+    <div className={clsx("grid", `grid-cols-${columns}`, "px-8 gap-x-4 gap-y-7")} style={{ gridTemplateAreas: section ? layout : '' }}>
+      {section && section.controls && section.controls.map((control: any) => renderControl(control))}
+    </div>
+  )
+
   return (
-    <div className='mb-9'>
-      <div className="space-y-1 mx-3">
-        <h4 className="text-sm font-medium leading-none">
-          { section ? section.title : ''}
-        </h4>
-        <p className="text-sm text-muted-foreground">
-        { section ? section.subtitle : '' } 
-        </p>
-      </div>
-      <Separator className="mt-2 mb-5" />
-      <div className={clsx("grid", `grid-cols-${columns}`, "gap-x-4 gap-y-7")} style={{ gridTemplateAreas: section ? layout : ''}}>
-      { section && section.controls && section.controls.map((control: any) => renderControl(control)) }
-      </div>
+    <div className='mb-5'>
+      
+      {headerStyle === "FIXED" && section && (
+        <>
+          <div className="space-y-1 mx-3">
+            <h4 className="text-lg font-medium leading-none">{section ? section.title : ''}</h4>
+            <p className="text-sm text-muted-foreground">{section ? section.subtitle : ''}</p>
+          </div>
+          <Separator className="mt-2 mb-5" />
+          {sectionContent}
+        </>
+      )}
+
+      {headerStyle === "ACC" && section && (
+        <Accordion type="multiple">
+          <AccordionItem value={section.id}>
+            <AccordionTrigger className="hover:bg-accent hover:no-underline p-3 rounded-md mb-6">
+              <div className="space-y-1 mx-3 text-left">
+                <h4 className="text-lg font-medium">{section ? section.title : ''}</h4>
+                <p className="text-sm text-muted-foreground">{section ? section.subtitle : ''}</p>
+              </div>
+            </AccordionTrigger>
+            <AccordionContent>
+              {sectionContent}
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
+      )}
     </div>
   );
-
 }

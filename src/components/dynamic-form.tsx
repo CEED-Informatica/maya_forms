@@ -21,7 +21,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { isValidNif } from 'nif-dni-nie-cif-validation'
 
 interface DynamicFormProps {
-  formId: string;
+  formId: string
 }
 
 const defaultZodSchema = z.object({}); // creo un esquema vacio de inicio
@@ -300,7 +300,7 @@ export default function DynamicForm({ formId }: DynamicFormProps)
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)}>
           { form && form.sections_ids && form.sections_ids.map((section: FieldSection) => (
-            <DynamicSectionForm key={section.id} sectionId={section.id}/>
+            <DynamicSectionForm key={section.id} sectionId={section.id} headerStyle={section.style}/>
           ))
           }
         <Button type="submit" className="mt-4">

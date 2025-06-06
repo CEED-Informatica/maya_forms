@@ -58,7 +58,7 @@ export interface Section {
 // Campo sección de un doc_template
 export interface FieldSection {
   id: string
-  style: string
+  style: "ACC" | "FIXED"
 }
 
 export interface DocTemplate {
