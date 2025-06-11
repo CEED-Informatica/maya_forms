@@ -1,0 +1,53 @@
+{
+  "id": "SEC_VALIDATION_MODULES",
+  "title": "Módulos",
+  "subtitle": "Módulos que se desean convalidar o aprobar con anterioridad",
+  "layout": "'modcontainer'",
+  "controls": [ 
+    {
+      "id": "CTRL_MODULOS",
+      "label": "Módulos",
+      "caption": "",
+      "area": "modcontainer",
+      "control_type": {
+        "RepetableControlContainer": {
+          "num_max_rep": 16,
+          "num_max_col": 2,
+          "mode": "DYNAMIC",
+          "layout": "'modulo modulo tipo'",
+          "items": [
+            {
+              "id": "CTRL_MODULO",
+              "label": "Módulo",
+              "caption": "Código y nombre del módulo",
+              "area": "modulo",
+              "control_type": {
+                "Combo": {
+                  "placeholder": "un módulo",
+                  "default": null,
+                  "options": "general_data/provincias"
+                }
+              }
+            },
+            {
+              "id": "CTRL_TIPOCONV",
+              "label": "Tipo de convalidación",
+              "caption": "Convalidación/Aprobado con anterioridad",
+              "area": "tipo",
+              "control_type": {
+                "Combo": {
+                  "placeholder": "tipo",
+                  "default": null,
+                  "options":  [ {"value":  "AA", "label": "Aprobado con anterioridad" }, {"value":  "CO", "label": "Convalidación" }]
+                }
+              }
+            }
+          ]
+        }
+      },
+      "validation":{
+        "type": "atLeast1"
+      }
+    }
+  ]
+}
