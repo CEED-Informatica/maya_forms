@@ -6,6 +6,20 @@ import { Condition, DisabledIf, FilterCondition, ComboOptions } from "@/lib/comp
 // React hook form
 import { useWatch, Control } from "react-hook-form";
 
+// componentes maya forms ui
+import MFCombo from "@/components/mfui/mf-combo"
+import MFEdit from "@/components/mfui/mf-edit"
+import MFCheckGroup from "@/components/mfui/mf-checkgroup"
+import MFRepetableControlContainer from "@/components/mfui/control-container/mf-repetable-control-container"
+
+// Mapea nombres de tipo a componentes
+const controlComponentMap: Record<string, React.ComponentType<any>> = {
+  Edit: MFEdit,
+  Combo: MFCombo,
+  CheckGroup: MFCheckGroup,
+  RepetableControlContainer: MFRepetableControlContainer,
+};
+
 ///// CONTROL ACTIVO/DESACTIVO /////
 
 // Hook que indica si el control tiene o que estar desactivado en función de 
@@ -108,4 +122,39 @@ export function useFilteredOptions(
 // Convierte el formato de layout que llega desdel JSON en formato CSS
 export function adaptLayout(layout: string) : string {
   return layout.replaceAll(',',' ')
-} 
+}
+
+// Renderiza el componente según el tipo
+export function renderControl(control: any, methods: any): JSX.Element {
+  const type = control?.control_type ? Object.keys(control.control_type)[0] : null;
+
+  if (!type || !controlComponentMap[type]) {
+    return <h2 key={control?.id}>Control no soportado</h2>
+  }
+
+  const Component = controlComponentMap[type];
+  return <Component key={control.id} control={control} methods={methods} />
+}
+
+
+/* 
+export function renderControl(control: any, methods: any) {
+
+  switch (Object.keys(control.control_type)[0]) {
+    case 'Edit':
+      return (<MFEdit control={control} methods={methods} key={control.id}/>)
+       
+    case 'Combo':
+      return (<MFCombo control={control} methods={methods} key={control.id}/>)
+
+    case 'CheckGroup':
+      return (<MFCheckGroup control={control} methods={methods} key={control.id}/>)
+
+    case 'RepetableControlContainer':
+        return (<MFRepetableControlContainer control={control} methods={methods} key={control.id}/>)
+
+    default:
+      return (<h1>Control no soportado</h1>)  // TODO 
+  }  
+}
+ */

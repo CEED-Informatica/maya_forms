@@ -15,13 +15,8 @@ import {
 import { resolveResource } from '@tauri-apps/api/path';
 import { readTextFile } from '@tauri-apps/plugin-fs';
 
-// componentes maya forms ui
-import MFCombo from "@/components/mfui/mf-combo"
-import MFEdit from "@/components/mfui/mf-edit"
-import MFCheckGroup from "@/components/mfui/mf-checkgroup"
-
 // utilidades
-import { adaptLayout } from '@/lib/ui-utils'
+import { adaptLayout, renderControl } from '@/lib/ui-utils'
 import clsx from 'clsx';
 
 interface DynamicSectionFormProps {
@@ -84,48 +79,20 @@ export default function DynamicSectionForm({ sectionId, headerStyle = "FIXED" }:
     }
   } 
 
-  function renderControl(control: any) {
-
-    switch (Object.keys(control.control_type)[0]) {
-      case 'Edit':
-        return <MFEdit control={control} methods={methods} key={control.id}/>;
-          /* <div key={control.id}>
-            <label>{control.label}</label>
-            <Input
-              {...register(control.id)}
-              placeholder={control.control_type.props.caption}
-              defaultValue={control.control_type.props.default || ''}
-            />
-        </div>
- */     
-      case 'Combo':
-        return <MFCombo control={control} methods={methods} key={control.id}/>
-
-      case 'CheckGroup':
-        return <MFCheckGroup control={control} methods={methods} key={control.id}/>
-
-      /* case 'CheckGroup':
-          return <MFCombo control={control} methods={methods} key={control.id}/>; */
-
-      default:
-        return (<h1>Control no soportado</h1>)  // TODO 
-    }  
-  }
-
   const sectionContent = section && (
     <div className={clsx("grid", `grid-cols-${columns}`, "px-8 gap-x-4 gap-y-7")} style={{ gridTemplateAreas: section ? layout : '' }}>
-      {section && section.controls && section.controls.map((control: any) => renderControl(control))}
+      {section && section.controls && section.controls.map((control: any) => renderControl(control, methods))}
     </div>
   )
 
   return (
-    <div className='mb-5'>
+    <div className='mb-3'>
       
       {headerStyle === "FIXED" && section && (
         <>
           <div className="space-y-1 mx-3">
             <h4 className="text-lg font-medium leading-none">{section ? section.title : ''}</h4>
-            <p className="text-sm text-muted-foreground">{section ? section.subtitle : ''}</p>
+            <p className="text-sm htext-muted-foreground">{section ? section.subtitle : ''}</p>
           </div>
           <Separator className="mt-2 mb-5" />
           {sectionContent}
