@@ -25,9 +25,15 @@
                 "Combo": {
                   "placeholder": "un módulo",
                   "default": null,
-                  "options": "general_data/provincias"
+                  "options": "studies/CF/subjects"
                 }
-              }
+              },
+              "filter": [
+                {
+                  "control_id": "CTRL_CURSO",
+                  "optionField": "course"
+                }
+              ]
             },
             {
               "id": "CTRL_TIPOCONV",

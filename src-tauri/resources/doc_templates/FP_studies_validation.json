@@ -12,6 +12,10 @@
     {
       "id": "REQUIREMENTS",
       "style": "ACC"
+    },
+    {
+      "id": "VALIDATION_MODULES",
+      "style": "ACC"
     }
   ]
 }
