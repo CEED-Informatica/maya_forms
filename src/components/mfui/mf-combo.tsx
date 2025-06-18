@@ -22,7 +22,7 @@ import { readTextFile } from '@tauri-apps/plugin-fs';
 import clsx from 'clsx';
 
 // utilidades ui
-import { useFilteredOptions, useIsDisabled } from '@/lib/ui-utils'
+import { useFilteredOptions, useIsDisabled, formatDisplay } from '@/lib/ui-utils'
 
 // Modelos
 import { ComboOptions } from "@/lib/component-models"
@@ -33,7 +33,8 @@ import { ComboOptions } from "@/lib/component-models"
 //   control: bloque JSON del control
 //   methods: methods del hook useForm de react-hook-form del formulario padre
 export default function MFCombo({ control, methods }: any) {
-  const [options, setOptions] = useState<ComboOptions[]>([]);
+  const [options, setOptions] = useState<ComboOptions[]>([])
+  const [open, setOpen] = useState(false)
 
   useEffect(() => {
     async function getOptionsFromJSON() {
@@ -96,20 +97,20 @@ export default function MFCombo({ control, methods }: any) {
         render={({ field }) => (
           <FormItem className="flex flex-col">
             <FormLabel>{control.label}</FormLabel>
-            <Popover>
+            <Popover open={open} onOpenChange={setOpen}>
               <PopoverTrigger asChild>
                 <FormControl>
                   <Button variant="outline" role="combobox"
                     disabled={isDisabled}
                     className={clsx("justify-between",
                     !field.value && "text-muted-foreground")} {...field}>
-                      {field.value ? filteredOptions.find((option) => option.value === field.value)?.label
+                      {field.value ? formatDisplay(filteredOptions.find((option) => option.value === field.value), control.control_type.Combo.display)
                        : "Selecciona " + control.control_type.Combo.placeholder}
                     <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                   </Button>
                 </FormControl>
               </PopoverTrigger>
-              <PopoverContent className="p-0">
+              <PopoverContent className="p-0 w-[--radix-popover-trigger-width]" style={{ width: "var(--radix-popover-trigger-width)"}}>
                 <Command>
                   <CommandInput placeholder={"Busca " + control.control_type.Combo.placeholder} />
                   <CommandList>
@@ -122,9 +123,10 @@ export default function MFCombo({ control, methods }: any) {
                           onSelect={() => {
                             methods.setValue(control.id, option.value)
                             console.log("Se ha seleccionado " + option.value)
+                            setOpen(false)
                           }}
                         >
-                          {option.label}
+                          {formatDisplay(option, control.control_type.Combo.display)}
                           <Check
                             className={clsx(
                               "ml-auto",

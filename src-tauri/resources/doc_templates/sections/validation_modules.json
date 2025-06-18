@@ -25,7 +25,8 @@
                 "Combo": {
                   "placeholder": "un módulo",
                   "default": null,
-                  "options": "studies/CF/subjects"
+                  "options": "studies/CF/subjects",
+                  "display": "{code} - {name}"
                 }
               },
               "filter": [

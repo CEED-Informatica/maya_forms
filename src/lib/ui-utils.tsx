@@ -136,25 +136,15 @@ export function renderControl(control: any, methods: any): JSX.Element {
   return <Component key={control.id} control={control} methods={methods} />
 }
 
-
-/* 
-export function renderControl(control: any, methods: any) {
-
-  switch (Object.keys(control.control_type)[0]) {
-    case 'Edit':
-      return (<MFEdit control={control} methods={methods} key={control.id}/>)
-       
-    case 'Combo':
-      return (<MFCombo control={control} methods={methods} key={control.id}/>)
-
-    case 'CheckGroup':
-      return (<MFCheckGroup control={control} methods={methods} key={control.id}/>)
-
-    case 'RepetableControlContainer':
-        return (<MFRepetableControlContainer control={control} methods={methods} key={control.id}/>)
-
-    default:
-      return (<h1>Control no soportado</h1>)  // TODO 
-  }  
+// Monta la cadena a mostrar en un componente
+export function formatDisplay(option: any, displayPattern?: string): string {
+  if (!option) return ""
+  
+  if (displayPattern) {
+    return displayPattern.replace(/\{(\w+)\}/g, (_, key) => option[key] ?? "")
+  } else if (typeof option.label === "string") {
+    return option.label;
+  } else {
+    return "";
+  }
 }
- */
