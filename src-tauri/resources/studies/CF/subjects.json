@@ -1,6 +1,6 @@
 [
   {
-    "id": "CF_SUBJECT_ASIR_IPGS",
+    "value": "CF_SUBJECT_ASIR_IPGS",
     "code": "0179",
     "name": "Inglés profesional",
     "year": 1,
@@ -11,7 +11,7 @@
     "valid": true
   },
   {
-    "id": "CF_SUBJECT_ASIR_ISO",
+    "value": "CF_SUBJECT_ASIR_ISO",
     "code": "0369",
     "name": "Implantación de sistemas operativos",
     "year": 1,
@@ -22,7 +22,7 @@
     "valid": true
   },
   {
-    "id": "CF_SUBJECT_ASIR_PAR",
+    "value": "CF_SUBJECT_ASIR_PAR",
     "code": "0370",
     "name": "Planificación y administración de redes",
     "year": 1,
@@ -33,7 +33,7 @@
     "valid": true
   },
   {
-    "id": "CF_SUBJECT_ASIR_FHW",
+    "value": "CF_SUBJECT_ASIR_FHW",
     "code": "0371",
     "name": "Fundamentos de hardware",
     "year": 1,
@@ -44,7 +44,7 @@
     "valid": true
   },
   {
-    "id": "CF_SUBJECT_ASIR_GBD",
+    "value": "CF_SUBJECT_ASIR_GBD",
     "code": "0372",
     "name": "Gestión de bases de datos",
     "year": 1,
@@ -55,7 +55,7 @@
     "valid": true
   },
   {
-    "id": "CF_SUBJECT_ASIR_LM",
+    "value": "CF_SUBJECT_ASIR_LM",
     "code": "0373",
     "name": "Lenguajes de marcas y sistemas de gestión de información",
     "year": 1,
@@ -66,7 +66,7 @@
     "valid": true
   },
   {
-    "id": "CF_SUBJECT_ASIR_IPE1",
+    "value": "CF_SUBJECT_ASIR_IPE1",
     "code": "1709",
     "name": "Itinerario personal para la empleabilidad I",
     "year": 1,
@@ -77,7 +77,7 @@
     "valid": true
   },
   {
-    "id": "CF_SUBJECT_ASIR_PI1",
+    "value": "CF_SUBJECT_ASIR_PI1",
     "code": "0379p",
     "name": "Proyecto intermodular ASIR (1)",
     "year": 1,
@@ -88,7 +88,7 @@
     "valid": false
   },
   {
-    "id": "CF_SUBJECT_ASIR_ASO",
+    "value": "CF_SUBJECT_ASIR_ASO",
     "code": "0374",
     "name": "Administración de sistemas operativos",
     "year": 2,
@@ -99,7 +99,7 @@
     "valid": true
   },
   {
-    "id": "CF_SUBJECT_ASIR_SRI",
+    "value": "CF_SUBJECT_ASIR_SRI",
     "code": "0375",
     "name": "Servicios de red e internet",
     "year": 2,
@@ -110,7 +110,7 @@
     "valid": true
   },
   {
-    "id": "CF_SUBJECT_ASIR_IAW",
+    "value": "CF_SUBJECT_ASIR_IAW",
     "code": "0376",
     "name": "Implantación de aplicaciones web",
     "year": 2,
@@ -121,7 +121,7 @@
     "valid": true
   },
   {
-    "id": "CF_SUBJECT_ASIR_ASGBD",
+    "value": "CF_SUBJECT_ASIR_ASGBD",
     "code": "0377",
     "name": "Administración de sistemas gestores de bases de datos",
     "year": 2,
@@ -132,7 +132,7 @@
     "valid": true
   },
   {
-    "id": "CF_SUBJECT_ASIR_SAD",
+    "value": "CF_SUBJECT_ASIR_SAD",
     "code": "0378",
     "name": "Seguridad y alta disponibilidad",
     "year": 2,
@@ -143,7 +143,7 @@
     "valid": true
   },
   {
-    "id": "CF_SUBJECT_ASIR_IPE2",
+    "value": "CF_SUBJECT_ASIR_IPE2",
     "code": "1710",
     "name": "Itinerario personal para la empleabilidad II",
     "year": 2,
@@ -154,7 +154,7 @@
     "valid": true
   },
   {
-    "id": "CF_SUBJECT_ASIR_PI2",
+    "value": "CF_SUBJECT_ASIR_PI2",
     "code": "0379",
     "name": "Proyecto intermodular ASIR (2)",
     "year": 2,
@@ -165,7 +165,7 @@
     "valid": false
   },
   {
-    "id": "CF_SUBJECT_ASIR_DIGGS",
+    "value": "CF_SUBJECT_ASIR_DIGGS",
     "code": "1665190",
     "name": "Digitalización aplicada al sistema productivo",
     "year": 2,
@@ -176,7 +176,7 @@
     "valid": true
   },
   {
-    "id": "CF_SUBJECT_ASIR_SOSGS",
+    "value": "CF_SUBJECT_ASIR_SOSGS",
     "code": "1708190",
     "name": "Sostenibilidad aplicada al sistema productivo",
     "year": 2,
@@ -187,7 +187,7 @@
     "valid": true
   },
   {
-    "id": "CF_SUBJECT_ASIR_OPINO",
+    "value": "CF_SUBJECT_ASIR_OPINO",
     "abbr": "OPINP",
     "code": "CVOPS190:INO",
     "course": "CF_COURSE_ASIR",
@@ -199,7 +199,7 @@
     "valid": false
   },
   {
-    "id": "CF_SUBJECT_ASIR_OPINP",
+    "value": "CF_SUBJECT_ASIR_OPINP",
     "abbr": "OPINP",
     "code": "CVOPS190:INP",
     "course": "CF_COURSE_ASIR",
@@ -211,7 +211,7 @@
     "valid": false
   },
   {
-    "id": "CF_SUBJECT_ASIR_OPIP",
+    "value": "CF_SUBJECT_ASIR_OPIP",
     "abbr": "OPIP",
     "code": "CVOPS190:IP",
     "course": "CF_COURSE_ASIR",
@@ -223,7 +223,7 @@
     "valid": false
   },
   {
-    "id": "CF_SUBJECT_ASIR_OPSGEA",
+    "value": "CF_SUBJECT_ASIR_OPSGEA",
     "abbr": "OPSGEA",
     "code": "CVOPS190:SGEA",
     "course": "CF_COURSE_ASIR",
@@ -235,7 +235,7 @@
     "valid": false
   },
   {
-    "id": "CF_SUBJECT_DAM_IPGS",
+    "value": "CF_SUBJECT_DAM_IPGS",
     "code": "0179",
     "name": "Inglés profesional",
     "year": 1,
@@ -246,7 +246,7 @@
     "valid": true
   },
   {
-    "id": "CF_SUBJECT_DAM_LM",
+    "value": "CF_SUBJECT_DAM_LM",
     "code": "0373",
     "name": "Lenguajes de marcas y sistemas de gestión de información",
     "year": 1,
@@ -257,7 +257,7 @@
     "valid": true
   },
   {
-    "id": "CF_SUBJECT_DAM_SIN",
+    "value": "CF_SUBJECT_DAM_SIN",
     "code": "0483",
     "name": "Sistemas informáticos",
     "year": 1,
@@ -268,7 +268,7 @@
     "valid": true
   },
   {
-    "id": "CF_SUBJECT_DAM_BD",
+    "value": "CF_SUBJECT_DAM_BD",
     "code": "0484",
     "name": "Bases de datos",
     "year": 1,
@@ -279,7 +279,7 @@
     "valid": true
   },
   {
-    "id": "CF_SUBJECT_DAM_PRG",
+    "value": "CF_SUBJECT_DAM_PRG",
     "code": "0485",
     "name": "Programación",
     "year": 1,
@@ -290,7 +290,7 @@
     "valid": true
   },
   {
-    "id": "CF_SUBJECT_DAM_ED",
+    "value": "CF_SUBJECT_DAM_ED",
     "code": "0487",
     "name": "Entornos de desarrollo",
     "year": 1,
@@ -301,7 +301,7 @@
     "valid": true
   },
   {
-    "id": "CF_SUBJECT_DAM_IPE1",
+    "value": "CF_SUBJECT_DAM_IPE1",
     "code": "1709",
     "name": "Itinerario personal para la empleabilidad I",
     "year": 1,
@@ -312,7 +312,7 @@
     "valid": true
   },
   {
-    "id": "CF_SUBJECT_DAM_PI1",
+    "value": "CF_SUBJECT_DAM_PI1",
     "code": "0492p",
     "name": "Proyecto intermodular DAM (1)",
     "year": 1,
@@ -323,7 +323,7 @@
     "valid": false
   },
   {
-    "id": "CF_SUBJECT_DAM_AD",
+    "value": "CF_SUBJECT_DAM_AD",
     "code": "0486",
     "name": "Acceso a datos",
     "year": 2,
@@ -334,7 +334,7 @@
     "valid": true
   },
   {
-    "id": "CF_SUBJECT_DAM_DI",
+    "value": "CF_SUBJECT_DAM_DI",
     "code": "0488",
     "name": "Desarrollo de interfaces",
     "year": 2,
@@ -345,7 +345,7 @@
     "valid": true
   },
   {
-    "id": "CF_SUBJECT_DAM_PMDM",
+    "value": "CF_SUBJECT_DAM_PMDM",
     "code": "0489",
     "name": "Programación multimedia y dispositivos móviles",
     "year": 2,
@@ -356,7 +356,7 @@
     "valid": true
   },
   {
-    "id": "CF_SUBJECT_DAM_PSP",
+    "value": "CF_SUBJECT_DAM_PSP",
     "code": "0490",
     "name": "Programación de servicios y procesos",
     "year": 2,
@@ -367,7 +367,7 @@
     "valid": true
   },
   {
-    "id": "CF_SUBJECT_DAM_SGE",
+    "value": "CF_SUBJECT_DAM_SGE",
     "code": "0491",
     "name": "Sistemas de gestión empresarial",
     "year": 2,
@@ -378,7 +378,7 @@
     "valid": true
   },
   {
-    "id": "CF_SUBJECT_DAM_IPE2",
+    "value": "CF_SUBJECT_DAM_IPE2",
     "code": "1710",
     "name": "Itinerario personal para la empleabilidad II",
     "year": 2,
@@ -389,7 +389,7 @@
     "valid": true
   },
   {
-    "id": "CF_SUBJECT_DAM_PI2",
+    "value": "CF_SUBJECT_DAM_PI2",
     "code": "0492",
     "name": "Proyecto intermodular DAM (2)",
     "year": 2,
@@ -400,7 +400,7 @@
     "valid": false
   },
   {
-    "id": "CF_SUBJECT_DAM_DIGGS",
+    "value": "CF_SUBJECT_DAM_DIGGS",
     "code": "1665190",
     "name": "Digitalización aplicada al sistema productivo",
     "year": 2,
@@ -411,7 +411,7 @@
     "valid": true
   },
   {
-    "id": "CF_SUBJECT_DAM_SOSGS",
+    "value": "CF_SUBJECT_DAM_SOSGS",
     "code": "1708190",
     "name": "Sostenibilidad aplicada al sistema productivo",
     "year": 2,
@@ -422,7 +422,7 @@
     "valid": true
   },
   {
-    "id": "CF_SUBJECT_DAM_OPINO",
+    "value": "CF_SUBJECT_DAM_OPINO",
     "abbr": "OPINP",
     "code": "CVOPS190:INO",
     "course": "CF_COURSE_DAM",
@@ -434,7 +434,7 @@
     "valid": false
   },
   {
-    "id": "CF_SUBJECT_DAM_OPINP",
+    "value": "CF_SUBJECT_DAM_OPINP",
     "abbr": "OPINP",
     "code": "CVOPS190:INP",
     "course": "CF_COURSE_DAM",
@@ -446,7 +446,7 @@
     "valid": false
   },
   {
-    "id": "CF_SUBJECT_DAW_IPGS",
+    "value": "CF_SUBJECT_DAW_IPGS",
     "code": "0179",
     "name": "Inglés profesional",
     "year": 1,
@@ -457,7 +457,7 @@
     "valid": true
   },
   {
-    "id": "CF_SUBJECT_DAW_LM",
+    "value": "CF_SUBJECT_DAW_LM",
     "code": "0373",
     "name": "Lenguajes de marcas y sistemas de gestión de información",
     "year": 1,
@@ -468,7 +468,7 @@
     "valid": true
   },
   {
-    "id": "CF_SUBJECT_DAW_SIN",
+    "value": "CF_SUBJECT_DAW_SIN",
     "code": "0483",
     "name": "Sistemas informáticos",
     "year": 1,
@@ -479,7 +479,7 @@
     "valid": true
   },
   {
-    "id": "CF_SUBJECT_DAW_BD",
+    "value": "CF_SUBJECT_DAW_BD",
     "code": "0484",
     "name": "Bases de datos",
     "year": 1,
@@ -490,7 +490,7 @@
     "valid": true
   },
   {
-    "id": "CF_SUBJECT_DAW_PRG",
+    "value": "CF_SUBJECT_DAW_PRG",
     "code": "0485",
     "name": "Programación",
     "year": 1,
@@ -501,7 +501,7 @@
     "valid": true
   },
   {
-    "id": "CF_SUBJECT_DAW_ED",
+    "value": "CF_SUBJECT_DAW_ED",
     "code": "0487",
     "name": "Entornos de desarrollo",
     "year": 1,
@@ -512,7 +512,7 @@
     "valid": true
   },
   {
-    "id": "CF_SUBJECT_DAW_IPE1",
+    "value": "CF_SUBJECT_DAW_IPE1",
     "code": "1709",
     "name": "Itinerario personal para la empleabilidad I",
     "year": 1,
@@ -523,7 +523,7 @@
     "valid": true
   },
   {
-    "id": "CF_SUBJECT_DAW_PI1",
+    "value": "CF_SUBJECT_DAW_PI1",
     "code": "0616p",
     "name": "Proyecto intermodular DAW (1)",
     "year": 1,
@@ -534,7 +534,7 @@
     "valid": false
   },
   {
-    "id": "CF_SUBJECT_DAW_DWEC",
+    "value": "CF_SUBJECT_DAW_DWEC",
     "code": "0612",
     "name": "Desarrollo web en entorno cliente",
     "year": 2,
@@ -545,7 +545,7 @@
     "valid": true
   },
   {
-    "id": "CF_SUBJECT_DAW_DWES",
+    "value": "CF_SUBJECT_DAW_DWES",
     "code": "0613",
     "name": "Desarrollo web en entorno servidor",
     "year": 2,
@@ -556,7 +556,7 @@
     "valid": true
   },
   {
-    "id": "CF_SUBJECT_DAW_DAW",
+    "value": "CF_SUBJECT_DAW_DAW",
     "code": "0614",
     "name": "Despliegue de aplicaciones web",
     "year": 2,
@@ -567,7 +567,7 @@
     "valid": true
   },
   {
-    "id": "CF_SUBJECT_DAW_DIW",
+    "value": "CF_SUBJECT_DAW_DIW",
     "code": "0615",
     "name": "Diseño de interfaces web",
     "year": 2,
@@ -578,7 +578,7 @@
     "valid": true
   },
   {
-    "id": "CF_SUBJECT_DAW_IPE2",
+    "value": "CF_SUBJECT_DAW_IPE2",
     "code": "1710",
     "name": "Itinerario personal para la empleabilidad II",
     "year": 2,
@@ -589,7 +589,7 @@
     "valid": true
   },
   {
-    "id": "CF_SUBJECT_DAW_PI2",
+    "value": "CF_SUBJECT_DAW_PI2",
     "code": "0616",
     "name": "Proyecto intermodular DAW (2)",
     "year": 2,
@@ -600,7 +600,7 @@
     "valid": false
   },
   {
-    "id": "CF_SUBJECT_DAW_DIGGS",
+    "value": "CF_SUBJECT_DAW_DIGGS",
     "code": "1665190",
     "name": "Digitalización aplicada al sistema productivo",
     "year": 2,
@@ -611,7 +611,7 @@
     "valid": true
   },
   {
-    "id": "CF_SUBJECT_DAW_SOSGS",
+    "value": "CF_SUBJECT_DAW_SOSGS",
     "code": "1708190",
     "name": "Sostenibilidad aplicada al sistema productivo",
     "year": 2,
@@ -622,7 +622,7 @@
     "valid": true
   },
   {
-    "id": "CF_SUBJECT_DAW_OPINO",
+    "value": "CF_SUBJECT_DAW_OPINO",
     "abbr": "OPINP",
     "code": "CVOPS190:INO",
     "course": "CF_COURSE_DAW",
@@ -634,7 +634,7 @@
     "valid": false
   },
   {
-    "id": "CF_SUBJECT_DAW_OPINP",
+    "value": "CF_SUBJECT_DAW_OPINP",
     "abbr": "OPINP",
     "code": "CVOPS190:INP",
     "course": "CF_COURSE_DAW",
@@ -646,7 +646,7 @@
     "valid": false
   },
   {
-    "id": "CF_SUBJECT_DAW_OPSGEA",
+    "value": "CF_SUBJECT_DAW_OPSGEA",
     "abbr": "OPSGEA",
     "code": "CVOPS190:SGEA",
     "course": "CF_COURSE_DAW",
