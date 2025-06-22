@@ -24,7 +24,7 @@ Además, en fases posteriores, se pretende que:
 La aplicación está desarrollada en Tauri (Rust) utilizando React para el desarrollo del interfaz gráfico
 
   - Instalar Rust (>= 1.86)
-  - Instalar node (>= 22)
+  - Instalar node (>= 22). Recomendado [nvm](https://github.com/nvm-sh/nvm) en Linux/MacOS o [nvm for Windows](https://github.com/coreybutler/nvm-windows)
   - [Instalar dependencias Tauri](https://v2.tauri.app/es/start/prerequisites/)
   - Instalar Tauri
 
