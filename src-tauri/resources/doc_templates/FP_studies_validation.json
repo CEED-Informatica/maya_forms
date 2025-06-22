@@ -16,6 +16,10 @@
     {
       "id": "VALIDATION_MODULES",
       "style": "ACC"
+    },
+    {
+      "id": "ATTACHED_DOCUMENTATION_STUDIES_VALIDATION_CF",
+      "style": "ACC"
     }
   ]
 }
