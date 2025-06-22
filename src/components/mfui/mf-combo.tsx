@@ -93,7 +93,7 @@ export default function MFCombo({ control, methods }: any) {
 
   return (
     <div style={{ gridArea: control.area }}>
-      <FormField control={methods.control} name={control.id} 
+      <FormField control={methods.control} name={control.name} 
         render={({ field }) => (
           <FormItem className="flex flex-col">
             <FormLabel>{control.label}</FormLabel>
@@ -121,7 +121,7 @@ export default function MFCombo({ control, methods }: any) {
                           value={option.label}
                           key={option.value}
                           onSelect={() => {
-                            methods.setValue(control.id, option.value)
+                            methods.setValue(control.name, option.value)
                             console.log("Se ha seleccionado " + option.value)
                             setOpen(false)
                           }}

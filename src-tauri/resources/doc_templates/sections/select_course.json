@@ -5,7 +5,7 @@
   "layout": "'family family level course course'",
   "controls": [ 
     {
-      "id": "CTRL_FAMILIA",
+      "name": "CTRL_FAMILIA",
       "label": "Familia",
       "caption": "Familia formativa",
       "area": "family",
@@ -18,7 +18,7 @@
       }
     },
     {
-      "id": "CTRL_NIVEL",
+      "name": "CTRL_NIVEL",
       "label": "Grado",
       "caption": "Tipo de grado",
       "area": "level",
@@ -55,7 +55,7 @@
       }
     },
     {
-      "id": "CTRL_CURSO",
+      "name": "CTRL_CURSO",
       "label": "Ciclo",
       "caption": "Ciclo Formativo que se está cursando",
       "area": "course",
