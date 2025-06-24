@@ -34,6 +34,13 @@
                   "control_id": "CTRL_CURSO",
                   "optionField": "course"
                 }
+              ],
+              "disabledIf": [
+                {
+                  "control_id": "CTRL_CURSO",
+                  "operator": "0",
+                  "value": ""
+                }
               ]
             },
             {
