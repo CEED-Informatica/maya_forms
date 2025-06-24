@@ -27,6 +27,9 @@ import { useFilteredOptions, useIsDisabled, formatDisplay } from '@/lib/ui-utils
 // Modelos
 import { ComboOptions } from "@/lib/component-models"
 
+// react-hook-form
+import { useWatch } from "react-hook-form";
+
 // Combo que se puede incorpora dentro de una sección
 // Permite la carga de datos de manera asincrona
 // Propiedades:
@@ -35,6 +38,25 @@ import { ComboOptions } from "@/lib/component-models"
 export default function MFCombo({ control, methods }: any) {
   const [options, setOptions] = useState<ComboOptions[]>([])
   const [open, setOpen] = useState(false)
+
+  // Hook para saber si el combo está activado o desactivado
+  const isDisabled = useIsDisabled(control.disabledIf, methods.control)
+
+  // Hook  para obtener las opciones filtradas
+  const filteredOptions = useFilteredOptions(options, control.filter, methods.control)
+
+  // Hook para controlar el valor de actual del control
+  const watchedValue = useWatch({ control: methods.control, name: control.name });
+
+  // en el caso de que el valor no esté en la lista de opciones, resetea el valor
+  useEffect(() => {
+    const existsInOptions = filteredOptions.some(opt => opt.value === watchedValue)
+    if (!existsInOptions && watchedValue) {
+      console.log(`[MFCombo] El valor "${watchedValue}" no está entre las opciones visibles. Debería resetearse.`)
+      methods.setValue(control.name, "", { shouldDirty: true, shouldTouch: true, shouldValidate: true })
+    }
+  }, [watchedValue, filteredOptions]);
+  
 
   useEffect(() => {
     async function getOptionsFromJSON() {
@@ -85,11 +107,6 @@ export default function MFCombo({ control, methods }: any) {
     fetchOptions()
 
   }, [control])
-
-  // Hook para saber si el combo está activado o desactivado
-  const isDisabled = useIsDisabled(control.disabledIf, methods.control)
-
-  const filteredOptions = useFilteredOptions(options, control.filter, methods.control);
 
   return (
     <div style={{ gridArea: control.area }}>
