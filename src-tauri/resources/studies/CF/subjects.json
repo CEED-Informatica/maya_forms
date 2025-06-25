@@ -1,11 +1,11 @@
 [
   {
-    "value": "CF_SUBJECT_ASIR_IPGS",
+    "value": "CF_SUBJECT_ASIR_INGS",
     "code": "0179",
-    "name": "Inglés profesional",
+    "name": "Inglés profesional GS",
     "year": 1,
     "course": "CF_COURSE_ASIR",
-    "abbr": "IPGS",
+    "abbr": "INGS",
     "ht": 67,
     "hs": 2,
     "valid": true
@@ -170,7 +170,7 @@
     "name": "Digitalización aplicada al sistema productivo",
     "year": 2,
     "course": "CF_COURSE_ASIR",
-    "abbr": "DIGGS",
+    "abbr": "DIGGSINF",
     "ht": 34,
     "hs": 1,
     "valid": true
@@ -181,7 +181,7 @@
     "name": "Sostenibilidad aplicada al sistema productivo",
     "year": 2,
     "course": "CF_COURSE_ASIR",
-    "abbr": "SOSGS",
+    "abbr": "SOSGSINF",
     "ht": 34,
     "hs": 1,
     "valid": true
@@ -235,12 +235,12 @@
     "valid": false
   },
   {
-    "value": "CF_SUBJECT_DAM_IPGS",
+    "value": "CF_SUBJECT_DAM_INGS",
     "code": "0179",
-    "name": "Inglés profesional",
+    "name": "Inglés profesional GS",
     "year": 1,
     "course": "CF_COURSE_DAM",
-    "abbr": "IPGS",
+    "abbr": "INGS",
     "ht": 68,
     "hs": 2,
     "valid": true
@@ -405,7 +405,7 @@
     "name": "Digitalización aplicada al sistema productivo",
     "year": 2,
     "course": "CF_COURSE_DAM",
-    "abbr": "DIGGS",
+    "abbr": "DIGGSINF",
     "ht": 34,
     "hs": 1,
     "valid": true
@@ -416,7 +416,7 @@
     "name": "Sostenibilidad aplicada al sistema productivo",
     "year": 2,
     "course": "CF_COURSE_DAM",
-    "abbr": "SOSGS",
+    "abbr": "SOSGSINF",
     "ht": 34,
     "hs": 1,
     "valid": true
@@ -446,12 +446,12 @@
     "valid": false
   },
   {
-    "value": "CF_SUBJECT_DAW_IPGS",
+    "value": "CF_SUBJECT_DAW_INGS",
     "code": "0179",
-    "name": "Inglés profesional",
+    "name": "Inglés profesional GS",
     "year": 1,
     "course": "CF_COURSE_DAW",
-    "abbr": "IPGS",
+    "abbr": "INGS",
     "ht": 68,
     "hs": 2,
     "valid": true
@@ -605,7 +605,7 @@
     "name": "Digitalización aplicada al sistema productivo",
     "year": 2,
     "course": "CF_COURSE_DAW",
-    "abbr": "DIGGS",
+    "abbr": "DIGGSINF",
     "ht": 34,
     "hs": 1,
     "valid": true
@@ -616,7 +616,7 @@
     "name": "Sostenibilidad aplicada al sistema productivo",
     "year": 2,
     "course": "CF_COURSE_DAW",
-    "abbr": "SOSGS",
+    "abbr": "SOSGSINF",
     "ht": 34,
     "hs": 1,
     "valid": true
@@ -656,5 +656,396 @@
     "name": "Sistemas de gestión empresarial actuales",
     "optional": true, 
     "valid": false
+  },
+  {
+    "value": "CF_SUBJECT_AFI_INGS",
+    "name": "Inglés profesional GS",
+    "abbr": "INGS",
+    "code": "0179",
+    "year": 1,
+    "ht": 167,
+    "hs": 5,
+    "course": "CF_COURSE_AFI",
+    "valid": true
+  },
+  {
+    "value": "CF_SUBJECT_AFI_GDJE",
+    "code": "0647",
+    "name": "Gestión de la documentación jurídica y empresarial",
+    "abbr": "GDJE",
+    "year": 1,
+    "ht": 100,
+    "hs": 3,
+    "course": "CF_COURSE_AFI",
+    "valid": true
+  },
+  {
+    "value": "CF_SUBJECT_AFI_RRHHRSC",
+    "code": "0648",
+    "name": "Recursos humanos y responsabilidad social corporativa",
+    "abbr": "RRHHRSC",
+    "year": 1,
+    "ht": 67,
+    "hs": 2,
+    "course": "CF_COURSE_AFI",
+    "valid": true
+  },
+  {
+    "value": "CF_SUBJECT_AFI_OPI",
+    "code": "0649",
+    "name": "Ofimática y proceso de la información",
+    "abbr": "OPI",
+    "year": 1,
+    "ht": 200,
+    "hs": 6,
+    "course": "CF_COURSE_AFI",
+    "valid": true
+  },
+  {
+    "value": "CF_SUBJECT_AFI_PIAC",
+    "name": "Proceso integral de la actividad comercial",
+    "abbr": "PIAC",
+    "code": "0650",
+    "year": 1,
+    "ht": 166,
+    "hs": 5,
+    "course": "CF_COURSE_AFI",
+    "valid": true
+  },
+  {
+    "value": "CF_SUBJECT_AFI_CAC",
+    "name": "Comunicación y atención al cliente",
+    "abbr": "CAC",
+    "code": "0651",
+    "year": 1,
+    "ht": 166,
+    "hs": 5,
+    "course": "CF_COURSE_AFI",
+    "valid": true
+  },
+  {
+    "value": "CF_SUBJECT_AFI_IPE1",
+    "name": "Itinerario personal para la empleabilidad I",
+    "abbr": "IPE1",
+    "code": "1709",
+    "year": 1,
+    "ht": 100,
+    "hs": 3,
+    "course": "CF_COURSE_AFI",
+    "valid": true
+  },
+  {
+    "value": "CF_SUBJECT_AFI_PI1",
+    "name": "Proyecto intermodular AFI (1)",
+    "abbr": "PI1",
+    "code": "0657p",
+    "year": 1,
+    "course": "CF_COURSE_AFI",
+    "valid": false
+  },
+  {
+    "value": "CF_SUBJECT_AFI_GRRHH",
+    "code": "0652",
+    "name": "Gestión de recursos humanos",
+    "abbr": "GRRHH",
+    "year": 2,
+    "course": "CF_COURSE_AFI",
+    "valid": true
+  },
+  {
+    "value": "CF_SUBJECT_AFI_GESTFIN",
+    "code": "0653",
+    "name": "Gestión financiera",
+    "abbr": "GESTFIN",
+    "year": 2,
+    "course": "CF_COURSE_AFI",
+    "valid": true
+  },
+  {
+    "value": "CF_SUBJECT_AFI_COFI",
+    "code": "0654",
+    "name": "Contabilidad y fiscalidad",
+    "abbr": "COFI",
+    "year": 2,
+    "course": "CF_COURSE_AFI",
+    "valid": true
+  },
+  {
+    "value": "CF_SUBJECT_AFI_GESTLOG",
+    "code": "0655",
+    "name": "Gestión logística y comercial",
+    "abbr": "GESTLOG",
+    "year": 2,
+    "course": "CF_COURSE_AFI",
+    "valid": true
+  },
+  {
+    "value": "CF_SUBJECT_AFI_SIM",
+    "code": "0656",
+    "name": "Simulación empresarial",
+    "abbr": "SIM",
+    "year": 2,
+    "course": "CF_COURSE_AFI",
+    "valid": true
+  },
+  {
+    "value": "CF_SUBJECT_AFI_IPE2",
+    "name": "Itinerario personal para la empleabilidad II",
+    "abbr": "IPE2",
+    "code": "1710",
+    "year": 2,
+    "course": "CF_COURSE_AFI",
+    "valid": true
+  },
+  {
+    "value": "CF_SUBJECT_AFI_PI2",
+    "code": "0657",
+    "name": "Proyecto intermodular AFI (2)",
+    "abbr": "PI2",
+    "year": 2,
+    "course": "CF_COURSE_AFI",
+    "valid": false
+  },
+  {
+    "value": "CF_SUBJECT_AFI_OPINO",
+    "abbr": "OPINP",
+    "code": "CVOPS001:INO",
+    "course": "CF_COURSE_AFI",
+    "year": 2,
+    "ht": 100,
+    "hs": 3,
+    "name": "Inglés profesional oral",
+    "optional": true, 
+    "valid": false
+  },
+  {
+    "value": "CF_SUBJECT_AFI_GRPCM",
+    "abbr": "OPINP",
+    "code": "CVOPS001:GRPCM",
+    "course": "CF_COURSE_AFI",
+    "year": 2,
+    "ht": 100,
+    "hs": 3,
+    "name": "Gestión de las redes en las pymes y gestión del comercio electrónico.",
+    "optional": true, 
+    "valid": false
+  },
+  {
+    "value": "CF_SUBJECT_AFI_DIGGS",
+    "code": "1665001",
+    "name": "Digitalización aplicada al sistema productivo",
+    "year": 2,
+    "course": "CF_COURSE_AFI",
+    "abbr": "DIGGSAFI",
+    "ht": 34,
+    "hs": 1,
+    "valid": true
+  },
+  {
+    "value": "CF_SUBJECT_AFI_SOSGS",
+    "code": "1708001",
+    "name": "Sostenibilidad aplicada al sistema productivo",
+    "year": 2,
+    "course": "CF_COURSE_AFI",
+    "abbr": "SOSGSAFI",
+    "ht": 34,
+    "hs": 1,
+    "valid": true
+  },
+  {
+    "value": "CF_SUBJECT_ADIR_INGS",
+    "name": "Inglés profesional GS",
+    "abbr": "INGS",
+    "code": "0179",
+    "year": 1,
+    "course": "CF_COURSE_ADI",
+    "ht": 167,
+    "hs": 5,
+    "valid": true
+  },
+  {
+    "value": "CF_SUBJECT_ADIR_GDJE",
+    "code": "0647",
+    "name": "Gestión de la documentación jurídica y empresarial",
+    "abbr": "GDJE",
+    "year": 1,
+    "ht": 100,
+    "hs": 3,
+    "course": "CF_COURSE_ADI",
+    "valid": true
+  },
+  {
+    "value": "CF_SUBJECT_ADIR_RRHHRSC",
+    "code": "0648",
+    "name": "Recursos humanos y responsabilidad social corporativa",
+    "abbr": "RRHHRSC",
+    "year": 1,
+    "ht": 67,
+    "hs": 2,
+    "course": "CF_COURSE_ADI",
+    "valid": true
+  },
+  {
+    "value": "CF_SUBJECT_ADIR_OPI",
+    "code": "0649",
+    "name": "Ofimática y proceso de la información",
+    "abbr": "OPI",
+    "year": 1,
+    "ht": 200,
+    "hs": 6,
+    "course": "CF_COURSE_ADI",
+    "valid": true
+  },
+  {
+    "value": "CF_SUBJECT_ADIR_PIAC",
+    "name": "Proceso integral de la actividad comercial",
+    "abbr": "PIAC",
+    "code": "0650",
+    "year": 1,
+    "ht": 166,
+    "hs": 5,
+    "course": "CF_COURSE_ADI",
+    "valid": true
+  },
+  {
+    "value": "CF_SUBJECT_ADIR_CAC",
+    "name": "Comunicación y atención al cliente",
+    "abbr": "CAC",
+    "code": "0651",
+    "year": 1,
+    "ht": 166,
+    "hs": 5,
+    "course": "CF_COURSE_ADI",
+    "valid": true
+  },
+  {
+    "value": "CF_SUBJECT_ADIR_IPE1",
+    "name": "Itinerario personal para la empleabilidad I",
+    "abbr": "IPE1",
+    "code": "1709",
+    "year": 1,
+    "ht": 100,
+    "hs": 3,
+    "course": "CF_COURSE_ADI",
+    "valid": true
+  },
+  {
+    "value": "CF_SUBJECT_ADIR_PI1",
+    "name": "Proyecto intermodular ADIR (1)",
+    "abbr": "PI1",
+    "code": "0664p",
+    "year": 1,
+    "course": "CF_COURSE_ADI",
+    "valid": false
+  },
+  {
+    "value": "CF_SUBJECT_ADIR_LE2",
+    "name": "Segunda lengua extranjera",
+    "abbr": "LE2",
+    "code": "0180",
+    "year": 2,
+    "ht": 166,
+    "hs": 5,
+    "course": "CF_COURSE_ADI",
+    "valid": true
+  },
+  {
+    "value": "CF_SUBJECT_ADIR_PE",
+    "name": "Protocolo empresarial",
+    "abbr": "PE",
+    "code": "0661",
+    "year": 2,
+    "ht": 100,
+    "hs": 3,
+    "course": "CF_COURSE_ADI",
+    "valid": true
+  },
+  {
+    "value": "CF_SUBJECT_ADIR_OEE",
+    "name": "Organización de eventos empresariales",
+    "abbr": "OEE",
+    "code": "0662",
+    "year": 2,
+    "ht": 166,
+    "hs": 5,
+    "course": "CF_COURSE_ADI",
+    "valid": true
+  },
+  {
+    "value": "CF_SUBJECT_ADIR_GAI",
+    "name": "Gestión avanzada de la información",
+    "abbr": "GAI",
+    "code": "0663",
+    "year": 2,
+    "ht": 133,
+    "hs": 4,
+    "course": "CF_COURSE_ADI",
+    "valid": true
+  },
+  {
+    "name": "Itinerario personal para la empleabilidad II",
+    "abbr": "IPE2",
+    "code": "1710",
+    "year": 2,
+    "ht": 100,
+    "hs": 3,
+    "course": "CF_COURSE_ADI",
+    "valid": true
+  },
+  {
+    "name": "Proyecto intermodular ADIR (2)",
+    "abbr": "Proyecto ADIR",
+    "code": "0664",
+    "year": 2,
+    "ht": 100,
+    "hs": 3,
+    "course": "CF_COURSE_ADI",
+    "valid": false
+  },
+  {
+    "value": "CF_SUBJECT_ADIR_OPINO",
+    "abbr": "OPINP",
+    "code": "CVOPS001:INO",
+    "course": "CF_COURSE_ADI",
+    "year": 2,
+    "ht": 100,
+    "hs": 3,
+    "name": "Inglés profesional oral",
+    "optional": true, 
+    "valid": false
+  },
+  {
+    "value": "CF_SUBJECT_ADIR_GRPCM",
+    "abbr": "OPINP",
+    "code": "CVOPS001:GRPCM",
+    "course": "CF_COURSE_ADI",
+    "year": 2,
+    "ht": 100,
+    "hs": 3,
+    "name": "Gestión de las redes en las pymes y gestión del comercio electrónico.",
+    "optional": true, 
+    "valid": false
+  },
+  {
+    "value": "CF_SUBJECT_ADIR_DIGGS",
+    "code": "1665001",
+    "name": "Digitalización aplicada al sistema productivo",
+    "year": 2,
+    "course": "CF_COURSE_ADI",
+    "abbr": "DIGGSAFI",
+    "ht": 34,
+    "hs": 1,
+    "valid": true
+  },
+  {
+    "value": "CF_SUBJECT_ADIR_SOSGS",
+    "code": "1708001",
+    "name": "Sostenibilidad aplicada al sistema productivo",
+    "year": 2,
+    "course": "CF_COURSE_ADI",
+    "abbr": "SOSGSAFI",
+    "ht": 34,
+    "hs": 1,
+    "valid": true
   }
 ]
