@@ -22,6 +22,7 @@ import clsx from 'clsx';
 interface DynamicSectionFormProps {
   sectionId: string
   headerStyle:  "ACC" | "FIXED"
+  index: number
 }
 
 interface SectionSchema {
@@ -32,7 +33,7 @@ interface SectionSchema {
   controls: any[]
 }
 
-export default function DynamicSectionForm({ sectionId, headerStyle = "FIXED" }: DynamicSectionFormProps)
+export default function DynamicSectionForm({ sectionId, headerStyle = "FIXED", index }: DynamicSectionFormProps)
 {
   const [section, setSection] = useState<SectionSchema | null>(null)
   const [columns, setColumns] = useState<number>(1)   // numero de columnas del grid
@@ -91,8 +92,11 @@ export default function DynamicSectionForm({ sectionId, headerStyle = "FIXED" }:
       {headerStyle === "FIXED" && section && (
         <>
           <div className="space-y-1 mx-3">
-            <h4 className="text-lg font-medium leading-none">{section ? section.title : ''}</h4>
-            <p className="text-sm htext-muted-foreground">{section ? section.subtitle : ''}</p>
+            <div className="text-3xl font-bold flex items-center h-full mr-3">{index}</div>
+            <div>
+              <h4 className="text-lg font-medium leading-none">{section ? section.title : ''}</h4>
+              <p className="text-sm htext-muted-foreground">{section ? section.subtitle : ''}</p>
+            </div>
           </div>
           <Separator className="mt-2 mb-5" />
           {sectionContent}
@@ -103,9 +107,12 @@ export default function DynamicSectionForm({ sectionId, headerStyle = "FIXED" }:
         <Accordion type="multiple">
           <AccordionItem value={section.id}>
             <AccordionTrigger className="hover:bg-accent hover:no-underline p-3 rounded-md mb-6">
-              <div className="space-y-1 mx-3 text-left">
-                <h4 className="text-lg font-medium">{section ? section.title : ''}</h4>
-                <p className="text-sm text-muted-foreground">{section ? section.subtitle : ''}</p>
+              <div className="flex items-center space-y-1 mx-3 text-left">
+                <div className="text-3xl font-bold flex items-center h-full mr-3">{index}</div>
+                <div>
+                  <h4 className="text-lg font-medium">{section ? section.title : ''}</h4>
+                  <p className="text-sm text-muted-foreground">{section ? section.subtitle : ''}</p>
+                </div>
               </div>
             </AccordionTrigger>
             <AccordionContent>

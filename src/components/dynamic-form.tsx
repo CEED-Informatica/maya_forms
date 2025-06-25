@@ -299,8 +299,8 @@ export default function DynamicForm({ formId }: DynamicFormProps)
        en los subformularios a través de useFormContext*/
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)}>
-          { form && form.sections_ids && form.sections_ids.map((section: FieldSection) => (
-            <DynamicSectionForm key={section.id} sectionId={section.id} headerStyle={section.style}/>
+          { form && form.sections_ids && form.sections_ids.map((section: FieldSection, index: number) => (
+            <DynamicSectionForm key={section.id} sectionId={section.id} headerStyle={section.style} index={index + 1}/>
           ))
           }
         <Button type="submit" className="mt-4">
