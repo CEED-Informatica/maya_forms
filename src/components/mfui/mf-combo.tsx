@@ -56,8 +56,8 @@ export default function MFCombo({ control, methods }: any) {
       methods.setValue(control.name, "", { shouldDirty: true, shouldTouch: true, shouldValidate: true })
     }
   }, [watchedValue, filteredOptions]);
+ 
   
-
   useEffect(() => {
     async function getOptionsFromJSON() {
       const idOptionsData: string  = control.control_type.Combo.options
@@ -139,6 +139,7 @@ export default function MFCombo({ control, methods }: any) {
                           key={option.value}
                           onSelect={() => {
                             methods.setValue(control.name, option.value)
+                            methods.setValue(`${control.name}_ctrl`, option.value) /// valor utilizado para el control de inhabilitado
                             console.log("Se ha seleccionado " + option.value)
                             setOpen(false)
                           }}

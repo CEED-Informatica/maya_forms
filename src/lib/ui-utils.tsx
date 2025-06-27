@@ -48,7 +48,7 @@ export function useIsDisabled(
   const controlNames = conditions.map((cond) => cond.control_id);
 
   // array de valores de los controles, ordenados por controlNames
-  const watchedValuesArray = useWatch({ control, name: controlNames })
+  const watchedValuesArray = useWatch({ control, name: controlNames.map(name => `${name}_ctrl`) })
 
   // lo convierto de array a coleccion de pares control_id, valor
   const watchedValues: Record<string, any> = {};
