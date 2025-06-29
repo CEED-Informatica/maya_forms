@@ -1,5 +1,6 @@
 // componentes maya forms ui
 import MFCheck from "@/components/mfui/mf-check"
+import MFCheckContainer from "@/components/mfui/control-container/mf-check-container"
 
 import { adaptLayout } from '@/lib/ui-utils'
 
@@ -23,9 +24,13 @@ export default function MFCheckGroup({ control, methods }: any) {
       render={({ field, fieldState }) => (
         <FormItem style={{ gridArea: control.area }}>
           <div style={{ gridTemplateAreas: adaptLayout(control.control_type.CheckGroup.layout) }} >
-            {items.map((checkItem: any) => (
-              <MFCheck control={checkItem} methods={methods} key={checkItem.id} />
-            ))}
+            { items.map((checkItem: any) => {
+              const type = Object.keys(checkItem.control_type)[0]
+              if (type === "Check") 
+                return <MFCheck key={checkItem.id} control={checkItem} methods={methods} />
+              if (type === "CheckContainer") 
+                return <MFCheckContainer key={checkItem.id} control={checkItem} methods={methods} />
+            })}
           </div>
           {fieldState.error && (
             <FormMessage>{fieldState.error.message}</FormMessage>

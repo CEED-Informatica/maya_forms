@@ -6,12 +6,14 @@ import {
 
 // utilidades ui
 import { useIsDisabled } from '@/lib/ui-utils'
+import clsx from 'clsx'
+
 
 // Casilla de edición que se puede incorpora dentro de una sección
 // Propiedades:
 //   control: bloque JSON del control
 //   methods: methods del hook useForm de react-hook-form del formulario padre
-export default function MFCheck({ control, methods }: any) {
+export default function MFCheck({ control, methods, border = true }: any) {
     
   // Hook para saber si el combo está activado o desactivado
  
@@ -21,10 +23,10 @@ export default function MFCheck({ control, methods }: any) {
         <FormField control={methods.control} name={control.id} 
           render={({ field }) => (
           <FormItem>
-            <FormLabel className="hover:bg-accent/50 flex items-start gap-3 rounded-lg border 
-                      p-3 has-[[aria-checked=true]]:border-blue-600 
-                      has-[[aria-checked=true]]:bg-blue-50 dark:has-[[aria-checked=true]]:border-blue-900 
-                      dark:has-[[aria-checked=true]]:bg-blue-950">
+            <FormLabel className={clsx(
+                        "hover:bg-accent/50 flex items-start gap-3",
+                        "p-3 has-[[aria-checked=true]]:bg-blue-50 dark:has-[[aria-checked=true]]:bg-blue-950",
+                        { "has-[[aria-checked=true]]:border-blue-600 rounded-lg border dark:has-[[aria-checked=true]]:border-blue-900" : border == true })}>
               <Checkbox 
                 checked={field.value ?? false}
                 onCheckedChange={field.onChange}
@@ -46,6 +48,3 @@ export default function MFCheck({ control, methods }: any) {
   )
 
 }
-
-//disabled={isDisabled} 
-//const isDisabled = useIsDisabled(control.disabledIf, methods.control)

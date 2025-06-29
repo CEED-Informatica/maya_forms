@@ -9,6 +9,7 @@ import { useWatch, Control } from "react-hook-form";
 // componentes maya forms ui
 import MFCombo from "@/components/mfui/mf-combo"
 import MFEdit from "@/components/mfui/mf-edit"
+import MFCheck from "@/components/mfui/mf-check"
 import MFCheckGroup from "@/components/mfui/mf-checkgroup"
 import MFRepetableControlContainer from "@/components/mfui/control-container/mf-repetable-control-container"
 
@@ -17,6 +18,7 @@ const controlComponentMap: Record<string, React.ComponentType<any>> = {
   Edit: MFEdit,
   Combo: MFCombo,
   CheckGroup: MFCheckGroup,
+  Check: MFCheck,
   RepetableControlContainer: MFRepetableControlContainer,
 };
 
