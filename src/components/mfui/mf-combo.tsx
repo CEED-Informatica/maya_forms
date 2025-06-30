@@ -35,12 +35,12 @@ import { useWatch } from "react-hook-form";
 // Propiedades:
 //   control: bloque JSON del control
 //   methods: methods del hook useForm de react-hook-form del formulario padre
-export default function MFCombo({ control, methods }: any) {
+export default function MFCombo({ control, methods, disabled = false }: any) {
   const [options, setOptions] = useState<ComboOptions[]>([])
   const [open, setOpen] = useState(false)
 
   // Hook para saber si el combo está activado o desactivado
-  const isDisabled = useIsDisabled(control.disabledIf, methods.control)
+  const isDisabled = useIsDisabled(control.disabledIf, methods.control) || disabled
 
   // Hook  para obtener las opciones filtradas
   const filteredOptions = useFilteredOptions(options, control.filter, methods.control)

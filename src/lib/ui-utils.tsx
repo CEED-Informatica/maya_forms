@@ -127,15 +127,15 @@ export function adaptLayout(layout: string) : string {
 }
 
 // Renderiza el componente según el tipo
-export function renderControl(control: any, methods: any): JSX.Element {
+export function renderControl(control: any, methods: any, disabled: boolean = false): JSX.Element {
   const type = control?.control_type ? Object.keys(control.control_type)[0] : null;
 
   if (!type || !controlComponentMap[type]) {
     return <h2 key={control?.id}>Control no soportado</h2>
   }
 
-  const Component = controlComponentMap[type];
-  return <Component key={control.id} control={control} methods={methods} />
+  const Component = controlComponentMap[type]
+  return <Component key={control.id} control={control} methods={methods} disabled={disabled}/>
 }
 
 // Monta la cadena a mostrar en un componente

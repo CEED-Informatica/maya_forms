@@ -3,7 +3,8 @@
 import MFCheck from "@/components/mfui/mf-check"
 
 // react-hook-form
-import { useFieldArray } from "react-hook-form"
+import { useWatch } from "react-hook-form";
+
 
 // React
 import { useState } from 'react'
@@ -19,6 +20,16 @@ import { v4 as uuidv4 } from "uuid"
 //   methods: methods del hook useForm de react-hook-form del formulario padre
 export default function MFCheckContainer({ control, methods }: any) {
 
+  // vigilo el estado del check
+  const isChecked = useWatch({
+    control: methods.control,
+    name: control.id,
+  });
+
+  const isDisabled = !isChecked;
+
+  console.log("CHECKED "+ isChecked)
+
   return (
     <div style={{ gridArea: control.area }} className="mb-4 has-[[aria-checked=true]]:border-blue-600 rounded-lg border dark:has-[[aria-checked=true]]:border-blue-900">
       <MFCheck control={control} methods={methods} border="false"/>
@@ -29,7 +40,8 @@ export default function MFCheckContainer({ control, methods }: any) {
               ...childControl,
               name: `${childControl.id}`,
             },
-            methods
+            methods,
+            isDisabled,
           )
         )}
       </div>

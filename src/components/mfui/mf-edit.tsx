@@ -12,10 +12,10 @@ import { useIsDisabled } from '@/lib/ui-utils'
 // Propiedades:
 //   control: bloque JSON del control
 //   methods: methods del hook useForm de react-hook-form del formulario padre
-export default function MFEdit({ control, methods }: any) {
+export default function MFEdit({ control, methods, disabled = false }: any) {
     
   // Hook para saber si el combo está activado o desactivado
-  const isDisabled = useIsDisabled(control.disabledIf, methods.control)
+  const isDisabled = useIsDisabled(control.disabledIf, methods.control) || disabled
 
   return (
       <div style={{ gridArea: control.area }} key={control.id}>
