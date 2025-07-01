@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 import { useFieldArray } from "react-hook-form"
 
 // React
-import { useState } from 'react'
+import { useEffect, useRef } from "react";
 
 // libs
 import { adaptLayout, renderControl } from '@/lib/ui-utils'
@@ -32,6 +32,16 @@ export default function MFRepetableControlContainer({ control, methods }: any) {
   })
 
   console.log(isDynamic + "    " +  control.control_type.RepetableControlContainer.mode.toUpperCase())
+  const initialized = useRef(false);
+
+  useEffect(() => {
+    if (!isDynamic && !initialized.current && fields.length === 0) {
+      for (let i = 0; i < maxReps; i++) {
+        append({ id: uuidv4() });
+      }
+      initialized.current = true;
+    }
+  }, [append, fields.length, isDynamic, maxReps]);
 
   function addContainter() {
     if (fields.length < maxReps) {

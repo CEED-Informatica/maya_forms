@@ -45,6 +45,73 @@
                   "default": false
                 }
               }
+            },
+            {
+              "id": "CTRL_DOCUMENTACION3_CONTAINER",
+              "label": "Tener superados otros estudios reglados.",
+              "caption": "",
+              "area": "d3",
+              "control_type": {
+                "CheckContainer": {
+                  "default": false,
+                  "layout": "'ciclosprevcontainer'",
+                  "items": [
+                    
+
+
+
+                    {
+                      "id": "CTRL_CEED_STUDIES_PREV",
+                      "label": "Estudios previos CEED",
+                      "caption": "",
+                      "area": "ciclosprevcontainer",
+                      "control_type": {
+                        "RepetableControlContainer": {
+                          "num_max_rep": 3,
+                          "num_max_col": 3,
+                          "mode": "FIXED",
+                          "layout": "'ciclo ciclo ciclo ciclo curso'",
+                          "items": [
+                            {
+                              "id": "CTRL_CICLO",
+                              "label": "Ciclo",
+                              "caption": "Ciclo formativo finalizado en el CEED",
+                              "area": "ciclo",
+                              "control_type": {
+                                "Combo": {
+                                  "placeholder": "un ciclo",
+                                  "default": null,
+                                  "options": "studies/CF/courses" 
+                                }
+                              }
+                            },
+                            {
+                              "id": "CTRL_CURSO",
+                              "label": "Año",
+                              "caption": "Año de finalización",
+                              "area": "curso",
+                              "control_type": {
+                                "Combo": {
+                                  "placeholder": "año",
+                                  "default": null,
+                                  "options":  [ {"value":  "22", "label": "2022" }, {"value":  "23", "label": "2023" }]
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      "validation":{
+                        "type": "atLeast1"
+                      }
+                    }
+
+
+
+
+                  ]
+                }
+              }
             }
           ]
         }
