@@ -50,20 +50,3 @@ export default function MFCheckContainer({ control, methods }: any) {
 
  
 }
-
-
-/* {checked && (
-  <div
-    className="ml-6 mt-2 space-y-2"
-    style={{
-      display: "grid",
-      gridTemplateAreas: adaptLayout(container.layout),
-    }}
-  >
-    {container.items.map((childControl: any) => (
-      <RenderControl
-        key={childControl.id}
-        control={childControl}
-        methods={methods}
-      />
-    ))} */

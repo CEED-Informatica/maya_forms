@@ -16,8 +16,7 @@ import clsx from 'clsx'
 export default function MFCheck({ control, methods, border = true }: any) {
     
   // Hook para saber si el combo está activado o desactivado
- 
-  console.log("CHHHECK   " + control ? JSON.stringify(control) :  "NOOOOOO")
+
   return (
       <div style={{ gridArea: control.area }} key={control.id} className="mb-4">
         <FormField control={methods.control} name={control.id} 

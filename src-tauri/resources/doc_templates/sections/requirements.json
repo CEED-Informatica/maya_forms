@@ -61,59 +61,6 @@
                   ]
                 }
               }
-            },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            {
-              "id": "CTRL_REQUISITO3",
-              "label": "Tener superados otros estudios reglados.",
-              "caption": "",
-              "area": "r3",
-              "control_type": {
-                "Check": {
-                  "default": false,
-                  "container": {
-                    "id": "CTRL_REQUISITO3_CONTAINER",
-                    "layout": "'r3edit'",
-                    "items": [
-                      {
-                        "id": "CTRL_REQUISITO_DESC",
-                        "label": "Otros estudios",
-                        "caption": "Indica que otros estudios reglados alegas como requisito",
-                        "area": "r3edit",
-                        "control_type": {
-                          "Edit": {
-                            "placeholder": "Escribe el requisito",
-                            "default": null,
-                            "value": null
-                          }
-                        }
-                      }
-                    ]
-                  }
-                }
-              }
             }
           ]
         }
