@@ -134,8 +134,8 @@ export default function DynamicForm({ formId }: DynamicFormProps)
         
         // Cada item como es un campo bopleano
         for (const item of items) {
-          if (!item.control_type.Check && item.control_type.CheckContainer) 
-            throw new Error("Uno de los items de un checkgroup no es un check!!")
+          if (!item.control_type.Check && !item.control_type.CheckContainer) 
+            throw new Error("Uno de los items de un checkgroup no es un Check o un CheckContainer!!")
           
           schemaShape[item.id] = z.boolean().default(item.control_type.Check?.default);
         }
