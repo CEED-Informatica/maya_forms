@@ -19,7 +19,7 @@ import { DiamondPlus } from "lucide-react"
 // Propiedades:
 //   control: bloque JSON del control
 //   methods: methods del hook useForm de react-hook-form del formulario padre
-export default function MFRepetableControlContainer({ control, methods }: any) {
+export default function MFRepetableControlContainer({ control, methods, disabled = false }: any) {
 
   const maxReps = control.control_type.RepetableControlContainer.num_max_rep || 1
 
@@ -61,7 +61,8 @@ export default function MFRepetableControlContainer({ control, methods }: any) {
                   ...childControl,
                   name: `${control.id}[${index}].${childControl.id}`,
                 },
-                methods
+                methods,
+                disabled
               )
             )}
             </div>
