@@ -91,7 +91,6 @@ function evaluateCondition(
   }
 }
 
-
 ///// FILTRADO DE OPCIONES /////
 
 // Hook que devuelve las opciones filtradas en función del valor de otro control.
@@ -104,12 +103,28 @@ function evaluateCondition(
 export function useFilteredOptions(
   options: ComboOptions[],
   filters: FilterCondition[] | undefined,
-  control?: Control  
+  control?: Control,
+  namePrefix?: string
 ): ComboOptions[] {
   if (!filters || !filters.length ) return options;  // no hay bloque filter
 
   // observo todos los valores de los controles implicados
-  const watchedValues = useWatch({ control, name: filters.map((f) => f.control_id) })
+  const watchedValues = useWatch({ control, name: filters.map((f) => 
+    {
+      if (f.control_id.endsWith("[]")) {
+        if (!namePrefix) {
+          console.warn(
+            `[useFilteredOptions] El filtro "${f.control_id}" parece referirse a un control dentro de un contenedor repetible, pero no se ha proporcionado un namePrefix.`
+          );
+        }
+        return namePrefix
+          ? `${namePrefix}.${f.control_id.replace("[]", "")}`
+          : f.control_id.replace("[]", "")
+      } else {
+        return f.control_id;
+      }
+    })
+  })
 
   return options.filter(
     (option) => filters.every((filter, index) => {
@@ -121,6 +136,7 @@ export function useFilteredOptions(
     })
   );
 }
+
 // Convierte el formato de layout que llega desdel JSON en formato CSS
 export function adaptLayout(layout: string) : string {
   return layout.replaceAll(',',' ')

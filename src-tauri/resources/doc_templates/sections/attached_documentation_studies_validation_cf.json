@@ -86,7 +86,7 @@
                               }
                             },
                             {
-                              "id": "CTRL_CURSO",
+                              "id": "CTRL_CURSO_END",
                               "label": "Año",
                               "caption": "Año de finalización",
                               "area": "curso",
@@ -94,9 +94,15 @@
                                 "Combo": {
                                   "placeholder": "año",
                                   "default": null,
-                                  "options":  [ {"value":  "22", "label": "2022" }, {"value":  "23", "label": "2023" }]
+                                  "options": "studies/CF/courses_year" 
                                 }
-                              }
+                              },
+                              "filter": [
+                                {
+                                  "control_id": "CTRL_CICLO[]",
+                                  "optionField": "course"
+                                }
+                              ]
                             }
                           ]
                         }

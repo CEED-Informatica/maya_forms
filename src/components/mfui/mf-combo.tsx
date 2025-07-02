@@ -43,7 +43,7 @@ export default function MFCombo({ control, methods, disabled = false }: any) {
   const isDisabled = useIsDisabled(control.disabledIf, methods.control) || disabled
 
   // Hook  para obtener las opciones filtradas
-  const filteredOptions = useFilteredOptions(options, control.filter, methods.control)
+  const filteredOptions = useFilteredOptions(options, control.filter, methods.control, control.name?.split('.').slice(0, -1).join('.'))
 
   // Hook para controlar el valor de actual del control
   const watchedValue = useWatch({ control: methods.control, name: control.name });

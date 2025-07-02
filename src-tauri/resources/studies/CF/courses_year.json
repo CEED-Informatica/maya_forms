@@ -1,0 +1,82 @@
+[
+  {
+    "value": "DAW/2014",
+    "course": "CF_COURSE_DAW",
+    "label": "2014"
+  },
+  {
+    "value": "DAW/2015",
+    "course": "CF_COURSE_DAW",
+    "label": "2015"
+  },
+  {
+    "value": "DAW/2016",
+    "course": "CF_COURSE_DAW",
+    "label": "2016"
+  },
+  {
+    "value": "DAW/2017",
+    "course": "CF_COURSE_DAW",
+    "label": "2017"
+  },
+  {
+    "value": "DAW/2018",
+    "course": "CF_COURSE_DAW",
+    "label": "2018"
+  },
+  {
+    "value": "DAW/2019",
+    "course": "CF_COURSE_DAW",
+    "label": "2019"
+  },
+  {
+    "value": "DAW/2020",
+    "course": "CF_COURSE_DAW",
+    "label": "2020"
+  },
+  {
+    "value": "DAW/2021",
+    "course": "CF_COURSE_DAW",
+    "label": "2021"
+  },
+  {
+    "value": "DAW/22",
+    "course": "CF_COURSE_DAW",
+    "label": "2022"
+  },
+  {
+    "value": "DAW/2023",
+    "course": "CF_COURSE_DAW",
+    "label": "2023"
+  },
+  {
+    "value": "DAW/2024",
+    "course": "CF_COURSE_DAW",
+    "label": "2024"
+  },
+  {
+    "value": "DAW/2025",
+    "course": "CF_COURSE_DAW",
+    "label": "2025"
+  },
+  {
+    "value": "DAM/2022",
+    "course": "CF_COURSE_DAM",
+    "label": "2022"
+  },
+  {
+    "value": "DAM/2023",
+    "course": "CF_COURSE_DAM",
+    "label": "2023"
+  },
+  {
+    "value": "DAM/2024",
+    "course": "CF_COURSE_DAM",
+    "label": "2024"
+  },
+  {
+    "value": "DAM/2025",
+    "course": "CF_COURSE_DAM",
+    "label": "2025"
+  }
+]
