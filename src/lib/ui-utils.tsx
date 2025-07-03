@@ -147,11 +147,11 @@ export function renderControl(control: any, methods: any, disabled: boolean = fa
   const type = control?.control_type ? Object.keys(control.control_type)[0] : null;
 
   if (!type || !controlComponentMap[type]) {
-    return <h2 key={control?.id}>Control no soportado</h2>
+    return <h2 key={control?.name}>Control no soportado</h2>
   }
 
   const Component = controlComponentMap[type]
-  return <Component key={control.id} control={control} methods={methods} disabled={disabled}/>
+  return <Component key={control.name} control={control} methods={methods} disabled={disabled}/>
 }
 
 // Monta la cadena a mostrar en un componente

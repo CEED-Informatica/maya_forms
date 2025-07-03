@@ -18,13 +18,14 @@ export default function MFEdit({ control, methods, disabled = false }: any) {
   const isDisabled = useIsDisabled(control.disabledIf, methods.control) || disabled
 
   return (
-      <div style={{ gridArea: control.area }} key={control.id}>
-        <FormField control={methods.control} name={control.id} 
+      <div style={{ gridArea: control.area }} key={control.name}>
+        <FormField control={methods.control} name={control.name} 
           render={({ field }) => (
           <FormItem>
             <FormLabel>{control.label}</FormLabel>
             <FormControl>
-              <Input  disabled={isDisabled} placeholder={control.control_type.Edit.placeholder} {...field} />
+              <Input  disabled={isDisabled} placeholder={control.control_type.Edit.placeholder} 
+              {...field} value={field.value !== undefined && field.value !== null ? field.value : ""} />
             </FormControl>
             <FormDescription>
               {control.caption}

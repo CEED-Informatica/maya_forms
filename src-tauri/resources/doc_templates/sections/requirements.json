@@ -5,7 +5,7 @@
   "layout": "'req req'",
   "controls": [ 
     {
-      "id": "CTRL_REQUISITOS",
+      "name": "CTRL_REQUISITOS",
       "label": "Requisitos",
       "caption": "",
       "area": "req",
@@ -14,7 +14,7 @@
           "layout": "'r1 r1', 'r2 r2', 'r3 r3'",
           "items": [
             {
-              "id": "CTRL_REQUISITO1",
+              "name": "CTRL_REQUISITO1",
               "label": "Tener módulos profesionales o títulos LOGSE/LOE",
               "caption": "Tener superados módulos profesionales de títulos de Formación Profesional del catálogo de la LOGSE/LOE o bien estar en posesión de un título LOGSE/LOE, cuya convalidación está definida en las normas que regulan los títulos de Formación Profesional del catálogo de la LFP",
               "area": "r1",
@@ -25,7 +25,7 @@
               }
             },
             {
-              "id": "CTRL_REQUISITO2",
+              "name": "CTRL_REQUISITO2",
               "label": "Tener superados estudios que acrediten competencias profesionales.",
               "caption": "",
               "area": "r2",
@@ -36,7 +36,7 @@
               }
             },
             {
-              "id": "CTRL_REQUISITO3_CONTAINER",
+              "name": "CTRL_REQUISITO3_CONTAINER",
               "label": "Tener superados otros estudios reglados.",
               "caption": "",
               "area": "r3",
@@ -46,7 +46,7 @@
                   "layout": "'r3edit'",
                   "items": [
                     {
-                      "id": "CTRL_REQUISITO3_DESCRIPTION",
+                      "name": "CTRL_REQUISITO3_DESCRIPTION",
                       "label": "Otros estudios",
                       "caption": "Indica que otros estudios reglados alegas como requisito",
                       "area": "r3edit",

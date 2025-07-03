@@ -18,8 +18,8 @@ export default function MFCheck({ control, methods, border = true }: any) {
   // Hook para saber si el combo está activado o desactivado
 
   return (
-      <div style={{ gridArea: control.area }} key={control.id} className="mb-4">
-        <FormField control={methods.control} name={control.id} 
+      <div style={{ gridArea: control.area }} key={control.name} className="mb-4">
+        <FormField control={methods.control} name={control.name} 
           render={({ field }) => (
           <FormItem>
             <FormLabel className={clsx(

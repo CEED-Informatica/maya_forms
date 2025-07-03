@@ -50,7 +50,7 @@ export default function MFCombo({ control, methods, disabled = false }: any) {
 
   // en el caso de que el valor no esté en la lista de opciones, resetea el valor
   useEffect(() => {
-    if (!filteredOptions || filteredOptions.length === 0) return
+    if (!filteredOptions || filteredOptions.length === 0) return  
 
     const existsInOptions = filteredOptions.some(opt => opt.value === watchedValue)
     if (!existsInOptions && watchedValue) {

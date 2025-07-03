@@ -5,7 +5,7 @@
   "layout": "'modcontainer'",
   "controls": [ 
     {
-      "id": "CTRL_MODULOS",
+      "name": "CTRL_MODULOS",
       "label": "Módulos",
       "caption": "",
       "area": "modcontainer",
@@ -17,7 +17,7 @@
           "layout": "'modulo modulo tipo'",
           "items": [
             {
-              "id": "CTRL_MODULO",
+              "name": "CTRL_MODULO",
               "label": "Módulo",
               "caption": "Código y nombre del módulo",
               "area": "modulo",
@@ -44,7 +44,7 @@
               ]
             },
             {
-              "id": "CTRL_TIPOCONV",
+              "name": "CTRL_TIPOCONV",
               "label": "Tipo de convalidación",
               "caption": "Convalidación/Aprobado con anterioridad",
               "area": "tipo",

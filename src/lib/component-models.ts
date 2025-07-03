@@ -36,7 +36,7 @@ export interface FilterCondition {
 
 // Control (componente gráfico del formulario)
 export interface Control {
-  id: string
+  name: string    // no aparece en el fichero, se calcula en tiempo de carga
   label: string
   caption: string
   area: string

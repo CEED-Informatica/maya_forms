@@ -5,7 +5,7 @@
   "layout": "'req req'",
   "controls": [ 
     {
-      "id": "CTRL_ATTACHED_DOCUMENTATION",
+      "name": "CTRL_ATTACHED_DOCUMENTATION",
       "label": "Documentación",
       "caption": "",
       "area": "req",
@@ -14,7 +14,7 @@
           "layout": "'r1 r1', 'r2 r2', 'r3 r3'",
           "items": [
             {
-              "id": "CTRL_DOCUMENTACION1",
+              "name": "CTRL_DOCUMENTACION1",
               "label": "Certificación académica oficial",
               "caption": "Certificación académica oficial (original o fotocopia compulsada) en la que consten los módulos profesionales cursados, la convocatoria en la que han sido superados y la calificación obtenida.",
               "area": "r1",
@@ -25,7 +25,7 @@
               }
             },
             {
-              "id": "CTRL_DOCUMENTACION2",
+              "name": "CTRL_DOCUMENTACION2",
               "label": "Certificación oficial o certificado de profesionalidad.",
               "caption": "Certificación oficial de la Administración competente según el R.D.1224/2009 o certificado de profesionalidad establecido a partir del R.D. 34/2008.",
               "area": "r2",
@@ -36,7 +36,7 @@
               }
             },
             {
-              "id": "CTRL_DOCUMENTACION3",
+              "name": "CTRL_DOCUMENTACION3",
               "label": "Fotocopia compulsada del título.",
               "caption": "O fotocopia del antiguo Libro de Calificaciones de Formación Profesional.",
               "area": "r3",
@@ -47,7 +47,7 @@
               }
             },
             {
-              "id": "CTRL_DOCUMENTACION3_CONTAINER",
+              "name": "CTRL_DOCUMENTACION3_CONTAINER",
               "label": "Tener superados otros estudios reglados.",
               "caption": "",
               "area": "d3",
@@ -56,12 +56,8 @@
                   "default": false,
                   "layout": "'ciclosprevcontainer'",
                   "items": [
-                    
-
-
-
                     {
-                      "id": "CTRL_CEED_STUDIES_PREV",
+                      "name": "CTRL_CEED_STUDIES_PREV",
                       "label": "Estudios previos CEED",
                       "caption": "",
                       "area": "ciclosprevcontainer",
@@ -73,7 +69,7 @@
                           "layout": "'ciclo ciclo ciclo ciclo curso'",
                           "items": [
                             {
-                              "id": "CTRL_CICLO",
+                              "name": "CTRL_CICLO",
                               "label": "Ciclo",
                               "caption": "Ciclo formativo finalizado en el CEED",
                               "area": "ciclo",
@@ -86,7 +82,7 @@
                               }
                             },
                             {
-                              "id": "CTRL_CURSO_END",
+                              "name": "CTRL_CURSO_END",
                               "label": "Año",
                               "caption": "Año de finalización",
                               "area": "curso",
@@ -111,10 +107,6 @@
                         "type": "atLeast1"
                       }
                     }
-
-
-
-
                   ]
                 }
               }

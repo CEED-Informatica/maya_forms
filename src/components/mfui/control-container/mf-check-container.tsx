@@ -23,7 +23,7 @@ export default function MFCheckContainer({ control, methods }: any) {
   // vigilo el estado del check
   const isChecked = useWatch({
     control: methods.control,
-    name: control.id,
+    name: control.name,
   });
 
   const isDisabled = !isChecked;
@@ -38,7 +38,7 @@ export default function MFCheckContainer({ control, methods }: any) {
           renderControl(
             {
               ...childControl,
-              name: `${childControl.id}`,
+              name: `${childControl.name}`,
             },
             methods,
             isDisabled,

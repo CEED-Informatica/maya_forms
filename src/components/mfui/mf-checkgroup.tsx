@@ -18,16 +18,16 @@ export default function MFCheckGroup({ control, methods }: any) {
   return (
     <FormField
       control={methods.control}
-      name={control.id}
+      name={control.name}
       render={({ field, fieldState }) => (
         <FormItem style={{ gridArea: control.area }}>
           <div style={{ gridTemplateAreas: adaptLayout(control.control_type.CheckGroup.layout) }} >
             { items.map((checkItem: any) => {
               const type = Object.keys(checkItem.control_type)[0]
               if (type === "Check") 
-                return <MFCheck key={checkItem.id} control={checkItem} methods={methods} />
+                return <MFCheck key={checkItem.name} control={checkItem} methods={methods} />
               if (type === "CheckContainer") 
-                return <MFCheckContainer key={checkItem.id} control={checkItem} methods={methods} />
+                return <MFCheckContainer key={checkItem.name} control={checkItem} methods={methods} />
             })}
           </div>
           {fieldState.error && (

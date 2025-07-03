@@ -28,7 +28,7 @@ export default function MFRepetableControlContainer({ control, methods, disabled
 
   const { fields, append } = useFieldArray({
     control: methods.control,
-    name: control.id,
+    name: control.name,
   })
 
   console.log(isDynamic + "    " +  control.control_type.RepetableControlContainer.mode.toUpperCase())
@@ -55,11 +55,10 @@ export default function MFRepetableControlContainer({ control, methods, disabled
           { fields.map((field, index) => (
             <div key={field.id} className="grid gap-4 border p-4 rounded shadow-sm" style={{ gridTemplateAreas: adaptLayout(control.control_type.RepetableControlContainer.layout), gridTemplateColumns: '1fr 1fr 1fr' }}>
                 {control.control_type.RepetableControlContainer.items.map((childControl: any) =>
-              /* renderControl({ ...childControl, id: `${childControl.id}_${field.id}` }, methods) */
               renderControl(
                 {
                   ...childControl,
-                  name: `${control.id}[${index}].${childControl.id}`,
+                  name: `${control.name}[${index}].${childControl.name}`,
                 },
                 methods,
                 disabled

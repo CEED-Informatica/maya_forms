@@ -102,7 +102,7 @@ export default function DynamicForm({ formId }: DynamicFormProps)
           controls.push(control)
           // si es de tipo Edit lo inicializo a ""
           if (Object.keys(control.control_type)[0] == 'Edit')
-            initValues[control.id] = ""
+            initValues[control.name] = ""
         }) 
       }
  
@@ -125,7 +125,7 @@ export default function DynamicForm({ formId }: DynamicFormProps)
     
     for (const control of controls) {
      
-      const { id, validation, control_type } = control
+      const { name, validation, control_type } = control
       const controlName = Object.keys(control_type)[0]
 
       // CHECKBOX
@@ -137,7 +137,7 @@ export default function DynamicForm({ formId }: DynamicFormProps)
           if (!item.control_type.Check && !item.control_type.CheckContainer) 
             throw new Error("Uno de los items de un checkgroup no es un Check o un CheckContainer!!")
           
-          schemaShape[item.id] = z.boolean().default(item.control_type.Check?.default);
+          schemaShape[item.name] = z.boolean().default(item.control_type.Check?.default);
         }
 
         if (validation?.type?.startsWith("atLeast")) {
@@ -149,9 +149,9 @@ export default function DynamicForm({ formId }: DynamicFormProps)
           const minRequired = parseInt(match[1], 10)
   
           checkGroupValidations.push({
-            ids: items.map((i: any) => i.id),
+            ids: items.map((i: any) => i.name),
             minSelected: minRequired,
-            groupId: control.id, // identificador del checkgroup
+            groupId: control.name, // identificador del checkgroup
             message:
               validation.message ||
               `Debes seleccionar al menos ${minRequired} opción${minRequired > 1 ? "es" : ""}`,
@@ -227,7 +227,7 @@ export default function DynamicForm({ formId }: DynamicFormProps)
           fieldSchema = z.any()
       }
 
-      schemaShape[id] = fieldSchema
+      schemaShape[name] = fieldSchema
     }
 
     console.log("REGLAS " +customZodRules) 
