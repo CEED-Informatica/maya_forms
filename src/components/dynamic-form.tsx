@@ -118,168 +118,206 @@ export default function DynamicForm({ formId }: DynamicFormProps)
   // Crea el esquema de validación de Zod para el formulario a partir de los datos 
   // que se incluyen en el json
   function buildZodSchema(controls: Control[]) {
-
-    const schemaShape: Record<string, z.ZodTypeAny> = {}
-    let customZodRules: CustomZodRules[] = []
-    const checkGroupValidations: { ids: string[]; minSelected: number; groupId: string; message: string }[] = [];
-    
+    const schemaShape: Record<string, z.ZodTypeAny> = {};
+    let customZodRules: CustomZodRules[] = [];
+    const checkGroupValidations: { ids: string[]; minSelected: number; groupId: string; message: string }[] = []
+    const checkContainerValidations: { parentName: string; childControls: Control[]}[] = []
+  
+    // Utilidad para crear la validación base de un campo, según su tipo
+    const buildFieldSchema = (control: Control): z.ZodTypeAny => {
+      const { validation } = control;
+      if (!validation) return z.any();
+  
+      switch (validation.type) {
+        case "string":
+          let stringSchema = validation.required
+            ? z.string({ required_error: "El campo es obligatorio" })
+            : z.string()
+  
+          // permite la definición de la regex en el json de varias maneras 
+          // "regex": "expre"  o   "regex": { "regex": "expre", "message": "mess" } o "regex": { "regex": "expre" }
+          if (validation.regex) {
+            const regex =
+              typeof validation.regex === "string"
+                ? validation.regex
+                : validation.regex.regex
+  
+            if (regex)
+              stringSchema = stringSchema.regex(new RegExp(regex), {
+                message: validation.regex.message || "Formato inválido",
+              });
+          }
+  
+          if (validation.minLength)
+            stringSchema = stringSchema.min(validation.minLength, {
+              message: `El número mínimo de caracteres permitido es ${validation.minLength}`,
+            });
+  
+          if (validation.maxLength)
+            stringSchema = stringSchema.max(validation.maxLength, {
+              message: `El número máximo de caracteres permitido es ${validation.maxLength}`,
+            });
+  
+          return stringSchema;
+  
+        case "dni":
+          return z
+            .string()
+            .min(9, { message: "El documento debe tener al menos 9 caracteres" })
+            .max(9, { message: "El documento no puede tener más de 9 caracteres" })
+            .refine((value) => isValidNif(value), {
+              message: "El DNI/NIE no es válido o la letra de control es incorrecta",
+            });
+  
+        case "email":
+          return z.string().email({
+            message: "Introduce una dirección de correo electrónico válida",
+          });
+  
+        default:
+          return z.any()
+      }
+    }
+  
     for (const control of controls) {
-     
       const { name, validation, control_type } = control
       const controlName = Object.keys(control_type)[0]
-
-      // CHECKBOX
-      if (controlName === "CheckGroup") {
-        const items = control_type.CheckGroup.items
-        
-        // Cada item como es un campo bopleano
-        for (const item of items) {
-          if (!item.control_type.Check && !item.control_type.CheckContainer) 
-            throw new Error("Uno de los items de un checkgroup no es un Check o un CheckContainer!!")
-          
-          schemaShape[item.name] = z.boolean().default(item.control_type.Check?.default);
-        }
-
-        if (validation?.type?.startsWith("atLeast")) {
-          const match = validation.type.match(/^atLeast(\d+)$/)
-          if (!match) 
-            throw new Error(`Tipo de validación "${validation.type}" no válido`)
-          
-          // máximo 10
-          const minRequired = parseInt(match[1], 10)
   
+      // CheckGroup
+      if (controlName === "CheckGroup") {
+        const items = control_type.CheckGroup.items;
+  
+        for (const item of items) {
+          const itemType = Object.keys(item.control_type)[0];
+  
+          if (itemType === "Check") {
+            schemaShape[item.name] = z.boolean().default(item.control_type.Check?.default || false);
+          } else if (itemType === "CheckContainer") {
+            schemaShape[item.name] = z.boolean().default(item.control_type.CheckContainer?.default || false);
+  
+            checkContainerValidations.push({
+              parentName: item.name,
+              childControls: item.control_type.CheckContainer.items,
+            });
+  
+            for (const child of item.control_type.CheckContainer.items) {
+              schemaShape[child.name] = buildFieldSchema(child).optional();
+            }
+          } else {
+            throw new Error("Uno de los items de un CheckGroup no es un Check o CheckContainer");
+          }
+        }
+  
+        if (validation?.type?.startsWith("atLeast")) {
+          const match = validation.type.match(/^atLeast(\d+)$/);
+          if (!match) throw new Error(`Tipo de validación inválido: ${validation.type}`);
+  
+          const minRequired = parseInt(match[1], 10);
           checkGroupValidations.push({
             ids: items.map((i: any) => i.name),
             minSelected: minRequired,
-            groupId: control.name, // identificador del checkgroup
+            groupId: control.name,
             message:
               validation.message ||
               `Debes seleccionar al menos ${minRequired} opción${minRequired > 1 ? "es" : ""}`,
           });
         }
-
-
+  
+        continue
+      }
+      
+      // CheckContainer
+      if (controlName === "CheckContainer") {
+        schemaShape[name] = z.boolean().default(control_type.CheckContainer.default ?? false);
+  
+        checkContainerValidations.push({
+          parentName: control.name,
+          childControls: control.control_type.CheckContainer.items,
+        });
+  
+        for (const child of control.control_type.CheckContainer.items) {
+          // Registramos como opcionales para evitar validaciones prematuras
+          schemaShape[child.name] = buildFieldSchema(child).optional();
+        }
+  
+        continue
       }
   
-      if (!validation) continue;  // si no hay validación pasa al siguiente control
-
-      let fieldSchema: z.ZodTypeAny
-
-      switch (validation.type) {
-        case 'string':    // se comprueban cadenas
-          let stringSchema
-
-          if (validation.required)
-            stringSchema= z.string({required_error: "El campo es obligatorio"})
-          else 
-            stringSchema= z.string()
-
-          /* 
-           * permite la defincion de la regex en el json de varias maneras 
-              "regex": "expre" +
-              o 
-              "regex": { "regex": "expre", "message": "mess" }
-              o
-              "regex": { "regex": "expre" }
-          */
-          if (validation.regex) { 
-            let regex: string = ""
-
-            if (typeof validation.regex === "string") regex = validation.regex
-            else if (typeof validation.regex === "object" && validation.regex.regex) regex = validation.regex.regex
-
-            if (regex)
-              stringSchema = stringSchema.regex(new RegExp(regex), { message: validation.regex.message || "Formato inválido" });
-          }
-          if (validation.custom) {
-            customZodRules.push(validation.custom)
-          }
-
-          if (validation.maxLength) {
-            stringSchema = stringSchema.max(validation.maxLength, { message: `El número máximo de caracteres permitido es ${validation.maxLength}` });
-          }
-          if (validation.minLength) {
-            stringSchema = stringSchema.min(validation.minLength, { message: `El número mínimo de caracteres permitido es ${validation.minLength}` });
-          }
-          
-          fieldSchema = stringSchema
-          break
-        case  'dni':
-          const dniSchema = 
-            z.string()
-              .min(9, { message: 'El documento debe tener al menos 9 caracteres' })
-              .max(9, { message: 'El documento no puede tener más de 9 caracteres' })
-              .refine((value) => isValidNif(value), {
-                message: 'El DNI/NIE no es válido o la letra de control es incorrecta',
-              })
-    
-          fieldSchema = dniSchema
-          break
-        case  'email':
-            const emailSchema = 
-              z.string()
-                .email({ message: 'Introduce una dirección de correo electrónico válida' })
-      
-            fieldSchema = emailSchema
-            break
-
-        default:
-          fieldSchema = z.any()
+      // Normal
+      if (controlName === "Check") {
+        schemaShape[name] = z.boolean().default(control_type.Check.default ?? false);
+        continue
       }
 
-      schemaShape[name] = fieldSchema
+      if (!validation) continue
+  
+      const fieldSchema = buildFieldSchema(control);
+  
+      schemaShape[name] = fieldSchema;
+      if (validation?.custom) customZodRules.push(validation.custom)
     }
-
-    console.log("REGLAS " +customZodRules) 
-
+  
     const zodSchema = z.object(schemaShape).superRefine((data, ctx) => {
-      
-      // Reglas presonalizadas
-      customZodRules.forEach((rule) => {
-        
-        try {
 
-          const menssageInterpolated = new Function('data', `return \`${rule.message}\`;`)(data)
-          // Creo un objeto función con un parámetro data que solo evalúa la condicion y la devuelve
-          const conditionFunction = new Function('data', `return ${rule.condition}`)
-          // ejecuto la función
-          const isInvalid = conditionFunction(data)
-      
-          // si la condición no se cumple añado un issue
+      // Custom Zod Rules
+      customZodRules.forEach((rule) => {
+        try {
+          const messageInterpolated = new Function("data", `return \`${rule.message}\`;`)(data);
+          const conditionFunction = new Function("data", `return ${rule.condition}`);
+          const isInvalid = conditionFunction(data);
+  
           if (isInvalid) {
             ctx.addIssue({
               code: ZodIssueCode.custom,
-              message: menssageInterpolated,
-              path: JSON.parse(rule.path.replace(/'/g, '"'))
-            });
+              message: messageInterpolated,
+              path: JSON.parse(rule.path.replace(/'/g, '"')),
+            })
           }
-
-        } catch (error) {
+        } catch {
           ctx.addIssue({
             code: ZodIssueCode.custom,
-            message: 'Error al evaluar la condición de validación.',
-            path: []
-          });
-        } 
+            message: "Error al evaluar la condición de validación.",
+            path: [],
+          })
+        }
       })
-     
-      // Reglas checkboxgroup
+
+      // Validaciones para CheckGroup
       checkGroupValidations.forEach(({ ids, minSelected, message, groupId }) => {
         const selectedCount = ids.reduce((acc, id) => acc + (data[id] ? 1 : 0), 0);
-    
         if (selectedCount < minSelected) {
           ctx.addIssue({
             code: ZodIssueCode.custom,
             message,
-            path: [groupId], // pone el mensaje de error en el checkgroup
-          });
+            path: [groupId],
+          })
         }
-      });
-      
-    })
+      })
 
-    return zodSchema
+      // Validaciones para CheckContainer
+      for (const { parentName, childControls } of checkContainerValidations) {
+        if (!data[parentName]) continue // si el check está desactivado, no se valida
+
+        for (const item of childControls) {
+          const fieldSchema = buildFieldSchema(item);
+          const parsed = fieldSchema.safeParse(data[item.name]);
+
+          if (!parsed.success) {
+            parsed.error.errors.forEach((err) => {
+              ctx.addIssue({
+                code: ZodIssueCode.custom,
+                message: err.message,
+                path: [item.name],
+              })
+            })
+          }
+        }
+    }
+    })
+  
+    return zodSchema;
   }
+  
 
   // Genera el formulario o almacena los datos en un fichero
   const onSubmit = (data: any) => {

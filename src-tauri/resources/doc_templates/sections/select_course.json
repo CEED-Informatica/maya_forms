@@ -15,6 +15,10 @@
           "default": null,
           "options": "studies/CF/families"
         }
+      },
+      "validation":{
+        "type": "string",
+        "required": true
       }
     },
     {
@@ -29,6 +33,10 @@
           "value": ""
         }
       ],
+      "validation":{
+        "type": "string",
+        "required": true
+      },
       "control_type": {
         "Combo": {
           "placeholder": "un grado",
@@ -66,6 +74,10 @@
           "value": ""
         }
       ],
+      "validation":{
+        "type": "string",
+        "required": true
+      },
       "filter": [ 
         {
           "control_id": "CTRL_FAMILIA",

@@ -56,6 +56,10 @@
                           "default": null,
                           "value": null
                         }
+                      },
+                      "validation":{
+                        "type": "string",
+                        "required": true
                       }
                     }
                   ]
