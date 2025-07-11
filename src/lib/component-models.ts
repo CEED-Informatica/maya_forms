@@ -62,5 +62,6 @@ export interface FieldSection {
 }
 
 export interface DocTemplate {
-  sections_ids: FieldSection[];
+  sections_ids: FieldSection[]
+  onSubmitAction: string
 }

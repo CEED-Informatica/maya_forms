@@ -4,6 +4,7 @@
   "version": 1,
   "description": "Formulario para solicitar convalidaciones por estudios, no por experiencia profesional",
   "study_type": "CICLOS",
+  "onSubmitAction": "generatePdf",
   "sections_ids": [
     {
       "id": "SELECT_COURSE",

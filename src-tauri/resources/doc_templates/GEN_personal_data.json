@@ -4,6 +4,7 @@
   "version": 1,
   "description": "Formulario para uso únicamente en la página Profile",
   "study_type": "GEN",
+  "onSubmitAction": "saveJson",
   "sections_ids": [
     {
       "id": "PERSONAL_DATA",

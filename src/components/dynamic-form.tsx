@@ -321,11 +321,30 @@ export default function DynamicForm({ formId }: DynamicFormProps)
 
   // Genera el formulario o almacena los datos en un fichero
   const onSubmit = (data: any) => {
+    console.log("Errores actuales:", methods.formState.errors);
     console.log('Datos del formulario:', data);
     const adat2 = methods.getValues()
-    console.log('Datos del formulario:', adat2);
+    console.log('Datos del formulario:', adat2)
+
+    if (!form?.onSubmitAction) {
+      console.warn("No se especificó ninguna acción en la plantilla del fomrulario. Guardando por defecto.")
+      saveProfile(adat2)
+      return
+    }
     
-    saveProfile(adat2);
+    switch (form.onSubmitAction) {
+      case "saveJson":
+        saveProfile(adat2);
+        break
+      
+      case "generatePdf":
+        console.log("Generando PDF. TODO")
+        break
+  
+      default:
+        console.error(`Acción onSubmitAction desconocida: ${form.onSubmitAction}`)
+    }
+   
   };
 
   if (!zodSchema || !form)
