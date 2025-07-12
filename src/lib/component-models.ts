@@ -1,4 +1,12 @@
-// Definición de los modelos /tipos de datos
+// Definición de los modelos/tipos de datos
+
+export interface SectionSchema {
+  id: string
+  title: string
+  subtitle: string
+  layout: string
+  controls: Control[]
+}
 
 // ReglasZod  de validación personalizadas
 export interface CustomZodRules {

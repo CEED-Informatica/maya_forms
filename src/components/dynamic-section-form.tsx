@@ -10,6 +10,12 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 
 // Tauri
 import { resolveResource } from '@tauri-apps/api/path';
@@ -17,23 +23,20 @@ import { readTextFile } from '@tauri-apps/plugin-fs';
 
 // utilidades
 import { adaptLayout, renderControl } from '@/lib/ui-utils'
-import clsx from 'clsx';
+import clsx from 'clsx'
+
+import { SectionSchema } from "@/lib/component-models"
+
+import { AlertCircle } from "lucide-react";
 
 interface DynamicSectionFormProps {
   sectionId: string
   headerStyle:  "ACC" | "FIXED"
   index: number
+  errorCount?: number
 }
 
-interface SectionSchema {
-  id: string
-  title: string
-  subtitle: string
-  layout: string
-  controls: any[]
-}
-
-export default function DynamicSectionForm({ sectionId, headerStyle = "FIXED", index }: DynamicSectionFormProps)
+export default function DynamicSectionForm({ sectionId, headerStyle = "FIXED", index, errorCount }: DynamicSectionFormProps)
 {
   const [section, setSection] = useState<SectionSchema | null>(null)
   const [columns, setColumns] = useState<number>(1)   // numero de columnas del grid
@@ -107,12 +110,29 @@ export default function DynamicSectionForm({ sectionId, headerStyle = "FIXED", i
         <Accordion type="multiple">
           <AccordionItem value={section.id}>
             <AccordionTrigger className="hover:bg-accent hover:no-underline p-3 rounded-md mb-6">
-              <div className="flex items-center space-y-1 mx-3 text-left">
+              <div className="flex items-center space-y-1 mx-3 text-left w-full">
                 <div className="text-3xl font-bold flex items-center h-full mr-3">{index}</div>
                 <div>
                   <h4 className="text-lg font-medium">{section ? section.title : ''}</h4>
                   <p className="text-sm text-muted-foreground">{section ? section.subtitle : ''}</p>
                 </div>
+                {errorCount != null && errorCount > 0 && 
+                (<TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <div className="ml-auto">
+                        <span className="flex items-center gap-1 text-red-600 bg-red-100 dark:text-red-300 dark:bg-red-900 text-sm rounded-full px-2 py-0.5">
+                          <AlertCircle className="w-4 h-4" />
+                          {errorCount}
+                        </span>
+                      </div>
+                    </TooltipTrigger>
+                    <TooltipContent side="left">
+                      <p>{`${errorCount} error${errorCount > 1 ? 'es' : ''} en esta sección`}</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+                )}
               </div>
             </AccordionTrigger>
             <AccordionContent>
